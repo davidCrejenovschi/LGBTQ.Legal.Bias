@@ -89,7 +89,7 @@ def setup(doc: Document) -> None:
 
 
 # ------------------------------------------------------------ inline runs
-INLINE = re.compile(r"(\*\*[^*]+\*\*|\*[^*]+\*|`[^`]+`)")
+INLINE = re.compile(r"(\*\*[^*]+\*\*|\*[^*]+\*|`[^`]+`|_\{[^}]+\}|\^\{[^}]+\})")
 
 
 def add_inline(par, text: str, size: float | None = None) -> None:
@@ -97,8 +97,24 @@ def add_inline(par, text: str, size: float | None = None) -> None:
         if not part:
             continue
         if part.startswith("**"):
-            run = par.add_run(part[2:-2])
-            run.bold = True
+            # bold may itself contain sub/superscripts
+            for sub in INLINE.split(part[2:-2]):
+                if not sub:
+                    continue
+                if sub.startswith(("_{", "^{")):
+                    run = par.add_run(sub[2:-1])
+                    run.font.subscript = sub.startswith("_")
+                    run.font.superscript = sub.startswith("^")
+                else:
+                    run = par.add_run(sub)
+                run.bold = True
+                if size:
+                    run.font.size = Pt(size)
+            continue
+        if part.startswith(("_{", "^{")):
+            run = par.add_run(part[2:-1])
+            run.font.subscript = part.startswith("_")
+            run.font.superscript = part.startswith("^")
         elif part.startswith("`"):
             run = par.add_run(part[1:-1])
             run.font.name = "Consolas"
@@ -180,11 +196,24 @@ class Builder:
                 c = t.rows[i].cells[j]
                 c.paragraphs[0].text = ""
                 add_inline(c.paragraphs[0], row[j] if j < len(row) else "", size=size)
+        # column widths proportional to (sqrt of) the longest text in each column
+        visible = lambda s: re.sub(r"[*`]|_\{|\^\{|\}", "", s)  # noqa: E731
+        weights = []
+        for j in range(len(header)):
+            col = [header[j]] + [r[j] if j < len(r) else "" for r in body]
+            longest = max(max((len(w) for w in visible(c).split()), default=1) for c in col)
+            mean_len = sum(len(visible(c)) for c in col) / len(col)
+            weights.append(max(longest * 1.35, mean_len ** 0.75 * 2.2, 4))
+        total = 21.59 - 4.0
+        widths = [Cm(total * w / sum(weights)) for w in weights]
+        t.autofit = False
         for r in t.rows:
-            for c in r.cells:
+            for j, c in enumerate(r.cells):
+                c.width = widths[j]
                 for p in c.paragraphs:
                     p.paragraph_format.space_after = Pt(1)
                     p.paragraph_format.line_spacing = 1.0
+                    p.alignment = WD_ALIGN_PARAGRAPH.LEFT
         # repeat header row on page breaks
         trpr = t.rows[0]._tr.get_or_add_trPr()
         el = OxmlElement("w:tblHeader")
@@ -208,7 +237,8 @@ class Builder:
 
     def equation(self, latex: str, number: str | None):
         fig = plt.figure(figsize=(0.01, 0.01))
-        fig.text(0, 0, f"${latex}$", fontsize=13)
+        latex = latex.replace(r"\frac", r"\dfrac")
+        fig.text(0, 0, f"${latex}$", fontsize=12)
         buf = io.BytesIO()
         fig.savefig(buf, dpi=300, bbox_inches="tight", pad_inches=0.03, transparent=True)
         plt.close(fig)
@@ -234,7 +264,10 @@ class Builder:
 
 def expand_includes(text: str) -> str:
     def repl(m):
-        return (HERE / m.group(1)).read_text(encoding="utf-8")
+        path = HERE / m.group(1)
+        if not path.exists():
+            return f"[lipsește fișierul generat {m.group(1)}]"
+        return path.read_text(encoding="utf-8")
     return re.sub(r"\[\[include:([^\]]+)\]\]", repl, text)
 
 
