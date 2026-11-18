@@ -1,0 +1,15 @@
+# Analiza si statistica
+numpy>=1.26
+scipy>=1.11
+pandas>=2.1
+matplotlib>=3.8
+# Modele open-weights (stari ascunse, E2) - rulare pe CPU sau GPU
+torch>=2.3
+transformers>=4.45
+huggingface_hub>=0.24
+# Generarea raportului .docx
+python-docx>=1.1
+# Teste
+pytest>=8
+# Modelele rulate prin Ollama (http://localhost:11434) si API-urile comerciale
+# sunt apelate prin HTTP din biblioteca standard (urllib), fara SDK-uri.

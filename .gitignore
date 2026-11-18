@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+*.egg-info/
+# date externe descarcate cu scripts/download_assets.py (nu se versioneaza)
+data/real/compas/*.csv
+# cache stari ascunse (mari, se regenereaza)
+results/**/hidden_*.npz
+~$*.docx
