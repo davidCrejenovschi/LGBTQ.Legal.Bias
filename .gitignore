@@ -9,3 +9,8 @@ data/real/compas/*.csv
 # cache stari ascunse (mari, se regenereaza)
 results/**/hidden_*.npz
 ~$*.docx
+# note personale de revizie (nu se versioneaza)
+plan.md
+# log-uri de rulare
+*.log
+results/**/analysis_log.txt

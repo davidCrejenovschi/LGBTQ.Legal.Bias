@@ -4,7 +4,7 @@ Counterfactual evaluation of sexual-orientation bias in large language models on
 legal tasks (recidivism risk, pretrial measure, witness credibility), plus an analysis of
 the models' hidden representations (WEAT/SEAT per layer) and of the link between the two.
 
-Research project, Lab 5–8 (applied part). The report is `IV.docx`, generated from the
+Research project, Lab 5–8 (applied part). The report is `docs/IV.docx`, generated from the
 Markdown sources in `report/`.
 
 ## Layout
@@ -19,7 +19,7 @@ Markdown sources in `report/`.
 | `results/` | raw model answers (JSONL) and analysis tables (CSV/JSON) |
 | `report/` | report chapters (Markdown), generated tables, figures, `build_report.py` |
 | `tests/` | unit tests (pytest), run by GitHub Actions on every push |
-| `I.docx`, `II.docx`, `III.docx` | previous labs (topic, literature analysis, outline and plan) |
+| `docs/` | the Lab 5–8 report `IV.docx`, previous labs `I.docx`–`III.docx` (topic, literature analysis, outline and plan) and the assignment `Lab5_8.pdf` |
 
 ## Reproducing the case study
 
@@ -40,7 +40,7 @@ python scripts/02_run_e1.py --model hf:Qwen/Qwen2.5-1.5B-Instruct --prompts data
 python scripts/05_analyze.py                           # E1 tables, H1b, manipulation check, E3, COMPAS
 python scripts/06_figures.py                           # figures
 python scripts/07_report_tables.py                     # tables for the report
-python report/build_report.py                          # -> IV.docx
+python report/build_report.py                          # -> docs/IV.docx
 python -m pytest -q                                    # unit tests
 ```
 

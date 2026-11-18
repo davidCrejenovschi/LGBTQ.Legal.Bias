@@ -13,7 +13,7 @@ Supported markup (a small, predictable subset):
     \\newpage             page break
     **bold**, *italic*, `code`
 
-    python report/build_report.py   ->  IV.docx (repository root)
+    python report/build_report.py   ->  docs/IV.docx
 """
 from __future__ import annotations
 
@@ -37,7 +37,7 @@ HERE = pathlib.Path(__file__).resolve().parent
 ROOT = HERE.parent
 SOURCES = ["00_front.md", "01_modelare.md", "02_studiu_de_caz.md", "03_related_work.md",
            "04_repository.md", "99_bibliografie.md"]
-OUT = ROOT / "IV.docx"
+OUT = ROOT / "docs" / "IV.docx"
 FONT = "Aptos"
 BODY_PT = 12
 

@@ -55,10 +55,14 @@ def extractor():
 def hidden(skip_first: bool) -> np.ndarray:
     cache = outdir / f"hidden_{tag}{'' if skip_first else '_withfirst'}.npz"
     if cache.exists():
-        return np.load(cache)["H"]
+        saved = np.load(cache)
+        # reuse the cache only if it was computed for exactly the same sentences
+        if "sentences" in saved and list(saved["sentences"]) == sentences:
+            return saved["H"]
+        print(f"cache {cache.name} is stale (sentence sets changed) - recomputing")
     t = time.time()
     H_ = extractor().encode(sentences, skip_first=skip_first)
-    np.savez_compressed(cache, H=H_)
+    np.savez_compressed(cache, H=H_, sentences=np.array(sentences))
     print(f"hidden states {H_.shape} (skip_first={skip_first}) in {time.time() - t:.1f}s")
     return H_
 

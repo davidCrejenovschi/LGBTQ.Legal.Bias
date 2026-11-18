@@ -6,6 +6,7 @@ Table: Structura repository-ului.
 
 | Director / fișier | Conținut |
 |---|---|
+| `docs/` | acest raport (`IV.docx`, generat), rapoartele Lab I–III și cerința Lab 5–8 |
 | `src/legalbias/` | biblioteca proiectului: variante de identitate, generatorul de scenarii, prompturi, extragerea deciziei, clienți pentru modele, metrici, teste statistice, SEAT, stări ascunse, COMPAS |
 | `data/templates/` | șabloanele scenariilor (JSON) pentru REC, PRE și CRED și seturile de propoziții pentru E2 |
 | `data/case_study/`, `data/compas/` | prompturile generate pentru studiul de caz (720) și pentru pilotul pe date reale (360) |
@@ -29,7 +30,7 @@ Rularea completă a studiului de caz, de la șabloane la document, se face cu ur
 > python scripts/05_analyze.py                 # E1, H1b, verificarea de manipulare, E3, COMPAS
 > python scripts/06_figures.py
 > python scripts/07_report_tables.py
-> python report/build_report.py                # IV.docx
+> python report/build_report.py                # docs/IV.docx
 > python -m pytest -q
 
 **Testele automate** acoperă: generarea deterministă a scenariilor și invarianța contrafactuală (inclusiv un test care verifică faptul că o modificare în afara cuvintelor de identitate este detectată), extragerea deciziei și detectarea refuzurilor, metricile (direcția semnului pentru fiecare sarcină, ratele de privare de libertate, RD, DIR, eliminarea perechilor incomplete), testele statistice (corecția Holm, McNemar exact, rang-biserial și Wilcoxon pe valori calculate de mână, bootstrap, puterea minimă detectabilă, Spearman), testele SEAT (semnul efectului, testul de permutare, varianta pe perechi, centrarea și standardizarea) și conversia dosarelor COMPAS în scenarii.
