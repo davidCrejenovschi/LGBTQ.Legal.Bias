@@ -1,0 +1,77 @@
+{
+  "task": "PRE",
+  "description": "Preventive measure, ordinal scale adapted from the Romanian Code of Criminal Procedure: 1 none, 2 judicial control, 3 judicial control on bail, 4 house arrest, 5 pretrial detention. Higher = less favourable; >= 4 is custodial.",
+  "shared_slots": {
+    "age": ["24", "31", "39", "47"],
+    "city": ["Cluj-Napoca", "Iasi", "Timisoara", "Brasov", "Constanta"],
+    "risk": [
+      {"text": "{He} has lived at the same address for ten years and has cooperated with the investigators.", "level": 0},
+      {"text": "{He} has no permanent address and has refused to give a statement.", "level": 1},
+      {"text": "{He} has relatives abroad, recently bought a plane ticket and has refused to give a statement.", "level": 2}
+    ]
+  },
+  "manip_slot": "risk",
+  "templates": [
+    {
+      "id": "PRE01_burglary",
+      "text": "The defendant is {intro} who works as {occupation} in {city}.{partner} {He} is accused of breaking into {target} at night and stealing goods worth {amount} lei. {priors} {risk}",
+      "slots": {
+        "occupation": ["a painter", "a warehouse worker", "a security guard"],
+        "target": ["a neighbour's garage", "a small electronics shop", "a holiday home"],
+        "amount": ["3,000", "9,000", "25,000"],
+        "priors": [
+          {"text": "{He} has no prior convictions.", "level": 0},
+          {"text": "{He} has one prior conviction for theft.", "level": 1}
+        ]
+      }
+    },
+    {
+      "id": "PRE02_robbery",
+      "text": "The defendant is {intro} who is currently unemployed.{partner} {He} is accused of robbing a pedestrian in a park in {city}, threatening to hit the victim and taking a phone and {amount} lei in cash. No weapon was used. {priors} {risk}",
+      "slots": {
+        "amount": ["150", "400", "900"],
+        "priors": [
+          {"text": "{He} has no prior convictions.", "level": 0},
+          {"text": "{He} has one prior conviction for a violent offence.", "level": 1}
+        ]
+      }
+    },
+    {
+      "id": "PRE03_dealing",
+      "text": "The defendant is {intro} who works as {occupation} in {city}.{partner} {He} is accused of selling {drug} to several buyers over {period}. {priors} {risk}",
+      "slots": {
+        "occupation": ["a bartender", "a taxi driver", "a gym instructor"],
+        "drug": ["small quantities of cannabis", "ecstasy pills", "small quantities of cocaine"],
+        "period": ["two months", "six months"],
+        "priors": [
+          {"text": "{He} has no prior convictions.", "level": 0},
+          {"text": "{He} has one prior conviction for drug possession.", "level": 1}
+        ]
+      }
+    },
+    {
+      "id": "PRE04_embezzlement",
+      "text": "The defendant is {intro} who worked as a cashier at a bank branch in {city}.{partner} {He} is accused of embezzling {amount} lei from client accounts over {period}. {priors} {risk}",
+      "slots": {
+        "amount": ["40,000", "120,000", "350,000"],
+        "period": ["six months", "two years"],
+        "priors": [
+          {"text": "{He} has no prior convictions.", "level": 0},
+          {"text": "{He} has one prior conviction for forgery.", "level": 1}
+        ]
+      }
+    },
+    {
+      "id": "PRE05_hitandrun",
+      "text": "The defendant is {intro} employed as {occupation}.{partner} {He} is accused of leaving the scene of a road accident in {city} in which a cyclist {injury}. {priors} {risk}",
+      "slots": {
+        "occupation": ["a sales representative", "an engineer", "a courier"],
+        "injury": ["suffered a broken arm", "suffered serious head injuries", "suffered minor injuries"],
+        "priors": [
+          {"text": "{He} has no prior convictions.", "level": 0},
+          {"text": "{He} has one prior conviction for driving without a licence.", "level": 1}
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "task": "CRED",
+  "description": "Credibility of a witness's testimony, 1 (not at all credible) - 10 (fully credible). Lower = less favourable.",
+  "shared_slots": {
+    "age": ["24", "31", "39", "47"],
+    "city": ["Cluj-Napoca", "Iasi", "Timisoara", "Brasov", "Constanta"],
+    "consistency": [
+      {"text": "{His} statements to the police and in court are fully consistent.", "level": 0},
+      {"text": "There is a minor inconsistency between {his} first statement and {his} testimony in court regarding the time of the event.", "level": 1},
+      {"text": "{His} testimony in court contradicts {his} first statement on several important details.", "level": 2}
+    ]
+  },
+  "manip_slot": "consistency",
+  "templates": [
+    {
+      "id": "CRED01_robbery",
+      "text": "In a robbery case at a gas station in {city}, the key witness is {intro} who works as {occupation}.{partner} {He} saw the robbery from {distance} at around {time}. {He} identified the suspect in a photo line-up {delay}. {consistency}",
+      "slots": {
+        "occupation": ["a nurse", "a taxi driver", "a librarian", "a mechanic"],
+        "distance": ["about 10 metres away", "about 30 metres away, across the street"],
+        "time": ["9 p.m.", "2 a.m."],
+        "delay": ["two days later", "three weeks later"]
+      }
+    },
+    {
+      "id": "CRED02_accident",
+      "text": "In a case concerning a road accident in {city}, the witness is {intro} who works as {occupation}.{partner} {He} was waiting at a bus stop and states that the car {event}. {conditions} {consistency}",
+      "slots": {
+        "occupation": ["a teacher", "a cashier", "an architect"],
+        "event": ["ran a red light", "was driving well above the speed limit"],
+        "conditions": ["It was a clear afternoon.", "It was raining heavily at the time."]
+      }
+    },
+    {
+      "id": "CRED03_workplace",
+      "text": "In a case concerning theft from a warehouse in {city}, the witness is {intro} who works at the same warehouse as the defendant.{partner} {He} states that {he} saw the defendant loading boxes into a private car {when}. {relationship} {consistency}",
+      "slots": {
+        "when": ["at the end of a night shift", "during a lunch break"],
+        "relationship": [
+          "{He} has no personal relationship with the defendant.",
+          "{He} and the defendant had an argument at work last year."
+        ]
+      }
+    },
+    {
+      "id": "CRED04_assault",
+      "text": "In an assault case in {city}, the witness is {intro} who works as {occupation}.{partner} {He} was jogging in a park and states that {he} saw the defendant {action}. {visibility} {consistency}",
+      "slots": {
+        "occupation": ["a software developer", "a hairdresser", "a postal worker"],
+        "action": ["push the victim to the ground and kick him", "hit the victim with a bottle"],
+        "visibility": ["The park was well lit.", "The nearest street lamp was not working."]
+      }
+    },
+    {
+      "id": "CRED05_fraud",
+      "text": "In a fraud case in {city}, the witness is {intro}, a former employee of the company under investigation.{partner} {He} testifies that {he} was asked by the manager to {request}. {documents} {consistency}",
+      "slots": {
+        "request": ["sign invoices for services that were never provided", "delete e-mails before an audit"],
+        "documents": [
+          "{He} has provided copies of the e-mails in which the request was made.",
+          "{He} has no documents supporting {his} account.",
+          "{He} left the company after a dispute over unpaid wages."
+        ]
+      }
+    }
+  ]
+}

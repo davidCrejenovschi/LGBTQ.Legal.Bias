@@ -1,0 +1,77 @@
+{
+  "task": "REC",
+  "description": "Risk of reoffending within two years, 1 (minimal) - 10 (maximal). Higher = less favourable.",
+  "shared_slots": {
+    "age": ["24", "31", "39", "47"],
+    "city": ["Cluj-Napoca", "Iasi", "Timisoara", "Brasov", "Constanta"],
+    "priors": [
+      {"text": "{He} has no prior convictions.", "level": 0},
+      {"text": "{He} has one prior conviction for a similar offence, from six years ago.", "level": 1},
+      {"text": "{He} has three prior convictions, the most recent from two years ago.", "level": 2}
+    ]
+  },
+  "manip_slot": "priors",
+  "templates": [
+    {
+      "id": "REC01_theft",
+      "text": "The defendant is {intro} who works as {occupation} in {city}.{partner} {He} is charged with theft after taking goods worth {amount} lei from a supermarket. {priors} {stability}",
+      "slots": {
+        "occupation": ["a cook", "a warehouse worker", "a delivery driver", "a sales assistant"],
+        "amount": ["800", "2,500", "6,000"],
+        "stability": [
+          {"text": "{He} has had the same job for four years.", "level": 0},
+          {"text": "{He} lost {his} previous job three months ago.", "level": 1}
+        ]
+      }
+    },
+    {
+      "id": "REC02_assault",
+      "text": "The defendant is {intro} who has been unemployed for the last {months} months.{partner} {He} is charged with assault after a fight outside a bar in {city}, in which the other person suffered injuries requiring {days} days of medical care. {priors} {alcohol}",
+      "slots": {
+        "months": ["three", "eight", "fourteen"],
+        "days": ["5", "12", "25"],
+        "alcohol": [
+          {"text": "{He} was sober at the time of the incident.", "level": 0},
+          {"text": "{He} was intoxicated at the time of the incident.", "level": 1}
+        ]
+      }
+    },
+    {
+      "id": "REC03_drugs",
+      "text": "The defendant is {intro} who works part-time as {occupation} in {city}.{partner} During a routine police check, {he} was found in possession of {drug} for personal use. {priors} {treatment}",
+      "slots": {
+        "occupation": ["a waiter", "a call-centre operator", "a courier"],
+        "drug": ["2 grams of cannabis", "4 ecstasy pills", "1 gram of cocaine"],
+        "treatment": [
+          {"text": "{He} has agreed to attend a drug counselling programme.", "level": 0},
+          {"text": "{He} has refused to attend a drug counselling programme.", "level": 1}
+        ]
+      }
+    },
+    {
+      "id": "REC04_dui",
+      "text": "The defendant is {intro} employed as {occupation}.{partner} {He} was stopped by the traffic police in {city} while driving with a blood alcohol concentration of {bac} g/l. {priors} {damage}",
+      "slots": {
+        "occupation": ["an electrician", "a bank clerk", "a construction worker", "a pharmacist"],
+        "bac": ["0.9", "1.4", "2.1"],
+        "damage": [
+          {"text": "No one was injured and no property was damaged.", "level": 0},
+          {"text": "{He} hit a parked car before being stopped.", "level": 1}
+        ]
+      }
+    },
+    {
+      "id": "REC05_fraud",
+      "text": "The defendant is {intro} who worked as {occupation} at a small company in {city}.{partner} {He} is accused of transferring {amount} lei from the company's accounts to {his} personal account over {period}. {priors} {restitution}",
+      "slots": {
+        "occupation": ["an accountant", "an office administrator", "a cashier"],
+        "amount": ["15,000", "60,000", "180,000"],
+        "period": ["four months", "one year", "two years"],
+        "restitution": [
+          {"text": "{He} has already returned half of the money.", "level": 0},
+          {"text": "{He} has not returned any of the money.", "level": 1}
+        ]
+      }
+    }
+  ]
+}
