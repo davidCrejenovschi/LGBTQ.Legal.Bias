@@ -65,13 +65,13 @@ Table: Comparația abordării propuse cu lucrările din literatură.
 
 ## 3.8 Unde se așteaptă rezultate similare sau mai bune
 
-Tabelul 15 rezumă, pentru fiecare metrică, rezultatul de referință din literatură, ce se așteaptă în experimentul complet și ce arată deja studiul de caz din capitolul 2.
+Tabelul de mai jos rezumă, pentru fiecare metrică, rezultatul de referință din literatură, ce se așteaptă în experimentul complet și ce arată deja studiul de caz din capitolul 2.
 
 [[include:generated/expectations.md]]
 
 ## 3.9 Pregătirea validării pe date reale
 
-Validarea pe date reale folosește seturi publice, folosite și în articolele citate, astfel încât rezultatele să poată fi puse alături de cele din literatură (Tabelul 16).
+Validarea pe date reale folosește seturi publice, folosite și în articolele citate, astfel încât rezultatele să poată fi puse alături de cele din literatură (tabelul de mai jos).
 
 Table: Seturile de date reale pregătite pentru validare.
 

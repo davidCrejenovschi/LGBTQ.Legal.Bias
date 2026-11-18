@@ -198,14 +198,20 @@ class Builder:
                 add_inline(c.paragraphs[0], row[j] if j < len(row) else "", size=size)
         # column widths proportional to (sqrt of) the longest text in each column
         visible = lambda s: re.sub(r"[*`]|_\{|\^\{|\}", "", s)  # noqa: E731
-        weights = []
+        char_cm = 0.185 if size == 9 else 0.205          # average glyph width
+        mins, weights = [], []
         for j in range(len(header)):
             col = [header[j]] + [r[j] if j < len(r) else "" for r in body]
             longest = max(max((len(w) for w in visible(c).split()), default=1) for c in col)
-            mean_len = sum(len(visible(c)) for c in col) / len(col)
-            weights.append(max(longest * 1.35, mean_len ** 0.75 * 2.2, 4))
+            mins.append(longest * char_cm * 1.08 + 0.32)  # longest word must not break
+            weights.append(sum(len(visible(c)) for c in col) / len(col))
         total = 21.59 - 4.0
-        widths = [Cm(total * w / sum(weights)) for w in weights]
+        if sum(mins) >= total:
+            cm = [m * total / sum(mins) for m in mins]
+        else:
+            extra = total - sum(mins)
+            cm = [m + extra * w / sum(weights) for m, w in zip(mins, weights)]
+        widths = [Cm(c) for c in cm]
         t.autofit = False
         for r in t.rows:
             for j, c in enumerate(r.cells):
@@ -262,12 +268,14 @@ class Builder:
         self.doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)
 
 
-def expand_includes(text: str) -> str:
+def expand_includes(text: str, depth: int = 0) -> str:
     def repl(m):
         path = HERE / m.group(1)
         if not path.exists():
             return f"[lipsește fișierul generat {m.group(1)}]"
-        return path.read_text(encoding="utf-8")
+        return expand_includes(path.read_text(encoding="utf-8"), depth + 1)
+    if depth > 5:
+        raise RecursionError("include nesting too deep")
     return re.sub(r"\[\[include:([^\]]+)\]\]", repl, text)
 
 
