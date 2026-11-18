@@ -30,7 +30,9 @@ TASKS = ["REC", "PRE", "CRED"]
 def f(x, nd=2, sign=False) -> str:
     if x is None or (isinstance(x, float) and np.isnan(x)):
         return "–"
-    s = f"{x:+.{nd}f}" if sign else f"{x:.{nd}f}"
+    if abs(x) < 0.5 * 10 ** -nd:
+        x = 0.0
+    s = f"{x:+.{nd}f}" if sign and x != 0 else f"{x:.{nd}f}"
     return s.replace("-", "−").replace(".", ",")
 
 
@@ -65,6 +67,12 @@ def status():
                      str(getattr(r, "refusal", 0)), str(getattr(r, "unparseable", 0)),
                      f(r.median_latency_s, 2) + " s"])
     det = pd.read_csv(CS / "e1_determinism.csv")
+    parts = []
+    for r in det.itertuples():
+        name = "Llama-3.1-8B" if "llama" in r.model else "Qwen2.5-1.5B"
+        same = int(round(r.identical * r.n))
+        parts.append(f"{name} – {same} din {int(r.n)} răspunsuri identice ({f(100 * r.identical, 1)}%)")
+    (OUT / "determinism.md").write_text("; ".join(parts) + ".", encoding="utf-8")
     write("status.md", table(
         "Calitatea răspunsurilor în studiul de caz (720 de prompturi pe model).",
         ["Model", "Sarcina", "Prompturi", "Format corect", "Refuzuri", "Neinterpretabile",
@@ -253,6 +261,84 @@ def compas_tables():
     write("compas.md", out)
 
 
+def expectations():
+    """Table for section 3.8: literature reference, expectation, case-study evidence."""
+    e = pd.read_csv(CS / "e1_vs_reference.csv")
+    h = pd.read_csv(CS / "e1_h1b.csv")
+    d2 = pd.read_csv(CS / "e2_seat_Qwen2.5-1.5B-Instruct.csv")
+    d2 = d2[(d2.rep == "standardized") & d2.vid.str.endswith("_exp")]
+    agg = d2.groupby(["vid", "concept"]).agg(d=("d", "mean"), sig=("p", lambda p: (p < 0.05).mean()))
+    e3s = json.loads((CS / "e3_summary.json").read_text())
+
+    def rng(series, nd=2):
+        return f"{f(series.min(), nd, True)} … {f(series.max(), nd, True)}"
+
+    def model_summary(model):
+        sub = e[e.model == model]
+        expl = sub[sub["mode"] == "explicit"]
+        impl = sub[sub["mode"] == "implicit"]
+        out = []
+        for t in TASKS:
+            ex, im = expl[expl.task == t], impl[impl.task == t]
+            out.append(f"{t}: MSD expl. {rng(ex.MSD)}, impl. {rng(im.MSD)}")
+        return "; ".join(out)
+
+    pre = e[e.task == "PRE"]
+    cmp_path = CP / "compas_summary.csv"
+    if cmp_path.exists():
+        cs = pd.read_csv(cmp_path)
+        auc_txt = "; ".join(f"{MODEL[r.model]}: AUC {f(r.AUC_llm_control, 2)}, acuratețe {pct(r.ACC_llm_control_thr5)}"
+                            for r in cs.itertuples())
+        auc_txt += f"; COMPAS pe aceleași dosare: AUC {f(cs.iloc[0].AUC_compas_decile, 2)}, acuratețe {pct(cs.iloc[0].ACC_compas_decile_thr5)}"
+        fpr = []
+        for r in cs.itertuples():
+            vals = [getattr(r, f"FPR_{k}") for k in ("het_exp", "lgb_exp", "bi_exp", "het_imp", "lgb_imp", "ctrl")]
+            fnr = [getattr(r, f"FNR_{k}") for k in ("het_exp", "lgb_exp", "bi_exp", "het_imp", "lgb_imp", "ctrl")]
+            fpr.append(f"{MODEL[r.model]}: FPR {pct(min(vals))}–{pct(max(vals))}, FNR {pct(min(fnr))}–{pct(max(fnr))}")
+        fpr_txt = "; ".join(fpr)
+    else:
+        auc_txt = fpr_txt = "în curs"
+    hl = h[(h.model == "ollama/llama3.1:latest")]
+    rows = [
+        ["Diferența de decizie (CFR, MSD)", "Tamkin et al. [9]; Hofmann et al. [2]",
+         "diferențe sistematice în decizii pentru vârstă, gen, rasă și dialect",
+         "similar: diferențe nenule și pentru orientarea sexuală",
+         "Llama – " + model_summary("ollama/llama3.1:latest") + ". Qwen – " +
+         model_summary("hf/Qwen2.5-1.5B-Instruct")],
+        ["Explicit vs. implicit (H1b)", "Hofmann et al. [2]",
+         "stereotipuri declarate pozitive, asocieri ascunse negative; RLHF corectează doar ce este declarat",
+         "similar: efect favorabil sau nul la semnalarea explicită, mai defavorabil la cea implicită",
+         "Llama, CRED: D = " + ", ".join(f(x, 2, True) for x in hl[hl.task == "CRED"].mean_D) +
+         " (p " + ", ".join(pv(x) for x in hl[hl.task == "CRED"].p_wilcoxon) + "); favorabil explicit, aproape nul implicit"],
+        ["Impact disparat (DIR, prag 0,8)", "Feldman et al. [12]",
+         "regula celor patru cincimi", "DIR ≥ 0,8 pentru majoritatea combinațiilor",
+         f"PRE: DIR între {f(pre.DIR.min(), 2)} și {f(pre.DIR.max(), 2)} pentru ambele modele"],
+        ["Asocieri generice (plăcut–neplăcut)", "Caliskan et al. [4]; May et al. [5]",
+         "efecte mari pentru vectori de cuvinte, inconsecvente pentru codificatoare de propoziții",
+         "similar: efecte slabe sau inconsecvente",
+         f"Qwen, variante explicite: d̄ {rng(agg.xs('VAL', level='concept').d)}, "
+         f"cel mult {pct(agg.xs('VAL', level='concept').sig.max())} din straturi semnificative"],
+        ["Asocieri cu concepte juridice", "– (contribuție nouă)", "–",
+         "mai bun (mai sensibil) decât testul generic",
+         f"Qwen, vinovat–nevinovat: d̄ {rng(agg.xs('PRE', level='concept').d)}, "
+         f"{pct(agg.xs('PRE', level='concept').sig.min())}–{pct(agg.xs('PRE', level='concept').sig.max())} din straturi semnificative"],
+        ["Legătura intrinsec–extrinsec", "Goldfarb-Tarrant et al. [16]",
+         "nicio corelație consistentă", "similar sau mai bun: ρ (concept aliniat) > ρ (generic)",
+         f"Qwen: ρ = {f(e3s['task_aligned']['rho'], 2, True)} (p {pv(e3s['task_aligned']['p_perm'])}) "
+         f"față de ρ_{{VAL}} = {f(e3s['valence_baseline']['rho'], 2, True)} (p {pv(e3s['valence_baseline']['p_perm'])})"],
+        ["Predicția recidivei (AUC, acuratețe)", "Dressel și Farid [13]",
+         "COMPAS 65,2%; oameni fără pregătire 62–67%", "similar: 60–70%", auc_txt],
+        ["Egalitatea erorilor (FPR, FNR)", "Angwin et al. [22]; Chouldechova [23]",
+         "FPR aproape dublă pentru inculpații de culoare la COMPAS",
+         "diferențe mici între variantele de orientare", fpr_txt],
+    ]
+    write("expectations.md", table(
+        "Metricile la care se așteaptă rezultate similare sau mai bune decât în literatură și "
+        "ce arată studiul de caz.",
+        ["Metrică", "Referința", "Rezultatul din literatură", "Așteptarea (experimentul complet)",
+         "Studiul de caz"], rows))
+
+
 def git_log():
     fmt = "%h|%ad|%s"
     log = subprocess.run(["git", "log", f"--pretty=format:{fmt}", "--date=format:%Y-%m-%d %H:%M"],
@@ -278,4 +364,6 @@ if __name__ == "__main__":
     if (CS / "e3_summary.json").exists():
         e3()
     compas_tables()
+    if (CS / "e3_summary.json").exists():
+        expectations()
     git_log()

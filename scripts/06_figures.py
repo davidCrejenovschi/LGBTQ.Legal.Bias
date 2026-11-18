@@ -54,7 +54,7 @@ def fig_e1_forest():
                         capsize=0, label=MODEL_LABEL[m], mec="white", mew=0.8)
         ax.axvline(0, color=INK2, lw=1)
         ax.set_title(TASK_LABEL[task], loc="left")
-        ax.set_xlabel("MSD (puncte pe scală; > 0 = LGBTQ+ defavorizat)")
+        ax.set_xlabel("MSD (puncte pe scală)")
         lim = max(0.6, np.nanmax(np.abs(e1[e1.task == task][["MSD_lo", "MSD_hi"]].to_numpy())) * 1.15)
         ax.set_xlim(-lim, lim)
         ax.grid(axis="y", visible=False)
@@ -98,7 +98,7 @@ def fig_e2_layers():
     conc = [("REC", "periculos–inofensiv", BLUE, "-"), ("PRE", "vinovat–nevinovat", ORANGE, "-"),
             ("CRED", "necinstit–credibil", AQUA, "-"), ("VAL", "neplăcut–plăcut (bază)", NEUTRAL, "--")]
     fig, axes = plt.subplots(2, 3, figsize=(10, 5.2), sharex=True, sharey=True)
-    for ax, vid in zip(axes.T.flat, VID_ORDER):
+    for ax, vid in zip(axes.flat, VID_ORDER):
         sub = e2[e2.vid == vid]
         for c, lab, col, ls in conc:
             s = sub[sub.concept == c].sort_values("layer")
@@ -108,12 +108,12 @@ def fig_e2_layers():
         ax.axhline(0, color=INK2, lw=0.9)
         ax.set_title(VID_LABEL[vid], loc="left")
     for ax in axes[-1]:
-        ax.set_xlabel("stratul ℓ")
-    for ax in axes[:, 0]:
-        ax.set_ylabel("dℓ (> 0: mai aproape de polul negativ)")
+        ax.set_xlabel("stratul l")
     h, lab = axes[0, 0].get_legend_handles_labels()
     fig.legend(h, lab, loc="upper center", ncol=4, bbox_to_anchor=(0.5, 1.04))
-    fig.tight_layout()
+    fig.tight_layout(rect=(0.03, 0, 1, 1))
+    fig.supylabel("efectul SEAT d (> 0: identitatea LGBTQ+ e mai aproape de polul negativ)",
+                  fontsize=8.5, color=INK2, x=0.005)
     fig.savefig(FIG / "e2_seat_layers.png")
     plt.close(fig)
 
@@ -127,7 +127,7 @@ def fig_e2_anisotropy():
     for col, lab, c, ls in series:
         if col in a:
             ax.plot(a["layer"], a[col], color=c, lw=2, ls=ls, label=lab)
-    ax.set_xlabel("stratul ℓ")
+    ax.set_xlabel("stratul l")
     ax.set_ylabel("cosinus mediu între\npropoziții oarecare")
     ax.set_ylim(-0.1, 1.05)
     ax.legend(loc="center right", fontsize=8)
