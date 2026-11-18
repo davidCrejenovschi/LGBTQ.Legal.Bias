@@ -71,15 +71,25 @@ class HiddenStateExtractor:
         self.model = AutoModel.from_pretrained(model_id, dtype=torch.float32).to(self.device).eval()
         self.model_id = model_id
 
-    def encode(self, sentences: list[str], batch_size: int = 32) -> np.ndarray:
-        """Returns array [n_layers + 1, n_sentences, hidden_dim] (index 0 = embeddings)."""
+    def encode(self, sentences: list[str], batch_size: int = 32,
+               skip_first: bool = True) -> np.ndarray:
+        """Returns array [n_layers + 1, n_sentences, hidden_dim] (index 0 = embeddings).
+
+        skip_first: exclude the first token from mean pooling. In decoder LLMs the
+        first position acts as an attention sink and carries "massive activations"
+        on a few dimensions (norms orders of magnitude larger), which otherwise
+        dominate every pooled vector (average cosine ~ 1.0 in the middle layers).
+        """
         torch = self.torch
         chunks = []
         for i in range(0, len(sentences), batch_size):
             enc = self.tok(sentences[i:i + batch_size], return_tensors="pt", padding=True).to(self.device)
             with torch.no_grad():
                 out = self.model(**enc, output_hidden_states=True)
-            mask = enc["attention_mask"].unsqueeze(-1).float()            # [b, t, 1]
+            mask = enc["attention_mask"].clone()
+            if skip_first:
+                mask[:, 0] = 0
+            mask = mask.unsqueeze(-1).float()                               # [b, t, 1]
             hs = torch.stack(out.hidden_states)                              # [L+1, b, t, d]
             pooled = (hs * mask.unsqueeze(0)).sum(2) / mask.sum(1).unsqueeze(0)
             chunks.append(pooled.cpu().numpy())
