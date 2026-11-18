@@ -103,10 +103,24 @@ def analyze_compas() -> pd.DataFrame | None:
         ctrl = ok[ok["mode"] == "control"]
         base = ctrl.drop_duplicates("sid")
         row = {"model": model, "n_records": int(base["sid"].nunique()),
+               "n_male": int((base["gender"] == "M").sum()),
                "AUC_llm_control": compas.auc(ctrl["value"], ctrl["recid"]),
                "ACC_llm_control_thr5": float(((ctrl["value"] >= 5) == (ctrl["recid"] == 1)).mean()),
                "AUC_compas_decile": compas.auc(base["decile"], base["recid"]),
                "ACC_compas_decile_thr5": float(((base["decile"] >= 5) == (base["recid"] == 1)).mean())}
+        # bootstrap CI for both AUCs (unit = record, same resample for both predictors)
+        rng = np.random.default_rng(0)
+        c_sorted = ctrl.sort_values("sid")
+        b_sorted = base.set_index("sid").loc[c_sorted["sid"]]
+        v, dcl, y = c_sorted["value"].to_numpy(), b_sorted["decile"].to_numpy(), c_sorted["recid"].to_numpy()
+        boots = []
+        for _ in range(2000):
+            i = rng.integers(0, len(y), len(y))
+            boots.append((compas.auc(v[i], y[i]), compas.auc(dcl[i], y[i])))
+        boots = np.array(boots)
+        row["AUC_llm_lo"], row["AUC_llm_hi"] = np.nanquantile(boots[:, 0], [0.025, 0.975])
+        row["AUC_compas_lo"], row["AUC_compas_hi"] = np.nanquantile(boots[:, 1], [0.025, 0.975])
+        row["AUC_diff_lo"], row["AUC_diff_hi"] = np.nanquantile(boots[:, 0] - boots[:, 1], [0.025, 0.975])
         # error-rate balance (separation): FPR / FNR per variant at threshold 5
         for vid_suffix in ("het_exp", "gay_exp|les_exp", "bi_exp", "het_imp", "gay_imp|les_imp", "ctrl"):
             sub = ok[ok["vid"].str.contains(vid_suffix)]

@@ -4,6 +4,7 @@ the computed ones."""
 from __future__ import annotations
 
 import ast
+import re
 import json
 import pathlib
 import subprocess
@@ -94,26 +95,37 @@ def manip():
         ["Model", "Sarcina", "Decizia medie pe niveluri (0 / 1 / 2)", "ρ_{manip}", "p"], rows))
 
 
+NB = " "   # non-breaking space: keeps "0% / 15%" and "[a; b]" on one line
+
+
+def ci(lo, hi) -> str:
+    return f"[{f(lo, 2, True)};{NB}{f(hi, 2, True)}]"
+
+
 def e1_main():
     e = pd.read_csv(CS / "e1_vs_reference.csv")
-    rows = []
+    out = []
     for model in MODEL:
+        rows = []
         for task in TASKS:
             for vid in VID_ORDER:
                 r = e[(e.model == model) & (e.task == task) & (e.vid == vid)]
                 if r.empty:
                     continue
                 r = r.iloc[0]
-                rows.append([MODEL[model], task, VID[vid], str(int(r.n_pairs)), pct(r.CFR),
-                             f"{pct(r.CFR_worse)} / {pct(r.CFR_better)}",
-                             f"{f(r.MSD, 2, True)} [{f(r.MSD_lo, 2, True)}; {f(r.MSD_hi, 2, True)}]",
+                rows.append([task, VID[vid], pct(r.CFR),
+                             f"{pct(r.CFR_worse)}{NB}/{NB}{pct(r.CFR_better)}",
+                             f"{f(r.MSD, 2, True)} {ci(r.MSD_lo, r.MSD_hi)}",
                              f(r.r_rb, 2, True), pv(r.p_wilcoxon), pv(r.p_wilcoxon_holm)])
-    write("e1_main.md", table(
-        "Rezultatele E1: fiecare variantă LGBTQ+ comparată cu referința heterosexuală (același gen, "
-        "același tip de semnalare). CFR⁺/CFR⁻: proporția perechilor în care decizia se schimbă în "
-        "defavoarea / în favoarea variantei LGBTQ+; MSD > 0 înseamnă tratament mai defavorabil.",
-        ["Model", "Sarcina", "Varianta", "n", "CFR", "CFR⁺ / CFR⁻", "MSD [IÎ 95%]", "r_{rb}",
-         "p Wilcoxon", "p Holm"], rows))
+        n = int(e[e.model == model].n_pairs.min())
+        out.append(table(
+            f"Rezultatele E1 pentru {MODEL[model]}: fiecare variantă LGBTQ+ comparată cu referința "
+            f"heterosexuală (același gen, același tip de semnalare), n = {n} perechi de scenarii. "
+            "CFR⁺ / CFR⁻: proporția perechilor în care decizia se schimbă în defavoarea / în favoarea "
+            "variantei LGBTQ+; MSD > 0 înseamnă tratament mai defavorabil.",
+            ["Sarcina", "Varianta", "CFR", "CFR⁺ / CFR⁻", "MSD [IÎ 95%]", "r_{rb}", "p Wilcoxon",
+             "p Holm"], rows))
+    write("e1_main.md", "\n".join(out))
 
 
 def e1_pre():
@@ -127,7 +139,7 @@ def e1_pre():
                 continue
             r = r.iloc[0]
             rows.append([MODEL[model], VID[vid], pct(r.custodial_v), pct(r.custodial_ref),
-                         f(r.RD, 2, True), f(r.DIR, 2), f"{int(r.n10)} / {int(r.n01)}",
+                         f(r.RD, 2, True), f(r.DIR, 2), f"{int(r.n10)}{NB}/{NB}{int(r.n01)}",
                          pv(r.p_mcnemar), pv(r.p_mcnemar_holm)])
     write("e1_pre.md", table(
         "Măsura preventivă ca decizie binară (privare de libertate: arest la domiciliu sau arestare "
@@ -166,7 +178,7 @@ def h1b():
     for r in h.itertuples():
         rows.append([MODEL[r.model], r.task, "bărbat gay" if r.implicit.startswith("M") else "femeie lesbiană",
                      f(r.MSD_explicit, 2, True), f(r.MSD_implicit, 2, True),
-                     f"{f(r.mean_D, 2, True)} [{f(r.D_lo, 2, True)}; {f(r.D_hi, 2, True)}]",
+                     f"{f(r.mean_D, 2, True)} {ci(r.D_lo, r.D_hi)}",
                      pv(r.p_wilcoxon)])
     write("h1b.md", table(
         "Testarea ipotezei H1b: prejudiciul mediu în varianta explicită și în cea implicită și "
@@ -214,7 +226,7 @@ def e3():
            "valence_baseline": "valență generică (bază), toate sarcinile",
            "within_REC": "aliniat, doar REC", "within_PRE": "aliniat, doar PRE",
            "within_CRED": "aliniat, doar CRED"}
-    rows = [[lab[k], str(v["n"]), f(v["rho"], 2, True), f"[{f(v['ci'][0], 2, True)}; {f(v['ci'][1], 2, True)}]",
+    rows = [[lab[k], str(v["n"]), f(v["rho"], 2, True), ci(v['ci'][0], v['ci'][1]),
              pv(v["p_perm"])] for k, v in s.items()]
     write("e3.md", table(
         "Rezultatele E3: corelația Spearman dintre asocierea din reprezentări (d̄) și diferența "
@@ -228,14 +240,19 @@ def compas_tables():
     s = pd.read_csv(CP / "compas_summary.csv")
     rows = []
     first = s.iloc[0]
-    rows.append(["COMPAS (decile ≥ 5)", f(first.AUC_compas_decile, 3), pct(first.ACC_compas_decile_thr5)])
+    rows.append(["COMPAS (decile ≥ 5)",
+                 f"{f(first.AUC_compas_decile, 2)} [{f(first.AUC_compas_lo, 2)}; {f(first.AUC_compas_hi, 2)}]",
+                 pct(first.ACC_compas_decile_thr5), "–"])
     for r in s.itertuples():
-        rows.append([f"{MODEL[r.model]} (control, scor ≥ 5)", f(r.AUC_llm_control, 3),
-                     pct(r.ACC_llm_control_thr5)])
+        rows.append([f"{MODEL[r.model]} (control, scor ≥ 5)",
+                     f"{f(r.AUC_llm_control, 2)} [{f(r.AUC_llm_lo, 2)}; {f(r.AUC_llm_hi, 2)}]",
+                     pct(r.ACC_llm_control_thr5),
+                     ci(r.AUC_diff_lo, r.AUC_diff_hi)])
     out = table(
-        f"Pilotul pe date reale: capacitatea de a prezice recidiva în 2 ani pe aceleași "
-        f"{int(first.n_records)} dosare COMPAS (eșantion echilibrat).",
-        ["Predictor", "AUC", "Acuratețe"], rows)
+        f"Pilotul pe date reale: predicția recidivei în 2 ani pe aceleași {int(first.n_records)} "
+        f"de dosare COMPAS (eșantion echilibrat, {int(first.n_male)} de bărbați). Între paranteze: "
+        f"intervale de încredere bootstrap de 95%.",
+        ["Predictor", "AUC [IÎ 95%]", "Acuratețe", "Diferența de AUC față de COMPAS [IÎ 95%]"], rows)
     rows = []
     keys = [("het_exp", "heterosexual (expl.)"), ("lgb_exp", "gay / lesbiană (expl.)"),
             ("bi_exp", "bisexual (expl.)"), ("het_imp", "partener de sex opus (impl.)"),
@@ -252,7 +269,7 @@ def compas_tables():
     rows = []
     for r in e.itertuples():
         rows.append([MODEL[r.model], VID[r.vid], str(int(r.n_pairs)), pct(r.CFR),
-                     f"{f(r.MSD, 2, True)} [{f(r.MSD_lo, 2, True)}; {f(r.MSD_hi, 2, True)}]",
+                     f"{f(r.MSD, 2, True)} {ci(r.MSD_lo, r.MSD_hi)}",
                      pv(r.p_wilcoxon)])
     out += "\n" + table(
         "Diferențele contrafactuale pe dosarele reale (scorul de risc 1–10, comparat cu referința "
@@ -278,12 +295,18 @@ def expectations():
         expl = sub[sub["mode"] == "explicit"]
         impl = sub[sub["mode"] == "implicit"]
         out = []
-        for t in TASKS:
+        for t in ("CRED", "REC"):
             ex, im = expl[expl.task == t], impl[impl.task == t]
-            out.append(f"{t}: MSD expl. {rng(ex.MSD)}, impl. {rng(im.MSD)}")
+            out.append(f"{t} {rng(ex.MSD)} (expl.), {rng(im.MSD)} (impl.)")
         return "; ".join(out)
 
-    pre = e[e.task == "PRE"]
+    def dir_summary(model):
+        d = e[(e.model == model) & (e.task == "PRE")].DIR
+        if d.isna().all():
+            return f"{MODEL[model]}: nedefinit (privare de libertate în 100% din cazuri)"
+        if d.min() == d.max():
+            return f"{MODEL[model]}: {f(d.min(), 2)} pentru toate variantele"
+        return f"{MODEL[model]}: {f(d.min(), 2)}–{f(d.max(), 2)}"
     cmp_path = CP / "compas_summary.csv"
     if cmp_path.exists():
         cs = pd.read_csv(cmp_path)
@@ -303,8 +326,8 @@ def expectations():
         ["Diferența de decizie (CFR, MSD)", "Tamkin et al. [9]; Hofmann et al. [2]",
          "diferențe sistematice în decizii pentru vârstă, gen, rasă și dialect",
          "similar: diferențe nenule și pentru orientarea sexuală",
-         "Llama – " + model_summary("ollama/llama3.1:latest") + ". Qwen – " +
-         model_summary("hf/Qwen2.5-1.5B-Instruct")],
+         "MSD pe variante LGBTQ+. Llama: " + model_summary("ollama/llama3.1:latest") + ". Qwen: " +
+         model_summary("hf/Qwen2.5-1.5B-Instruct") + f". PRE: între {f(e[e.task == 'PRE'].MSD.min(), 2, True)} și {f(e[e.task == 'PRE'].MSD.max(), 2, True)} (plafon)"],
         ["Explicit vs. implicit (H1b)", "Hofmann et al. [2]",
          "stereotipuri declarate pozitive, asocieri ascunse negative; RLHF corectează doar ce este declarat",
          "similar: efect favorabil sau nul la semnalarea explicită, mai defavorabil la cea implicită",
@@ -312,7 +335,7 @@ def expectations():
          " (p " + ", ".join(pv(x) for x in hl[hl.task == "CRED"].p_wilcoxon) + "); favorabil explicit, aproape nul implicit"],
         ["Impact disparat (DIR, prag 0,8)", "Feldman et al. [12]",
          "regula celor patru cincimi", "DIR ≥ 0,8 pentru majoritatea combinațiilor",
-         f"PRE: DIR între {f(pre.DIR.min(), 2)} și {f(pre.DIR.max(), 2)} pentru ambele modele"],
+         "PRE – " + "; ".join(dir_summary(m) for m in MODEL)],
         ["Asocieri generice (plăcut–neplăcut)", "Caliskan et al. [4]; May et al. [5]",
          "efecte mari pentru vectori de cuvinte, inconsecvente pentru codificatoare de propoziții",
          "similar: efecte slabe sau inconsecvente",
@@ -346,9 +369,14 @@ def git_log():
     rows = []
     for line in log.splitlines():
         h, d, msg = line.split("|", 2)
-        n = subprocess.run(["git", "show", "--stat", "--format=", h], cwd=ROOT, capture_output=True,
-                           text=True, encoding="utf-8").stdout.strip().splitlines()
-        rows.append([f"`{h}`", d, msg, n[-1].strip() if n else ""])
+        n = subprocess.run(["git", "show", "--shortstat", "--format=", h], cwd=ROOT, capture_output=True,
+                           text=True, encoding="utf-8").stdout.strip()
+        files = re.search(r"(\d+) files? changed", n)
+        ins = re.search(r"(\d+) insertions?", n)
+        dels = re.search(r"(\d+) deletions?", n)
+        stat = (f"{files.group(1) if files else 0} fișiere, +{ins.group(1) if ins else 0} / "
+                f"−{dels.group(1) if dels else 0} linii")
+        rows.append([f"`{h}`", d, msg, stat])
     write("git_log.md", table("Istoricul commit-urilor (cel mai recent primul).",
                               ["Commit", "Data", "Descriere", "Modificări"], rows))
 

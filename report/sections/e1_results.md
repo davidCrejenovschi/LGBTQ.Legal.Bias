@@ -1,6 +1,6 @@
 ## 2.5 Rezultatele E1: diferențele de decizie
 
-Tabelul de mai jos prezintă, pentru fiecare model, sarcină și variantă LGBTQ+, metricile din formulele (3)–(4) față de referința heterosexuală. Figura care urmează le rezumă grafic.
+Tabelele de mai jos prezintă, pentru fiecare model, sarcină și variantă LGBTQ+, metricile din formulele (3)–(4) față de referința heterosexuală. Figura care urmează le rezumă grafic.
 
 [[include:generated/e1_main.md]]
 

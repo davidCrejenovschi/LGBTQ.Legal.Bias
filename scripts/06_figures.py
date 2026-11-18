@@ -151,7 +151,8 @@ def fig_e3():
                            edgecolor="white", linewidth=0.8,
                            label=f"{task}, {'explicit' if mode == 'explicit' else 'implicit'}")
         r = summ[key]
-        ax.set_title(f"{title}\nρ = {r['rho']:.2f}, p = {r['p_perm']:.2f}", loc="left")
+        stat = f"ρ = {r['rho']:.2f}, p = {r['p_perm']:.2f}".replace(".", ",").replace("-", "−")
+        ax.set_title(f"{title}\n{stat}", loc="left")
         ax.axhline(0, color=INK2, lw=0.8)
         ax.axvline(0, color=INK2, lw=0.8)
         ax.set_xlabel("d̄ (media pe straturi, E2)")

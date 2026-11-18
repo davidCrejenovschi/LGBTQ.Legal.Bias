@@ -202,7 +202,7 @@ class Builder:
         mins, weights = [], []
         for j in range(len(header)):
             col = [header[j]] + [r[j] if j < len(r) else "" for r in body]
-            longest = max(max((len(w) for w in visible(c).split()), default=1) for c in col)
+            longest = max(max((len(w) for w in visible(c).split(" ")), default=1) for c in col)
             mins.append(longest * char_cm * 1.08 + 0.32)  # longest word must not break
             weights.append(sum(len(visible(c)) for c in col) / len(col))
         total = 21.59 - 4.0
