@@ -33,8 +33,10 @@ python scripts/02_run_e1.py --model ollama:llama3.1:latest --pilot 9   # pilot: 
 python scripts/02_run_e1.py --model ollama:llama3.1:latest             # E1
 python scripts/02_run_e1.py --model hf:Qwen/Qwen2.5-1.5B-Instruct      # E1 (CPU)
 python scripts/03_run_e2.py                            # E2: hidden states + SEAT per layer
+python scripts/03b_massive_activations.py              # first-token massive activations (why it is excluded)
 python scripts/04_compas_prompts.py --n 60             # real data: COMPAS -> prompts
 python scripts/02_run_e1.py --model ollama:llama3.1:latest --prompts data/compas/prompts.jsonl --outdir results/compas/e1_raw
+python scripts/02_run_e1.py --model hf:Qwen/Qwen2.5-1.5B-Instruct --prompts data/compas/prompts.jsonl --outdir results/compas/e1_raw
 python scripts/05_analyze.py                           # E1 tables, H1b, manipulation check, E3, COMPAS
 python scripts/06_figures.py                           # figures
 python scripts/07_report_tables.py                     # tables for the report

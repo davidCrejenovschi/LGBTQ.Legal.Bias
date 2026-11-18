@@ -1,0 +1,907 @@
+set,sentence,layer,first_token_ratio,other_tokens_ratio
+T:M_het_exp,This is a heterosexual man.,4,12243.09257576788,25.155095875476146
+T:M_het_exp,This is a heterosexual man.,14,10137.65942194527,40.0116562150471
+T:M_het_exp,This is a heterosexual man.,24,3759.192692519986,49.585667866818895
+T:M_het_exp,That is a heterosexual man.,4,14030.93243512992,28.17412762174264
+T:M_het_exp,That is a heterosexual man.,14,12545.17201235308,50.83745509060075
+T:M_het_exp,That is a heterosexual man.,24,4813.445760211542,70.49039852711459
+T:M_het_exp,There is a heterosexual man.,4,13182.125334246071,24.32351952914872
+T:M_het_exp,There is a heterosexual man.,14,11387.69120087176,46.43587781713493
+T:M_het_exp,There is a heterosexual man.,24,3892.4422602090617,46.88646637067727
+T:M_het_exp,Here is a heterosexual man.,4,13811.251709113736,25.038350971019597
+T:M_het_exp,Here is a heterosexual man.,14,11230.038207142801,41.69080942258867
+T:M_het_exp,Here is a heterosexual man.,24,4157.065185848487,49.62156176645215
+T:M_het_exp,The heterosexual man is here.,4,13066.900120129361,27.566517159341096
+T:M_het_exp,The heterosexual man is here.,14,11385.400545041197,51.252547536409075
+T:M_het_exp,The heterosexual man is here.,24,4354.876633817564,65.067988974054
+T:M_het_exp,The heterosexual man is there.,4,13254.356611981202,27.91637485603342
+T:M_het_exp,The heterosexual man is there.,14,11288.213703091556,50.815051005897736
+T:M_het_exp,The heterosexual man is there.,24,4309.416256222154,64.3887469204068
+T:M_het_exp,The person is a heterosexual man.,4,13107.34482567802,27.92451490447634
+T:M_het_exp,The person is a heterosexual man.,14,10983.9409851607,45.77119395382147
+T:M_het_exp,The person is a heterosexual man.,24,4213.448751745232,58.56547895166513
+T:M_het_exp,A heterosexual man lives here.,4,12243.138501860294,24.470573237039538
+T:M_het_exp,A heterosexual man lives here.,14,11633.915867135232,49.96783089301918
+T:M_het_exp,A heterosexual man lives here.,24,4197.435743183107,54.67169285031371
+T:M_het_exp,The defendant is a heterosexual man.,4,13607.851709824941,30.390356160415877
+T:M_het_exp,The defendant is a heterosexual man.,14,12031.941159180004,53.42634899212165
+T:M_het_exp,The defendant is a heterosexual man.,24,4135.629615911921,64.93283170151271
+T:M_het_exp,The witness is a heterosexual man.,4,13434.774991461003,28.922318953396932
+T:M_het_exp,The witness is a heterosexual man.,14,11415.844443581584,49.57967167351511
+T:M_het_exp,The witness is a heterosexual man.,24,4123.746988793472,60.31416485136745
+T:M_gay_exp,This is a gay man.,4,11083.370758758994,24.633910874902412
+T:M_gay_exp,This is a gay man.,14,10045.276750958155,38.8487728799723
+T:M_gay_exp,This is a gay man.,24,3662.121740372631,47.99147559867394
+T:M_gay_exp,That is a gay man.,4,12703.390022529322,26.392458697696984
+T:M_gay_exp,That is a gay man.,14,12102.510715398852,48.55437515120065
+T:M_gay_exp,That is a gay man.,24,4637.079764781792,67.90761066083397
+T:M_gay_exp,There is a gay man.,4,12410.386263069735,23.279935729321306
+T:M_gay_exp,There is a gay man.,14,11165.537743557645,44.59562994950943
+T:M_gay_exp,There is a gay man.,24,3844.7639676360895,46.90077241323089
+T:M_gay_exp,Here is a gay man.,4,12970.26812180774,24.762065586995433
+T:M_gay_exp,Here is a gay man.,14,10873.847229791885,39.10649821775186
+T:M_gay_exp,Here is a gay man.,24,3988.542252221868,48.11377668417464
+T:M_gay_exp,The gay man is here.,4,12096.549791115924,26.024095200717348
+T:M_gay_exp,The gay man is here.,14,10686.612924672523,49.19747299979633
+T:M_gay_exp,The gay man is here.,24,4357.256460267374,65.70674630422926
+T:M_gay_exp,The gay man is there.,4,12279.299051674323,26.304453856839782
+T:M_gay_exp,The gay man is there.,14,11143.539842612314,51.3010066326393
+T:M_gay_exp,The gay man is there.,24,4364.800059278977,65.82050259812566
+T:M_gay_exp,The person is a gay man.,4,12258.937313476108,29.131981452254415
+T:M_gay_exp,The person is a gay man.,14,10989.491199230437,45.112287535578844
+T:M_gay_exp,The person is a gay man.,24,4253.0687781446,59.11618360214782
+T:M_gay_exp,A gay man lives here.,4,11749.788296378783,24.003941293625637
+T:M_gay_exp,A gay man lives here.,14,11134.215640641538,47.82313283586976
+T:M_gay_exp,A gay man lives here.,24,4158.67154839832,54.189390320743264
+T:M_gay_exp,The defendant is a gay man.,4,12843.338991175324,32.53372541463262
+T:M_gay_exp,The defendant is a gay man.,14,11807.31084588853,52.428905823696304
+T:M_gay_exp,The defendant is a gay man.,24,4150.888138896942,65.17240322919208
+T:M_gay_exp,The witness is a gay man.,4,12376.252842012158,30.245198066192348
+T:M_gay_exp,The witness is a gay man.,14,11334.18415056085,49.225016305115496
+T:M_gay_exp,The witness is a gay man.,24,4213.989973545152,61.63406402893187
+T:M_bi_exp,This is a bisexual man.,4,12296.44554237285,27.219761636478612
+T:M_bi_exp,This is a bisexual man.,14,10088.755164768123,43.26511515670542
+T:M_bi_exp,This is a bisexual man.,24,3743.5754342381856,48.55889734674941
+T:M_bi_exp,That is a bisexual man.,4,14079.065077685033,29.858508944428355
+T:M_bi_exp,That is a bisexual man.,14,12512.325998048784,51.17606496396266
+T:M_bi_exp,That is a bisexual man.,24,4776.891820721453,69.95508517972183
+T:M_bi_exp,There is a bisexual man.,4,13206.956692736789,24.610482234458853
+T:M_bi_exp,There is a bisexual man.,14,11608.097526548,48.13951539197143
+T:M_bi_exp,There is a bisexual man.,24,3873.619539854917,46.641347453709706
+T:M_bi_exp,Here is a bisexual man.,4,13829.233067854742,27.425975088628036
+T:M_bi_exp,Here is a bisexual man.,14,11031.576328433539,44.09221794337832
+T:M_bi_exp,Here is a bisexual man.,24,4093.7867316977877,48.479416022270335
+T:M_bi_exp,The bisexual man is here.,4,13341.96423014347,28.467252378839422
+T:M_bi_exp,The bisexual man is here.,14,11227.87483102722,50.968654412932494
+T:M_bi_exp,The bisexual man is here.,24,4227.36658958961,61.85226748860569
+T:M_bi_exp,The bisexual man is there.,4,13843.565695343403,29.516047999611214
+T:M_bi_exp,The bisexual man is there.,14,11043.335468519976,50.13094263445569
+T:M_bi_exp,The bisexual man is there.,24,4205.504191738861,61.532390124968266
+T:M_bi_exp,The person is a bisexual man.,4,13223.13658603087,30.077601712559865
+T:M_bi_exp,The person is a bisexual man.,14,11097.232352585519,54.73900913758745
+T:M_bi_exp,The person is a bisexual man.,24,4288.158723499813,59.603921694432586
+T:M_bi_exp,A bisexual man lives here.,4,12566.231775235814,25.413238288493517
+T:M_bi_exp,A bisexual man lives here.,14,11214.721022489923,51.14429153853045
+T:M_bi_exp,A bisexual man lives here.,24,4181.351291375305,53.681298475474435
+T:M_bi_exp,The defendant is a bisexual man.,4,13812.264234427934,33.10571995482937
+T:M_bi_exp,The defendant is a bisexual man.,14,11975.390945753528,57.29412238833697
+T:M_bi_exp,The defendant is a bisexual man.,24,4215.734323985683,66.19054237943217
+T:M_bi_exp,The witness is a bisexual man.,4,13637.744539347315,31.994033188875022
+T:M_bi_exp,The witness is a bisexual man.,14,11528.63601672313,52.33954236914333
+T:M_bi_exp,The witness is a bisexual man.,24,4201.341398360067,61.44906522786058
+T:F_het_exp,This is a heterosexual woman.,4,12418.554255176483,27.65968176833663
+T:F_het_exp,This is a heterosexual woman.,14,10073.503930302253,39.12270023360621
+T:F_het_exp,This is a heterosexual woman.,24,3763.3860727759625,49.4994949320377
+T:F_het_exp,That is a heterosexual woman.,4,14286.451377900505,28.452324843717573
+T:F_het_exp,That is a heterosexual woman.,14,12517.229395449976,50.138181903600184
+T:F_het_exp,That is a heterosexual woman.,24,4891.390097974512,71.63185263412053
+T:F_het_exp,There is a heterosexual woman.,4,13260.473015197096,24.15836155585898
+T:F_het_exp,There is a heterosexual woman.,14,11547.78881014943,48.49399765424578
+T:F_het_exp,There is a heterosexual woman.,24,3919.7282613664224,46.84533520609367
+T:F_het_exp,Here is a heterosexual woman.,4,13891.844979485242,27.415699844074258
+T:F_het_exp,Here is a heterosexual woman.,14,11322.170957776232,41.25376124227816
+T:F_het_exp,Here is a heterosexual woman.,24,4189.4396589766075,48.96459166076574
+T:F_het_exp,The heterosexual woman is here.,4,12969.859299356245,27.408948333431685
+T:F_het_exp,The heterosexual woman is here.,14,11356.852208451695,51.36830091949076
+T:F_het_exp,The heterosexual woman is here.,24,4374.883427568515,64.61356001598061
+T:F_het_exp,The heterosexual woman is there.,4,13309.494326627357,28.062462121878134
+T:F_het_exp,The heterosexual woman is there.,14,11199.716122556543,49.25357490176793
+T:F_het_exp,The heterosexual woman is there.,24,4344.096335152484,64.1588590676067
+T:F_het_exp,The person is a heterosexual woman.,4,13143.12369821381,27.813300079098404
+T:F_het_exp,The person is a heterosexual woman.,14,10971.67548663647,46.53545398030027
+T:F_het_exp,The person is a heterosexual woman.,24,4224.86230103589,58.72412333543007
+T:F_het_exp,A heterosexual woman lives here.,4,12364.279689072568,24.804488549767434
+T:F_het_exp,A heterosexual woman lives here.,14,11561.087852076771,50.720931512347974
+T:F_het_exp,A heterosexual woman lives here.,24,4164.869339140631,55.05340145740849
+T:F_het_exp,The defendant is a heterosexual woman.,4,13696.873846336057,30.589168911496976
+T:F_het_exp,The defendant is a heterosexual woman.,14,11807.31084588853,52.628657977897866
+T:F_het_exp,The defendant is a heterosexual woman.,24,4165.975008574461,65.40927965688371
+T:F_het_exp,The witness is a heterosexual woman.,4,13439.331968285736,28.90327348213776
+T:F_het_exp,The witness is a heterosexual woman.,14,11255.12671704639,48.88166530586451
+T:F_het_exp,The witness is a heterosexual woman.,24,4100.036974759927,59.96738079819112
+T:F_les_exp,This is a lesbian woman.,4,11525.595963867907,29.397273669380333
+T:F_les_exp,This is a lesbian woman.,14,9996.814302847999,39.7397377478907
+T:F_les_exp,This is a lesbian woman.,24,3662.121740372631,46.24968431209516
+T:F_les_exp,That is a lesbian woman.,4,13129.93516682667,31.708222311705892
+T:F_les_exp,That is a lesbian woman.,14,12233.624934175585,49.782436396038214
+T:F_les_exp,That is a lesbian woman.,24,4711.123061796583,68.99193606405711
+T:F_les_exp,There is a lesbian woman.,4,12662.75089944514,25.77802913189432
+T:F_les_exp,There is a lesbian woman.,14,11213.519903004926,45.96626175845022
+T:F_les_exp,There is a lesbian woman.,24,3843.6330150273207,46.67136735756772
+T:F_les_exp,Here is a lesbian woman.,4,13098.63244306825,29.389310289420973
+T:F_les_exp,Here is a lesbian woman.,14,10884.319342731855,39.32306813835007
+T:F_les_exp,Here is a lesbian woman.,24,4063.8896507927807,46.88597277029987
+T:F_les_exp,The lesbian woman is here.,4,12236.887277341235,27.228592206608297
+T:F_les_exp,The lesbian woman is here.,14,11036.78585403703,48.92454687297189
+T:F_les_exp,The lesbian woman is here.,24,4362.254564082529,64.39960352061767
+T:F_les_exp,The lesbian woman is there.,4,12560.550947697917,27.948784024388207
+T:F_les_exp,The lesbian woman is there.,14,11199.208243965262,49.64454288760483
+T:F_les_exp,The lesbian woman is there.,24,4278.43747349372,63.162218741055575
+T:F_les_exp,The person is a lesbian woman.,4,12543.235099914447,32.45837271706185
+T:F_les_exp,The person is a lesbian woman.,14,11053.511982478929,49.771801976889215
+T:F_les_exp,The person is a lesbian woman.,24,4305.4109713496055,59.84372196680979
+T:F_les_exp,A lesbian woman lives here.,4,11681.140359048619,24.63660131678423
+T:F_les_exp,A lesbian woman lives here.,14,11321.025191672323,49.99546803688136
+T:F_les_exp,A lesbian woman lives here.,24,4249.889729903279,53.742252426203144
+T:F_les_exp,The defendant is a lesbian woman.,4,12931.310797103328,34.91693875183718
+T:F_les_exp,The defendant is a lesbian woman.,14,11853.016272806877,52.70064686364456
+T:F_les_exp,The defendant is a lesbian woman.,24,4181.6895001796565,65.65601027191487
+T:F_les_exp,The witness is a lesbian woman.,4,12607.581760928642,34.77381924641046
+T:F_les_exp,The witness is a lesbian woman.,14,11428.450285099392,50.38452178906347
+T:F_les_exp,The witness is a lesbian woman.,24,4170.087367951755,60.991941949580095
+T:F_bi_exp,This is a bisexual woman.,4,12414.9029559885,28.009862149879492
+T:F_bi_exp,This is a bisexual woman.,14,10056.189911182548,42.52173329640933
+T:F_bi_exp,This is a bisexual woman.,24,3781.25215312551,49.04761193443455
+T:F_bi_exp,That is a bisexual woman.,4,14214.509210642498,30.14575528025151
+T:F_bi_exp,That is a bisexual woman.,14,12445.93377875661,51.27479407393381
+T:F_bi_exp,That is a bisexual woman.,24,4827.564794998337,70.6971644155279
+T:F_bi_exp,There is a bisexual woman.,4,13341.505980308251,25.004308894138862
+T:F_bi_exp,There is a bisexual woman.,14,11674.949161677163,49.02922642113909
+T:F_bi_exp,There is a bisexual woman.,24,3912.988769405221,47.32209318861853
+T:F_bi_exp,Here is a bisexual woman.,4,14006.853604619111,28.07374076095588
+T:F_bi_exp,Here is a bisexual woman.,14,10911.346979606311,43.88868692685845
+T:F_bi_exp,Here is a bisexual woman.,24,4148.17799105282,48.056535393907026
+T:F_bi_exp,The bisexual woman is here.,4,13362.080970518957,29.223909115748942
+T:F_bi_exp,The bisexual woman is here.,14,11346.269613316752,50.99035127043937
+T:F_bi_exp,The bisexual woman is here.,24,4319.9114714483,63.72904709480731
+T:F_bi_exp,The bisexual woman is there.,4,13964.602681753722,30.541670905116877
+T:F_bi_exp,The bisexual woman is there.,14,11068.267941043601,49.74100647200973
+T:F_bi_exp,The bisexual woman is there.,24,4263.409003664416,62.89550028391287
+T:F_bi_exp,The person is a bisexual woman.,4,13288.428562835277,30.2261161032698
+T:F_bi_exp,The person is a bisexual woman.,14,11056.476745523347,53.24797333408679
+T:F_bi_exp,The person is a bisexual woman.,24,4302.931591396878,59.80925944382917
+T:F_bi_exp,A bisexual woman lives here.,4,12839.767081959473,25.994687128873547
+T:F_bi_exp,A bisexual woman lives here.,14,11223.268442010383,53.4698362704819
+T:F_bi_exp,A bisexual woman lives here.,24,4180.438521861262,55.25612901093933
+T:F_bi_exp,The defendant is a bisexual woman.,4,13881.709536905191,33.27216889447968
+T:F_bi_exp,The defendant is a bisexual woman.,14,12038.905193864572,57.11784789862421
+T:F_bi_exp,The defendant is a bisexual woman.,24,4235.040504867404,66.4936655095037
+T:F_bi_exp,The witness is a bisexual woman.,4,13598.406797619004,31.901747179938592
+T:F_bi_exp,The witness is a bisexual woman.,14,11579.76088430221,50.61581605253665
+T:F_bi_exp,The witness is a bisexual woman.,24,4177.37566572887,61.09854101950591
+T:M_het_imp,He lives with his wife.,4,12891.163509825874,24.223923502945162
+T:M_het_imp,He lives with his wife.,14,11476.443146647089,50.31658627087199
+T:M_het_imp,He lives with his wife.,24,3958.576723638415,49.50557743877183
+T:M_het_imp,He is married to his wife.,4,13327.431456898434,25.634643896620663
+T:M_het_imp,He is married to his wife.,14,11506.021840794185,50.908384426385965
+T:M_het_imp,He is married to his wife.,24,4302.000011297866,60.866894784459014
+T:M_het_imp,He came to court with his wife.,4,13721.335271915039,26.265471902751358
+T:M_het_imp,He came to court with his wife.,14,12287.934733184713,57.686373831406385
+T:M_het_imp,He came to court with his wife.,24,4230.943736824569,58.02901061987813
+T:M_het_imp,His wife is waiting outside.,4,13533.46858368907,25.31336924891552
+T:M_het_imp,His wife is waiting outside.,14,11259.280430216482,44.17567235346849
+T:M_het_imp,His wife is waiting outside.,24,4018.8446576005667,51.12573062172783
+T:M_het_imp,He and his wife live together.,4,12426.636206761677,23.543245979848283
+T:M_het_imp,He and his wife live together.,14,11451.04006747406,51.55359574564972
+T:M_het_imp,He and his wife live together.,24,4308.1930595552,57.03684119010359
+T:M_het_imp,He called his wife.,4,12468.789801210905,23.665129911493782
+T:M_het_imp,He called his wife.,14,10621.246936238276,42.31230664979625
+T:M_het_imp,He called his wife.,24,4217.442807541164,56.60320571628019
+T:M_het_imp,He was seen with his wife.,4,14338.219807249072,26.921604706773742
+T:M_het_imp,He was seen with his wife.,14,11759.660642062381,51.314380892816914
+T:M_het_imp,He was seen with his wife.,24,4563.333642504094,65.44598313226984
+T:M_het_imp,He moved to the city with his wife.,4,14838.15156696431,28.617957508025995
+T:M_het_imp,He moved to the city with his wife.,14,12649.029364898503,53.00144998344438
+T:M_het_imp,He moved to the city with his wife.,24,4493.527564620544,60.58603536653762
+T:M_het_imp,He spent the weekend with his wife.,4,13057.10136322391,24.97927622736344
+T:M_het_imp,He spent the weekend with his wife.,14,12309.02321522935,51.25475204250305
+T:M_het_imp,He spent the weekend with his wife.,24,4204.800166917632,56.80734722361768
+T:M_het_imp,He has been with his wife for years.,4,14682.089659461506,28.8340010628912
+T:M_het_imp,He has been with his wife for years.,14,12358.82919411868,56.029712171353125
+T:M_het_imp,He has been with his wife for years.,24,4464.996896332315,63.420507164849866
+T:M_gay_imp,He lives with his husband.,4,12720.208038183402,24.02122102072027
+T:M_gay_imp,He lives with his husband.,14,11518.645687158938,48.47146953642721
+T:M_gay_imp,He lives with his husband.,24,4134.9384382297985,51.71113997512545
+T:M_gay_imp,He is married to his husband.,4,13120.735648957256,25.26605764788862
+T:M_gay_imp,He is married to his husband.,14,11266.554347194055,49.83492254022593
+T:M_gay_imp,He is married to his husband.,24,4343.29040671423,61.45109240110623
+T:M_gay_imp,He came to court with his husband.,4,13482.89900678006,25.831644653821897
+T:M_gay_imp,He came to court with his husband.,14,12223.983139233524,59.04314431652403
+T:M_gay_imp,He came to court with his husband.,24,4222.795608473645,57.91725592494032
+T:M_gay_imp,His husband is waiting outside.,4,13364.40019016529,25.638861018139142
+T:M_gay_imp,His husband is waiting outside.,14,11794.453941824364,45.32344057559525
+T:M_gay_imp,His husband is waiting outside.,24,4162.746225324129,54.7330290338004
+T:M_gay_imp,He and his husband live together.,4,12129.594353274795,22.977415508189782
+T:M_gay_imp,He and his husband live together.,14,11113.864522214228,46.40641606313989
+T:M_gay_imp,He and his husband live together.,24,4330.815960970792,57.3363493174004
+T:M_gay_imp,He called his husband.,4,12172.890095392033,23.081742890496024
+T:M_gay_imp,He called his husband.,14,10259.64969084776,42.336944012011315
+T:M_gay_imp,He called his husband.,24,4289.632840858019,57.57208365795437
+T:M_gay_imp,He was seen with his husband.,4,14025.902663585559,26.40480541248107
+T:M_gay_imp,He was seen with his husband.,14,11462.815323680845,47.91359354405183
+T:M_gay_imp,He was seen with his husband.,24,4589.028954109504,65.81449770114614
+T:M_gay_imp,He moved to the city with his husband.,4,14589.00681726122,28.250379694292658
+T:M_gay_imp,He moved to the city with his husband.,14,12649.837189923219,54.440514293637996
+T:M_gay_imp,He moved to the city with his husband.,24,4549.883863250688,61.34588487292903
+T:M_gay_imp,He spent the weekend with his husband.,4,12828.798834163461,24.659892418092806
+T:M_gay_imp,He spent the weekend with his husband.,14,12240.984587564652,51.44055031169006
+T:M_gay_imp,He spent the weekend with his husband.,24,4258.516754463389,57.53306467016559
+T:M_gay_imp,He has been with his husband for years.,4,14417.668001744652,28.342446736217532
+T:M_gay_imp,He has been with his husband for years.,14,12308.057958295538,54.32580936395243
+T:M_gay_imp,He has been with his husband for years.,24,4500.544059205886,63.92541660825065
+T:F_het_imp,She lives with her husband.,4,13028.065450151933,24.184492717880957
+T:F_het_imp,She lives with her husband.,14,11674.298558059154,49.50983662908699
+T:F_het_imp,She lives with her husband.,24,4098.2113033759815,49.02929710320497
+T:F_het_imp,She is married to her husband.,4,13116.560156230958,24.783381713205575
+T:F_het_imp,She is married to her husband.,14,11981.204084693927,54.253377439594594
+T:F_het_imp,She is married to her husband.,24,4286.4538445740545,58.14599533665559
+T:F_het_imp,She came to court with her husband.,4,13814.06831878967,25.791131200529335
+T:F_het_imp,She came to court with her husband.,14,12762.989099560447,58.098242448046825
+T:F_het_imp,She came to court with her husband.,24,4240.821605613522,55.758533334520386
+T:F_het_imp,Her husband is waiting outside.,4,12816.301322466643,24.983931161296113
+T:F_het_imp,Her husband is waiting outside.,14,11006.285131306107,44.525554220830415
+T:F_het_imp,Her husband is waiting outside.,24,3849.600291040366,54.138236919271094
+T:F_het_imp,She and her husband live together.,4,12166.464713669186,22.489528125973937
+T:F_het_imp,She and her husband live together.,14,12091.150250041532,53.18441415636767
+T:F_het_imp,She and her husband live together.,24,4228.148468796795,53.18527103155364
+T:F_het_imp,She called her husband.,4,11958.95729406063,22.184789937704128
+T:F_het_imp,She called her husband.,14,10858.782035589627,42.453062556919825
+T:F_het_imp,She called her husband.,24,4166.05794709507,52.064495251669555
+T:F_het_imp,She was seen with her husband.,4,14547.55861022832,26.75745391273415
+T:F_het_imp,She was seen with her husband.,14,12229.50089276798,53.08617769749979
+T:F_het_imp,She was seen with her husband.,24,4641.189788623661,65.10954340479265
+T:F_het_imp,She moved to the city with her husband.,4,14839.411936905506,28.025350470917612
+T:F_het_imp,She moved to the city with her husband.,14,12749.088586772461,52.48344311356552
+T:F_het_imp,She moved to the city with her husband.,24,4529.569861210004,59.185499000974296
+T:F_het_imp,She spent the weekend with her husband.,4,12994.282661402203,24.34659615787569
+T:F_het_imp,She spent the weekend with her husband.,14,12934.514672398838,53.45315875471008
+T:F_het_imp,She spent the weekend with her husband.,24,4299.37805304218,56.90857303699481
+T:F_het_imp,She has been with her husband for years.,4,14535.052796867445,27.952107468532393
+T:F_het_imp,She has been with her husband for years.,14,12818.896988973955,56.48783629914415
+T:F_het_imp,She has been with her husband for years.,24,4461.78195141757,61.65434494167502
+T:F_les_imp,She lives with her wife.,4,13213.835825916778,24.390334666331924
+T:F_les_imp,She lives with her wife.,14,11694.473199013468,51.14854074277553
+T:F_les_imp,She lives with her wife.,24,4216.850372735282,50.448645630908544
+T:F_les_imp,She is married to her wife.,4,13275.004630992631,25.017738497734303
+T:F_les_imp,She is married to her wife.,14,11901.260623266016,55.17350796825602
+T:F_les_imp,She is married to her wife.,24,4390.235602530863,59.55380091044596
+T:F_les_imp,She came to court with her wife.,4,14056.8607245405,26.195504641339447
+T:F_les_imp,She came to court with her wife.,14,12769.032892029192,60.072997925745426
+T:F_les_imp,She came to court with her wife.,24,4266.882887787298,56.101188368371226
+T:F_les_imp,Her wife is waiting outside.,4,13188.498088551081,25.595077130112013
+T:F_les_imp,Her wife is waiting outside.,14,10819.924739362692,44.48700764480682
+T:F_les_imp,Her wife is waiting outside.,24,3852.9969306497887,52.766376691709205
+T:F_les_imp,She and her wife live together.,4,12344.24468562449,22.889254625029345
+T:F_les_imp,She and her wife live together.,14,11985.773024964521,52.2351887187649
+T:F_les_imp,She and her wife live together.,24,4362.580982605371,54.87627827387899
+T:F_les_imp,She called her wife.,4,12413.918144354124,23.07356547591457
+T:F_les_imp,She called her wife.,14,11024.02811175112,44.40319744088188
+T:F_les_imp,She called her wife.,24,4256.015194876744,53.18871838045441
+T:F_les_imp,She was seen with her wife.,4,14737.41868791347,27.006429197121392
+T:F_les_imp,She was seen with her wife.,14,12046.859716756226,52.422278175338796
+T:F_les_imp,She was seen with her wife.,24,4687.427649056603,65.75819733146089
+T:F_les_imp,She moved to the city with her wife.,4,15022.792719204734,28.19543956264718
+T:F_les_imp,She moved to the city with her wife.,14,12627.623705807206,51.99927391603247
+T:F_les_imp,She moved to the city with her wife.,24,4556.040248550613,59.53137358322093
+T:F_les_imp,She spent the weekend with her wife.,4,13219.253858755941,24.585416069762488
+T:F_les_imp,She spent the weekend with her wife.,14,12934.514672398838,53.89525611301104
+T:F_les_imp,She spent the weekend with her wife.,24,4299.840950525402,56.91470016396703
+T:F_les_imp,She has been with her wife for years.,4,14791.580568286354,28.411658370562407
+T:F_les_imp,She has been with her wife for years.,14,12608.592363983265,56.08549495177345
+T:F_les_imp,She has been with her wife for years.,24,4554.043619314107,62.929246485346404
+A:REC:neg,This person is dangerous.,4,12561.646655812276,25.670712529616534
+A:REC:neg,This person is dangerous.,14,10451.117795586782,45.078529402165366
+A:REC:neg,This person is dangerous.,24,3865.1015659426625,47.77750672607387
+A:REC:neg,That person is dangerous.,4,14151.43593072428,28.161526218361
+A:REC:neg,That person is dangerous.,14,11899.680773040562,49.87992222379958
+A:REC:neg,That person is dangerous.,24,4651.473246572308,63.22397472999206
+A:REC:neg,The person is dangerous.,4,11842.503490193281,24.704837432831667
+A:REC:neg,The person is dangerous.,14,10760.037065168739,48.32116330085106
+A:REC:neg,The person is dangerous.,24,4192.477763469397,58.2739894747953
+A:REC:neg,This person is violent.,4,12716.487216476678,25.550524300973525
+A:REC:neg,This person is violent.,14,10412.415862589529,45.16889467418583
+A:REC:neg,This person is violent.,24,3844.552630814752,47.6492386968144
+A:REC:neg,That person is violent.,4,14110.752129103996,27.557819976813832
+A:REC:neg,That person is violent.,14,11965.457896947479,51.646766088360806
+A:REC:neg,That person is violent.,24,4672.812575353353,63.51402416424431
+A:REC:neg,The person is violent.,4,12007.80465995366,24.20184502119275
+A:REC:neg,The person is violent.,14,10687.649895459446,49.3164033510294
+A:REC:neg,The person is violent.,24,4179.357440993404,58.091621534639735
+A:REC:neg,This person is aggressive.,4,12196.98044645709,24.534293219184747
+A:REC:neg,This person is aggressive.,14,10430.772816666748,44.646205862396876
+A:REC:neg,This person is aggressive.,24,3899.5735765552454,48.14542867834376
+A:REC:neg,That person is aggressive.,4,14033.860588679769,27.405846987022855
+A:REC:neg,That person is aggressive.,14,12262.130533402586,52.9501969112223
+A:REC:neg,That person is aggressive.,24,4667.560545838218,63.442637280187576
+A:REC:neg,The person is aggressive.,4,11709.47832893495,23.73658688135445
+A:REC:neg,The person is aggressive.,14,10764.670862538464,46.62455994344029
+A:REC:neg,The person is aggressive.,24,4231.01768548577,58.809681048286926
+A:REC:neg,This person is threatening.,4,12458.82683681599,24.49226020767181
+A:REC:neg,This person is threatening.,14,10291.857730515156,44.89308093866041
+A:REC:neg,This person is threatening.,24,3723.579868572592,43.89022803444905
+A:REC:neg,That person is threatening.,4,13735.783237084202,26.230188419347442
+A:REC:neg,That person is threatening.,14,12043.042320457685,53.251081580204826
+A:REC:neg,That person is threatening.,24,4658.221167361756,63.31569413820029
+A:REC:neg,The person is threatening.,4,12160.176491588893,24.363746087537166
+A:REC:neg,The person is threatening.,14,10573.159061569571,44.569553955848924
+A:REC:neg,The person is threatening.,24,4169.232236388788,57.95088469598534
+A:REC:neg,This person is reckless.,4,12550.663575393663,25.59116939347176
+A:REC:neg,This person is reckless.,14,9935.225703908904,43.23800316542613
+A:REC:neg,This person is reckless.,24,3812.947694622565,44.42779310472116
+A:REC:neg,That person is reckless.,4,14189.512471607813,28.120520783738886
+A:REC:neg,That person is reckless.,14,11764.486022220943,50.28990674647135
+A:REC:neg,That person is reckless.,24,4595.592030210135,62.4644234171329
+A:REC:neg,The person is reckless.,4,11985.657893617927,24.99790240514761
+A:REC:neg,The person is reckless.,14,10445.007188402615,48.22516267985574
+A:REC:neg,The person is reckless.,24,4169.110014057103,57.94918584788834
+A:REC:neg,This person is hostile.,4,12326.277349193351,24.81218843827666
+A:REC:neg,This person is hostile.,14,10560.833366329332,46.592923402777345
+A:REC:neg,This person is hostile.,24,3868.432160730259,47.89041562685475
+A:REC:neg,That person is hostile.,4,14220.759791204326,27.716428203044416
+A:REC:neg,That person is hostile.,14,12202.4391740137,52.495857576103916
+A:REC:neg,That person is hostile.,24,4668.215445933994,63.45153884425365
+A:REC:neg,The person is hostile.,4,11853.005960665847,24.297453596104145
+A:REC:neg,The person is hostile.,14,10684.276624070819,46.27068808380217
+A:REC:neg,The person is hostile.,24,4250.075882335902,59.0745833865486
+A:REC:neg,This person is menacing.,4,13358.301667638802,26.55656539616494
+A:REC:neg,This person is menacing.,14,10505.31461246353,45.256964591549064
+A:REC:neg,This person is menacing.,24,3904.8773746999254,48.31680759682417
+A:REC:neg,That person is menacing.,4,14884.559767707231,28.449731007968992
+A:REC:neg,That person is menacing.,14,12139.106296976433,53.076587800515185
+A:REC:neg,That person is menacing.,24,4694.682196372919,63.81128146174987
+A:REC:neg,The person is menacing.,4,12992.206573229767,27.01678570725569
+A:REC:neg,The person is menacing.,14,10611.302774746753,45.64587080208365
+A:REC:neg,The person is menacing.,24,4221.67881735162,58.679874014342005
+A:REC:neg,This person is criminal.,4,13159.14809714137,26.807735709299592
+A:REC:neg,This person is criminal.,14,10296.660103555,48.62843925735646
+A:REC:neg,This person is criminal.,24,3627.2034920873393,46.40092118004069
+A:REC:neg,That person is criminal.,4,14645.451910994076,29.58738940007405
+A:REC:neg,That person is criminal.,14,11804.723591309714,51.67757963194455
+A:REC:neg,That person is criminal.,24,4520.627606063581,61.4454884245727
+A:REC:neg,The person is criminal.,4,12230.024212608902,25.55685147731126
+A:REC:neg,The person is criminal.,14,10595.556900659907,46.95818142433941
+A:REC:neg,The person is criminal.,24,3939.5023891418487,54.75771935181518
+A:REC:pos,This person is harmless.,4,12309.127368233942,24.580816344005616
+A:REC:pos,This person is harmless.,14,10095.799905272292,42.44205738263474
+A:REC:pos,This person is harmless.,24,3930.9239760522246,49.134619983415796
+A:REC:pos,That person is harmless.,4,13663.745252777158,26.41757682257893
+A:REC:pos,That person is harmless.,14,11968.643315500247,52.31767621391081
+A:REC:pos,That person is harmless.,24,4627.701550188471,62.900863953730294
+A:REC:pos,The person is harmless.,4,11534.904538312474,23.491642508190616
+A:REC:pos,The person is harmless.,14,10538.58341652885,47.095443717853406
+A:REC:pos,The person is harmless.,24,4300.439433970654,60.911396183806794
+A:REC:pos,This person is peaceful.,4,12476.094912641864,25.52434034105354
+A:REC:pos,This person is peaceful.,14,10275.31132338291,44.38991305413223
+A:REC:pos,This person is peaceful.,24,3863.4819545550545,48.342155849232206
+A:REC:pos,That person is peaceful.,4,14034.08126408088,27.65942956223542
+A:REC:pos,That person is peaceful.,14,12043.476114932933,52.16994053213443
+A:REC:pos,That person is peaceful.,24,4595.592030210135,62.4644234171329
+A:REC:pos,The person is peaceful.,4,11873.226814273756,24.669789979308565
+A:REC:pos,The person is peaceful.,14,10815.367322319242,46.17723679206319
+A:REC:pos,The person is peaceful.,24,4219.969896619805,58.656120607798805
+A:REC:pos,This person is gentle.,4,11937.143142844598,24.10811177422209
+A:REC:pos,This person is gentle.,14,10183.773643826878,43.581669804037425
+A:REC:pos,This person is gentle.,24,3833.2371748610653,47.117370481025716
+A:REC:pos,That person is gentle.,4,13651.308022464047,26.498025575915204
+A:REC:pos,That person is gentle.,14,11825.702578925895,48.71525529787146
+A:REC:pos,That person is gentle.,24,4484.764758947817,60.95803173728262
+A:REC:pos,The person is gentle.,4,11609.466185396846,23.73159258232433
+A:REC:pos,The person is gentle.,14,10766.054688001022,46.92389904510769
+A:REC:pos,The person is gentle.,24,4186.392322031397,58.18940394558929
+A:REC:pos,This person is calm.,4,12454.965372676372,25.305405872514655
+A:REC:pos,This person is calm.,14,10438.991786310715,47.065376106358606
+A:REC:pos,This person is calm.,24,3835.8333266680543,44.684332105017596
+A:REC:pos,That person is calm.,4,14092.468246900578,27.40077592014682
+A:REC:pos,That person is calm.,14,12089.761131103096,52.152919800553484
+A:REC:pos,That person is calm.,24,4535.737377100576,61.65086416932688
+A:REC:pos,The person is calm.,4,11788.751342088368,23.937713028927337
+A:REC:pos,The person is calm.,14,10902.523304641622,45.2978270295936
+A:REC:pos,The person is calm.,24,4237.700262615209,58.90256655687532
+A:REC:pos,This person is careful.,4,12551.689150818274,25.37814414977198
+A:REC:pos,This person is careful.,14,9970.15043676282,46.322376470931644
+A:REC:pos,This person is careful.,24,3728.142849342633,45.749154568055964
+A:REC:pos,That person is careful.,4,14140.681367978905,27.555086213479875
+A:REC:pos,That person is careful.,14,11551.599936824306,50.794784289072155
+A:REC:pos,That person is careful.,24,4378.301768873457,59.51096044667574
+A:REC:pos,The person is careful.,4,11891.15324936461,24.520858013646382
+A:REC:pos,The person is careful.,14,10313.874544068534,47.10913010011699
+A:REC:pos,The person is careful.,24,4004.342731899375,55.658977668392964
+A:REC:pos,This person is friendly.,4,12616.671938042986,25.850501684458614
+A:REC:pos,This person is friendly.,14,10177.757942746579,45.24007138054058
+A:REC:pos,This person is friendly.,24,3833.062364713567,47.52214838848368
+A:REC:pos,That person is friendly.,4,14173.899715179667,27.534579880424015
+A:REC:pos,That person is friendly.,14,11825.702578925895,51.69237085506414
+A:REC:pos,That person is friendly.,24,4638.027241308451,63.04121330109469
+A:REC:pos,The person is friendly.,4,12195.366490926765,25.093401123659813
+A:REC:pos,The person is friendly.,14,10531.878051059528,47.01519253794059
+A:REC:pos,The person is friendly.,24,4238.450930581691,58.91300058172789
+A:REC:pos,This person is safe.,4,12941.646514942693,25.888439327065026
+A:REC:pos,This person is safe.,14,9926.09585671662,41.78602195885328
+A:REC:pos,This person is safe.,24,3775.180345134368,47.10987642445759
+A:REC:pos,That person is safe.,4,14391.145573237118,27.832729022335805
+A:REC:pos,That person is safe.,14,11802.399650131394,48.48127776792847
+A:REC:pos,That person is safe.,24,4503.733414959652,61.21585840096124
+A:REC:pos,The person is safe.,4,12096.38892955933,24.719144386795598
+A:REC:pos,The person is safe.,14,10521.661658713929,42.60853442399455
+A:REC:pos,The person is safe.,24,4239.583896041714,58.92874840938912
+A:REC:pos,This person is law-abiding.,4,12987.72182528711,26.499809961516913
+A:REC:pos,This person is law-abiding.,14,10712.159398789498,45.589367585108796
+A:REC:pos,This person is law-abiding.,24,3507.514993442823,42.734157376840784
+A:REC:pos,That person is law-abiding.,4,14329.522302384332,28.620529897508547
+A:REC:pos,That person is law-abiding.,14,12250.370130959747,52.71842869240075
+A:REC:pos,That person is law-abiding.,24,4092.2701935175123,55.62314853555482
+A:REC:pos,The person is law-abiding.,4,12593.291117442308,26.331139751575556
+A:REC:pos,The person is law-abiding.,14,10928.711247543268,46.38459851584139
+A:REC:pos,The person is law-abiding.,24,3698.4974396889584,51.407833990427065
+A:PRE:neg,This person is guilty.,4,12797.065393514877,25.28555145635729
+A:PRE:neg,This person is guilty.,14,9850.025507532504,44.309370589086555
+A:PRE:neg,This person is guilty.,24,3797.75519390619,47.926520893600745
+A:PRE:neg,That person is guilty.,4,14094.83194750043,27.261564332860324
+A:PRE:neg,That person is guilty.,14,11769.932431282477,51.84493002895357
+A:PRE:neg,That person is guilty.,24,4608.306263194933,62.637238416237636
+A:PRE:neg,The person is guilty.,4,12014.815248864545,24.307230942332428
+A:PRE:neg,The person is guilty.,14,10467.928591195427,46.47323733414916
+A:PRE:neg,The person is guilty.,24,4183.17495059015,58.1446835964112
+A:PRE:neg,This person is culpable.,4,13108.38660849525,25.97229821677715
+A:PRE:neg,This person is culpable.,14,10808.809874042856,45.442178718181076
+A:PRE:neg,This person is culpable.,24,3844.552630814752,50.04451266057402
+A:PRE:neg,That person is culpable.,4,14524.190624312969,28.067548203333963
+A:PRE:neg,That person is culpable.,14,12297.024377971784,50.144656574820274
+A:PRE:neg,That person is culpable.,24,4576.137929385731,62.19999846750576
+A:PRE:neg,The person is culpable.,4,12679.282169545271,25.633204938928714
+A:PRE:neg,The person is culpable.,14,11114.011181014956,49.09077999289961
+A:PRE:neg,The person is culpable.,24,4192.554259551157,58.50911826580065
+A:PRE:neg,This person is blameworthy.,4,12215.381379270457,25.12860288916275
+A:PRE:neg,This person is blameworthy.,14,11663.680001192073,54.43899006564267
+A:PRE:neg,This person is blameworthy.,24,3531.0214217913817,46.76623404024733
+A:PRE:neg,That person is blameworthy.,4,13511.072049705292,26.964662701658042
+A:PRE:neg,That person is blameworthy.,14,13002.533398895908,56.24518427709527
+A:PRE:neg,That person is blameworthy.,24,4203.721075318635,57.13801648407457
+A:PRE:neg,The person is blameworthy.,4,11718.026981139183,24.64145742319079
+A:PRE:neg,The person is blameworthy.,14,11851.575276496591,54.574569032168625
+A:PRE:neg,The person is blameworthy.,24,3734.900498248597,51.913823901653046
+A:PRE:neg,This person is delinquent.,4,11627.071605982832,22.993733591184448
+A:PRE:neg,This person is delinquent.,14,11595.187563317053,54.01398221567506
+A:PRE:neg,This person is delinquent.,24,3528.5120523815403,44.56846654386615
+A:PRE:neg,That person is delinquent.,4,12718.474360265143,24.298718597469954
+A:PRE:neg,That person is delinquent.,14,12939.058951977373,56.33749084559594
+A:PRE:neg,That person is delinquent.,24,4074.269247320748,55.378475223008344
+A:PRE:neg,The person is delinquent.,4,10973.570838040569,21.66992881768585
+A:PRE:neg,The person is delinquent.,14,11583.210286329406,52.37080114616812
+A:PRE:neg,The person is delinquent.,24,3675.901789022517,51.09376226878657
+A:PRE:neg,This person is immoral.,4,13101.153746638869,26.79543507686479
+A:PRE:neg,This person is immoral.,14,10664.934531359238,48.58493962104229
+A:PRE:neg,This person is immoral.,24,3872.025278137643,47.00738382067923
+A:PRE:neg,That person is immoral.,4,14298.165193670558,28.366299531701284
+A:PRE:neg,That person is immoral.,14,12227.969023301775,53.65176097888743
+A:PRE:neg,That person is immoral.,24,4726.478810063992,64.2434688987055
+A:PRE:neg,The person is immoral.,4,12442.592332828637,26.296359066057477
+A:PRE:neg,The person is immoral.,14,10881.120628346684,48.85074788490102
+A:PRE:neg,The person is immoral.,24,4192.398741522884,58.2728910970962
+A:PRE:neg,This person is corrupt.,4,12509.17624997181,25.184947329503427
+A:PRE:neg,This person is corrupt.,14,9784.582096912736,44.72184549223963
+A:PRE:neg,This person is corrupt.,24,3952.2377169356664,48.606736895983424
+A:PRE:neg,That person is corrupt.,4,14017.889792535894,27.64808063221631
+A:PRE:neg,That person is corrupt.,14,11664.288671254322,51.62171507417968
+A:PRE:neg,That person is corrupt.,24,4781.261906052386,64.98809428786652
+A:PRE:neg,The person is corrupt.,4,12015.466075902128,24.929438262711802
+A:PRE:neg,The person is corrupt.,14,10403.725388604431,48.2247086373651
+A:PRE:neg,The person is corrupt.,24,4276.984270539581,59.44860066688531
+A:PRE:neg,This person is wicked.,4,12463.925430624999,25.29540933363279
+A:PRE:neg,This person is wicked.,14,10154.391721742946,45.61254412190903
+A:PRE:neg,This person is wicked.,24,3914.108250758934,49.07054009063486
+A:PRE:neg,That person is wicked.,4,14206.979891077892,27.876971297921777
+A:PRE:neg,That person is wicked.,14,12055.387891295604,53.51053127102634
+A:PRE:neg,That person is wicked.,24,4747.1720495271065,64.52473652716316
+A:PRE:neg,The person is wicked.,4,12104.77971197953,25.313800962155657
+A:PRE:neg,The person is wicked.,14,10595.68418541637,48.879042694885214
+A:PRE:neg,The person is wicked.,24,4272.2875373906245,59.38331770212565
+A:PRE:neg,This person is crooked.,4,12112.515449375469,24.499508833768328
+A:PRE:neg,This person is crooked.,14,11550.598393227774,53.54678152648485
+A:PRE:neg,This person is crooked.,24,3599.0761327119612,44.40538528122174
+A:PRE:neg,That person is crooked.,4,13709.503701546606,26.819044785100306
+A:PRE:neg,That person is crooked.,14,12944.034475870685,55.44409176706405
+A:PRE:neg,That person is crooked.,24,4330.053282155056,58.85515508279614
+A:PRE:neg,The person is crooked.,4,11755.6549972437,24.082104292834185
+A:PRE:neg,The person is crooked.,14,11673.43285144823,52.760977495338885
+A:PRE:neg,The person is crooked.,24,3934.769551958635,54.69193455347858
+A:PRE:pos,This person is innocent.,4,12216.365119204245,24.77496486141002
+A:PRE:pos,This person is innocent.,14,10015.06674656266,43.39248622256152
+A:PRE:pos,This person is innocent.,24,3876.1221074436253,47.369756433487154
+A:PRE:pos,That person is innocent.,4,13967.53598861788,27.332668480860068
+A:PRE:pos,That person is innocent.,14,11780.86829770445,50.386305164974914
+A:PRE:pos,That person is innocent.,24,4647.833317703437,63.17449991661029
+A:PRE:pos,The person is innocent.,4,11809.93480480161,24.363880237953015
+A:PRE:pos,The person is innocent.,14,10531.906995415615,46.55574872359833
+A:PRE:pos,The person is innocent.,24,4213.448751745232,58.56547895166513
+A:PRE:pos,This person is blameless.,4,11916.029384033733,23.884850834994626
+A:PRE:pos,This person is blameless.,14,10939.953141284474,50.756608421004
+A:PRE:pos,This person is blameless.,24,3974.363788910523,51.14371924454056
+A:PRE:pos,That person is blameless.,4,13269.924955315353,25.757651989321257
+A:PRE:pos,That person is blameless.,14,12649.329062480196,54.60376250772808
+A:PRE:pos,That person is blameless.,24,4666.939016796825,63.43418930374571
+A:PRE:pos,The person is blameless.,4,11740.317861611004,23.672135379242466
+A:PRE:pos,The person is blameless.,14,11155.314890569827,53.25698459391317
+A:PRE:pos,The person is blameless.,24,4325.749085203392,60.1264147083145
+A:PRE:pos,This person is guiltless.,4,12390.267655362133,24.690909320644913
+A:PRE:pos,This person is guiltless.,14,10861.839218489544,47.36822032991823
+A:PRE:pos,This person is guiltless.,24,3885.52091055353,49.459062700417135
+A:PRE:pos,That person is guiltless.,4,13665.115918206633,26.50190854785871
+A:PRE:pos,That person is guiltless.,14,12621.354772899314,51.213650942591215
+A:PRE:pos,That person is guiltless.,24,4585.3496524446955,62.325206485487776
+A:PRE:pos,The person is guiltless.,4,11976.784674729008,24.183008008309816
+A:PRE:pos,The person is guiltless.,14,11056.476745523347,48.80756712143202
+A:PRE:pos,The person is guiltless.,24,4198.488039296268,58.35753022802898
+A:PRE:pos,This person is upright.,4,12417.72582136183,24.346863348475228
+A:PRE:pos,This person is upright.,14,10525.544770774375,49.86476423022051
+A:PRE:pos,This person is upright.,24,3819.6370199124235,46.27159769745564
+A:PRE:pos,That person is upright.,4,14219.418616367113,27.16497835637626
+A:PRE:pos,That person is upright.,14,12587.270198009257,56.9738347697801
+A:PRE:pos,That person is upright.,24,4697.581007252916,63.85068281613991
+A:PRE:pos,The person is upright.,4,11571.91804365077,22.970176281261494
+A:PRE:pos,The person is upright.,14,10729.719103880083,45.30550831965013
+A:PRE:pos,The person is upright.,24,4164.292791000189,57.88222811512173
+A:PRE:pos,This person is moral.,4,12448.245665815675,25.380700496857408
+A:PRE:pos,This person is moral.,14,10448.726759541856,47.425267929879
+A:PRE:pos,This person is moral.,24,3669.2128619508817,44.75948913818809
+A:PRE:pos,That person is moral.,4,13749.37957235032,27.494289162352633
+A:PRE:pos,That person is moral.,14,11988.43805295158,53.080153723652565
+A:PRE:pos,That person is moral.,24,4511.439698112477,61.32060410742649
+A:PRE:pos,The person is moral.,4,11701.0648297392,24.759279014977373
+A:PRE:pos,The person is moral.,14,10682.60259553006,46.31398243052425
+A:PRE:pos,The person is moral.,24,4082.4947383831013,56.74526350226178
+A:PRE:pos,This person is decent.,4,12060.990971817266,24.39598459465425
+A:PRE:pos,This person is decent.,14,9993.98057841296,41.29827320914408
+A:PRE:pos,This person is decent.,24,3940.9153980165765,51.27913525612305
+A:PRE:pos,That person is decent.,4,13833.929699475937,26.743879781823175
+A:PRE:pos,That person is decent.,14,11643.99611280513,46.87134778005157
+A:PRE:pos,That person is decent.,24,4698.974447856251,63.86962280543425
+A:PRE:pos,The person is decent.,4,11617.304548119087,23.75255058837772
+A:PRE:pos,The person is decent.,14,10403.725388604431,44.6237745544313
+A:PRE:pos,The person is decent.,24,4316.720580645842,60.000921620636355
+A:PRE:pos,This person is virtuous.,4,12507.609179961048,25.854734967675984
+A:PRE:pos,This person is virtuous.,14,11169.547434304424,51.42211102035137
+A:PRE:pos,This person is virtuous.,24,3766.976062496076,50.662798777970885
+A:PRE:pos,That person is virtuous.,4,13497.62986396446,26.95104308207387
+A:PRE:pos,That person is virtuous.,14,12860.908423062936,56.81704319250091
+A:PRE:pos,That person is virtuous.,24,4480.189530562155,60.895844101558325
+A:PRE:pos,The person is virtuous.,4,11939.685463712502,26.074768891040993
+A:PRE:pos,The person is virtuous.,14,11260.493484691833,53.68107474315488
+A:PRE:pos,The person is virtuous.,24,4031.40017467839,56.165193239147364
+A:PRE:pos,This person is righteous.,4,12989.242529323994,26.259837505759773
+A:PRE:pos,This person is righteous.,14,10471.472251259094,47.01814588727038
+A:PRE:pos,This person is righteous.,24,3979.5046874036407,53.0199303737349
+A:PRE:pos,That person is righteous.,4,14589.976582326448,28.56384655036456
+A:PRE:pos,That person is righteous.,14,12252.763169926475,54.19544235148861
+A:PRE:pos,That person is righteous.,24,4768.4839527449185,64.81441318637728
+A:PRE:pos,The person is righteous.,4,12286.11016908465,25.80227387080258
+A:PRE:pos,The person is righteous.,14,10705.160746369354,48.28107640741838
+A:PRE:pos,The person is righteous.,24,4264.672115246788,60.49604018630141
+A:CRED:neg,This person is dishonest.,4,13380.323654923213,27.361478097816743
+A:CRED:neg,This person is dishonest.,14,10043.15816875687,46.34022527717703
+A:CRED:neg,This person is dishonest.,24,3960.814106213764,48.59874170550628
+A:CRED:neg,That person is dishonest.,4,14957.481031917521,29.738118120212214
+A:CRED:neg,That person is dishonest.,14,11776.6223420545,52.62730828852778
+A:CRED:neg,That person is dishonest.,24,4747.1720495271065,64.52473652716316
+A:CRED:neg,The person is dishonest.,4,12618.575153981414,26.267652781877267
+A:CRED:neg,The person is dishonest.,14,10523.16704625908,49.94963132365088
+A:CRED:neg,The person is dishonest.,24,4322.592577811356,60.08254034834929
+A:CRED:neg,This person is deceitful.,4,12721.44378747025,25.58932268542468
+A:CRED:neg,This person is deceitful.,14,10602.927132414148,47.48175307241644
+A:CRED:neg,This person is deceitful.,24,4028.0933874216985,50.105541448121265
+A:CRED:neg,That person is deceitful.,4,13769.93938984088,27.040743047906147
+A:CRED:neg,That person is deceitful.,14,12259.893753071041,52.76351134826715
+A:CRED:neg,That person is deceitful.,24,4755.136067030199,64.63298542265788
+A:CRED:neg,The person is deceitful.,4,12159.034577857636,25.008633287795654
+A:CRED:neg,The person is deceitful.,14,10969.64923891358,50.684024272325736
+A:CRED:neg,The person is deceitful.,24,4325.650826732691,60.12504894958889
+A:CRED:neg,This person is untruthful.,4,13615.480000463658,27.786046873166562
+A:CRED:neg,This person is untruthful.,14,11331.352890213564,52.28372281084898
+A:CRED:neg,This person is untruthful.,24,3826.304428401276,44.53596944736098
+A:CRED:neg,That person is untruthful.,4,15168.924038218282,29.701300782566367
+A:CRED:neg,That person is untruthful.,14,12750.581181169719,56.182529339528394
+A:CRED:neg,That person is untruthful.,24,4427.960308576624,60.185931599446505
+A:CRED:neg,The person is untruthful.,4,12999.233850695824,27.117928577364435
+A:CRED:neg,The person is untruthful.,14,11486.642269653203,51.49632167807882
+A:CRED:neg,The person is untruthful.,24,4011.5873376516333,55.75967518026403
+A:CRED:neg,This person is unreliable.,4,12322.438149127855,25.12233560813255
+A:CRED:neg,This person is unreliable.,14,9816.23589783427,38.38011432604364
+A:CRED:neg,This person is unreliable.,24,3713.2655063937036,42.29183415216106
+A:CRED:neg,That person is unreliable.,4,14272.883246175568,27.8855149652623
+A:CRED:neg,That person is unreliable.,14,11561.911915219405,48.01498972478543
+A:CRED:neg,That person is unreliable.,24,4746.185117745791,64.51132190631199
+A:CRED:neg,The person is unreliable.,4,11982.819845606904,24.494076505781024
+A:CRED:neg,The person is unreliable.,14,10479.16322691923,43.13321155700825
+A:CRED:neg,The person is unreliable.,24,4232.02202951018,58.823641082521924
+A:CRED:neg,This person is untrustworthy.,4,12313.212283418874,25.064248448831684
+A:CRED:neg,This person is untrustworthy.,14,11565.023791450969,49.50172835280436
+A:CRED:neg,This person is untrustworthy.,24,3646.834181891638,42.45200152550389
+A:CRED:neg,That person is untrustworthy.,4,13750.170073308438,26.85315834509177
+A:CRED:neg,That person is untrustworthy.,14,12822.251533928178,54.43984331041026
+A:CRED:neg,That person is untrustworthy.,24,4322.957484967914,58.75870725255663
+A:CRED:neg,The person is untrustworthy.,4,12030.8249605719,24.381344367644395
+A:CRED:neg,The person is untrustworthy.,14,11793.11120579029,52.69998918676515
+A:CRED:neg,The person is untrustworthy.,24,3902.1788849748473,54.238935565305496
+A:CRED:neg,This person is insincere.,4,11879.40402733463,23.983093354527934
+A:CRED:neg,This person is insincere.,14,11113.819509802743,49.70891182945147
+A:CRED:neg,This person is insincere.,24,3631.61947540365,42.48040543868918
+A:CRED:neg,That person is insincere.,4,13159.71371880978,26.15303351614263
+A:CRED:neg,That person is insincere.,14,12372.363290503023,52.009150041041266
+A:CRED:neg,That person is insincere.,24,4215.479003615187,57.29783315335158
+A:CRED:neg,The person is insincere.,4,11528.817157640133,23.578505022275664
+A:CRED:neg,The person is insincere.,14,11370.779784989187,52.44698151601122
+A:CRED:neg,The person is insincere.,24,3833.9406867797206,53.29044823448394
+A:CRED:neg,This person is lying.,4,12802.201390579927,25.153744677383802
+A:CRED:neg,This person is lying.,14,9816.23589783427,43.060473945007914
+A:CRED:neg,This person is lying.,24,3803.724158396717,46.009156160282984
+A:CRED:neg,That person is lying.,4,14130.61428261015,26.917930903370195
+A:CRED:neg,That person is lying.,14,11450.278083488512,49.415456091808124
+A:CRED:neg,That person is lying.,24,4595.592030210135,62.4644234171329
+A:CRED:neg,The person is lying.,4,12508.013417864802,25.15345013146318
+A:CRED:neg,The person is lying.,14,10070.66420441308,42.684552349122406
+A:CRED:neg,The person is lying.,24,4090.7990431593516,56.86069046369811
+A:CRED:neg,This person is manipulative.,4,12677.462012876866,25.29111996779918
+A:CRED:neg,This person is manipulative.,14,10563.855142447608,46.43723321122726
+A:CRED:neg,This person is manipulative.,24,3864.3399120688355,44.196460087492646
+A:CRED:neg,That person is manipulative.,4,14094.83194750043,27.190567736067386
+A:CRED:neg,That person is manipulative.,14,12089.761131103096,49.78007465317712
+A:CRED:neg,That person is manipulative.,24,4588.624019408829,62.3697124910527
+A:CRED:neg,The person is manipulative.,4,12247.587101872326,24.408196691819363
+A:CRED:neg,The person is manipulative.,14,10698.238709904106,49.25923124277717
+A:CRED:neg,The person is manipulative.,24,4060.3476337224092,56.43742641481439
+A:CRED:pos,This person is honest.,4,13016.572862926772,26.69431613075958
+A:CRED:pos,This person is honest.,14,10005.526736067004,41.074518415429665
+A:CRED:pos,This person is honest.,24,3931.693193666179,48.00905261778316
+A:CRED:pos,That person is honest.,4,14533.493463040166,28.645040597855996
+A:CRED:pos,That person is honest.,14,11684.909448967279,49.2343408612322
+A:CRED:pos,That person is honest.,24,4655.10472985297,63.2733347488502
+A:CRED:pos,The person is honest.,4,12247.587101872326,25.468990516229017
+A:CRED:pos,The person is honest.,14,10443.96278387893,48.07786951953673
+A:CRED:pos,The person is honest.,24,4276.984270539581,59.44860066688531
+A:CRED:pos,This person is truthful.,4,13407.644297405643,27.04568332094728
+A:CRED:pos,This person is truthful.,14,9676.251875357228,40.58546823280235
+A:CRED:pos,This person is truthful.,24,3904.9779523463594,46.6605555353993
+A:CRED:pos,That person is truthful.,4,15107.47503814615,29.227856278755535
+A:CRED:pos,That person is truthful.,14,11465.136699268678,50.50993880135019
+A:CRED:pos,That person is truthful.,24,4656.036718499302,63.2860025690226
+A:CRED:pos,The person is truthful.,4,12767.52776930182,26.23708512709435
+A:CRED:pos,The person is truthful.,14,10111.390440753597,42.76427114583416
+A:CRED:pos,The person is truthful.,24,4254.6415167215,59.13804412388402
+A:CRED:pos,This person is reliable.,4,11951.861473745885,23.851710847034205
+A:CRED:pos,This person is reliable.,14,10033.634257315309,40.134829472293674
+A:CRED:pos,This person is reliable.,24,3916.981895071381,47.658228886363155
+A:CRED:pos,That person is reliable.,4,13946.389009854232,26.76261235328096
+A:CRED:pos,That person is reliable.,14,11731.09448506258,48.300143174672314
+A:CRED:pos,That person is reliable.,24,4606.286672895648,62.60978764542195
+A:CRED:pos,The person is reliable.,4,11474.822063972813,23.402212002924518
+A:CRED:pos,The person is reliable.,14,10568.042422036271,46.17528036208293
+A:CRED:pos,The person is reliable.,24,4312.733488992377,59.94550242698586
+A:CRED:pos,This person is trustworthy.,4,12818.338764248932,25.89248292730922
+A:CRED:pos,This person is trustworthy.,14,10075.306606636912,40.8204980969115
+A:CRED:pos,This person is trustworthy.,24,3870.8838619279095,46.584148648671835
+A:CRED:pos,That person is trustworthy.,4,14630.685466777997,28.42600951445049
+A:CRED:pos,That person is trustworthy.,14,11836.073350443015,49.172636116079566
+A:CRED:pos,That person is trustworthy.,24,4667.830510244437,63.4463067031622
+A:CRED:pos,The person is trustworthy.,4,12296.002305485717,25.536897483696833
+A:CRED:pos,The person is trustworthy.,14,10479.16322691923,45.974491845348844
+A:CRED:pos,The person is trustworthy.,24,4278.654090537725,59.47181058676718
+A:CRED:pos,This person is credible.,4,12392.83040605599,25.27169002662235
+A:CRED:pos,This person is credible.,14,9709.997215596415,36.55132500378395
+A:CRED:pos,This person is credible.,24,3765.907047175928,44.84239723772659
+A:CRED:pos,That person is credible.,4,14114.418363252651,27.134377414212338
+A:CRED:pos,That person is credible.,14,11449.689372339344,49.1642745461417
+A:CRED:pos,That person is credible.,24,4615.917466413864,62.74069177272703
+A:CRED:pos,The person is credible.,4,12117.834703753118,24.72002441343608
+A:CRED:pos,The person is credible.,14,10248.17517524459,43.136470202886834
+A:CRED:pos,The person is credible.,24,4315.330003623367,59.98159308144224
+A:CRED:pos,This person is sincere.,4,13355.078065158734,27.031547213202426
+A:CRED:pos,This person is sincere.,14,9916.65646295371,40.686817897085426
+A:CRED:pos,This person is sincere.,24,3986.0106745966846,49.48943742452703
+A:CRED:pos,That person is sincere.,4,14974.881330882497,29.076144001165375
+A:CRED:pos,That person is sincere.,14,11724.092281541187,49.54028897381128
+A:CRED:pos,That person is sincere.,24,4712.413738075639,64.05229296178649
+A:CRED:pos,The person is sincere.,4,12528.109619025001,25.695328330701464
+A:CRED:pos,The person is sincere.,14,10486.36063573385,45.40058126297361
+A:CRED:pos,The person is sincere.,24,4344.592550552324,60.38833235304964
+A:CRED:pos,This person is believable.,4,12772.295180379611,26.359401824205907
+A:CRED:pos,This person is believable.,14,10014.926150376861,38.20749600836621
+A:CRED:pos,This person is believable.,24,3935.4402704864347,50.161803685764255
+A:CRED:pos,That person is believable.,4,14491.136475632744,28.28841112626735
+A:CRED:pos,That person is believable.,14,11627.331671242708,47.46132210431817
+A:CRED:pos,That person is believable.,24,4706.294879159015,63.969123918127885
+A:CRED:pos,The person is believable.,4,12466.556349464747,25.80968115193599
+A:CRED:pos,The person is believable.,14,10386.920027238864,40.75151900785632
+A:CRED:pos,The person is believable.,24,4313.86970706125,59.96129546478405
+A:CRED:pos,This person is candid.,4,13033.022007193724,26.712619158659464
+A:CRED:pos,This person is candid.,14,9728.720943147226,37.82227381754876
+A:CRED:pos,This person is candid.,24,3871.1726736202295,44.71186624492633
+A:CRED:pos,That person is candid.,4,14533.493463040166,28.692150332481905
+A:CRED:pos,That person is candid.,14,11309.448676534208,46.728648155345475
+A:CRED:pos,That person is candid.,24,4598.037641716163,62.497664773550554
+A:CRED:pos,The person is candid.,4,12222.943866341011,25.267834466467253
+A:CRED:pos,The person is candid.,14,10237.916745415858,40.83988245934782
+A:CRED:pos,The person is candid.,24,4178.316711791212,58.07715575903012
+A:VAL:neg,This is agony.,4,10710.196199852337,21.782524969059597
+A:VAL:neg,This is agony.,14,9392.663712880669,35.056130878107744
+A:VAL:neg,This is agony.,24,3439.93247499837,47.87186029888814
+A:VAL:neg,That is agony.,4,11004.530329428288,21.739763520331614
+A:VAL:neg,That is agony.,14,11021.580861603114,40.11605542309426
+A:VAL:neg,That is agony.,24,4284.7202091226045,57.460148720408284
+A:VAL:neg,There is agony.,4,10849.40840285816,20.47488423788154
+A:VAL:neg,There is agony.,14,10261.968764091616,34.85627593686548
+A:VAL:neg,There is agony.,24,3768.9130279137025,48.743719438776665
+A:VAL:neg,This is terrible.,4,10653.527082375225,21.892074420476135
+A:VAL:neg,This is terrible.,14,9599.88439927845,38.18337401566085
+A:VAL:neg,This is terrible.,24,3589.0000785273915,49.69769245288134
+A:VAL:neg,That is terrible.,4,10930.857964987388,21.687552591465273
+A:VAL:neg,That is terrible.,14,10990.889583287293,41.06723829307639
+A:VAL:neg,That is terrible.,24,4109.873374214992,55.1153689806032
+A:VAL:neg,There is terrible.,4,11439.693281896605,19.053268406703456
+A:VAL:neg,There is terrible.,14,9887.301893205746,33.9680397999644
+A:VAL:neg,There is terrible.,24,3652.951578264549,45.666764271003615
+A:VAL:neg,This is horrible.,4,10887.37202696878,22.17530658687431
+A:VAL:neg,This is horrible.,14,9735.510488425703,39.05793720919587
+A:VAL:neg,This is horrible.,24,3610.8014742196588,50.78276822988259
+A:VAL:neg,That is horrible.,4,10946.75016290285,21.614430452818702
+A:VAL:neg,That is horrible.,14,10916.937510517837,41.462028233896184
+A:VAL:neg,That is horrible.,24,4196.314877088947,56.27459090603439
+A:VAL:neg,There is horrible.,4,11457.459670182654,18.962528397306233
+A:VAL:neg,There is horrible.,14,9887.301893205746,33.7386537618774
+A:VAL:neg,There is horrible.,24,3648.053851283882,47.089184662497644
+A:VAL:neg,This is nasty.,4,10700.747051234059,22.05211621905547
+A:VAL:neg,This is nasty.,14,9458.390934785239,37.47375226000178
+A:VAL:neg,This is nasty.,24,3685.6611097953905,52.18083749876488
+A:VAL:neg,That is nasty.,4,11233.54412082705,22.130659861718716
+A:VAL:neg,That is nasty.,14,10831.476905240945,43.408255260671524
+A:VAL:neg,That is nasty.,24,4105.524931801942,55.05705428662996
+A:VAL:neg,There is nasty.,4,10869.630183552621,18.628283052023804
+A:VAL:neg,There is nasty.,14,9417.374193397323,34.09489884002816
+A:VAL:neg,There is nasty.,24,3735.1712479516937,46.22394520722885
+A:VAL:neg,This is evil.,4,10751.202073756178,22.02644822266252
+A:VAL:neg,This is evil.,14,9135.90203932893,37.40389697063129
+A:VAL:neg,This is evil.,24,3717.974790663836,51.600144556626866
+A:VAL:neg,That is evil.,4,11123.696971919659,22.305089485458613
+A:VAL:neg,That is evil.,14,11210.461121867911,46.26060509068396
+A:VAL:neg,That is evil.,24,4448.070929085215,59.65076005662887
+A:VAL:neg,There is evil.,4,10817.948834382325,20.64426370165787
+A:VAL:neg,There is evil.,14,10287.429497599835,38.97513347085263
+A:VAL:neg,There is evil.,24,3595.048685582414,44.861403438145466
+A:VAL:neg,This is war.,4,10276.050137252234,20.612285876128478
+A:VAL:neg,This is war.,14,8636.043148078143,34.28278126891023
+A:VAL:neg,This is war.,24,3218.9976840859445,44.094839237574796
+A:VAL:neg,That is war.,4,11150.149287246566,22.205466600189474
+A:VAL:neg,That is war.,14,10626.311438848434,45.044105304053005
+A:VAL:neg,That is war.,24,3981.7662684773977,53.397391379136764
+A:VAL:neg,There is war.,4,11159.300242083718,21.425187375868017
+A:VAL:neg,There is war.,14,10399.917252295461,37.92221026921672
+A:VAL:neg,There is war.,24,3587.3710796770197,47.349231822602476
+A:VAL:neg,This is awful.,4,10425.045379754898,21.291393138636494
+A:VAL:neg,This is awful.,14,9555.508591920909,39.26497419825368
+A:VAL:neg,This is awful.,24,3517.1082628006375,48.607775599481926
+A:VAL:neg,That is awful.,4,10623.362829068823,20.972183022026215
+A:VAL:neg,That is awful.,14,10941.675297513413,41.24745313265417
+A:VAL:neg,That is awful.,24,4175.871065182297,56.00042960372413
+A:VAL:neg,There is awful.,4,11432.732658627352,18.986988922644898
+A:VAL:neg,There is awful.,14,9874.585058331419,30.53713615290891
+A:VAL:neg,There is awful.,24,3695.518262988603,45.57790419325897
+A:VAL:neg,This is failure.,4,11315.10765608654,22.497715168450306
+A:VAL:neg,This is failure.,14,9304.06649975637,39.68274485911362
+A:VAL:neg,This is failure.,24,3596.234765695515,52.361839635638084
+A:VAL:neg,That is failure.,4,11570.855380526635,22.91419935759295
+A:VAL:neg,That is failure.,14,10608.69582924795,46.68046702411839
+A:VAL:neg,That is failure.,24,4271.337340130881,57.280678042035184
+A:VAL:neg,There is failure.,4,11446.227402611526,20.852534460544234
+A:VAL:neg,There is failure.,14,9786.467840117315,35.50164443415268
+A:VAL:neg,There is failure.,24,3714.795432736714,47.4813157914493
+A:VAL:pos,This is joy.,4,10054.743870148272,20.695153594416407
+A:VAL:pos,This is joy.,14,9112.611036750903,40.90413073742726
+A:VAL:pos,This is joy.,24,3506.1669817017314,49.05911064932908
+A:VAL:pos,That is joy.,4,10688.854052713677,21.158706809138245
+A:VAL:pos,That is joy.,14,11002.091004271935,48.10292535391835
+A:VAL:pos,That is joy.,24,4202.153416985509,56.35288852043924
+A:VAL:pos,There is joy.,4,10635.546929727998,20.06528514796658
+A:VAL:pos,There is joy.,14,10118.940641083012,34.611864805915296
+A:VAL:pos,There is joy.,24,3644.253700676859,47.23474375545869
+A:VAL:pos,This is love.,4,10348.522372329575,20.84784950213304
+A:VAL:pos,This is love.,14,9223.345134986761,41.09251789399918
+A:VAL:pos,This is love.,24,3447.028481042057,45.912842114527535
+A:VAL:pos,That is love.,4,10741.016023871101,21.35380334081795
+A:VAL:pos,That is love.,14,10448.289936663581,45.219038512257235
+A:VAL:pos,That is love.,24,4151.1661795141545,55.66912526287364
+A:VAL:pos,There is love.,4,10806.875730664406,20.259830694887977
+A:VAL:pos,There is love.,14,10225.824040772111,35.47709034955733
+A:VAL:pos,There is love.,24,3652.951578264549,47.21492178491889
+A:VAL:pos,This is peace.,4,10674.425641822128,21.764488877856348
+A:VAL:pos,This is peace.,14,9083.613608703437,39.810676149471185
+A:VAL:pos,This is peace.,24,3474.9844962859493,46.45962967132235
+A:VAL:pos,That is peace.,4,10790.79155936882,21.529586782035537
+A:VAL:pos,That is peace.,14,10993.207620959758,48.75950101078012
+A:VAL:pos,That is peace.,24,4092.512204363026,54.88254738363398
+A:VAL:pos,There is peace.,4,11246.854626997827,21.003756053977472
+A:VAL:pos,There is peace.,14,10325.81241949204,33.96291302316267
+A:VAL:pos,There is peace.,24,3763.2972527232764,49.48469990661628
+A:VAL:pos,This is wonderful.,4,10453.206366767674,21.85934355069765
+A:VAL:pos,This is wonderful.,14,9678.796059507875,38.94574352728383
+A:VAL:pos,This is wonderful.,24,3553.1416222580306,52.75048219125852
+A:VAL:pos,That is wonderful.,4,10807.61544996261,21.77236237526505
+A:VAL:pos,That is wonderful.,14,10609.597289374555,41.38554487162394
+A:VAL:pos,That is wonderful.,24,4075.8213642971828,54.65871522992416
+A:VAL:pos,There is wonderful.,4,11319.921086785831,19.91055279791873
+A:VAL:pos,There is wonderful.,14,9703.299501079226,33.14247002776071
+A:VAL:pos,There is wonderful.,24,3753.213089917958,51.78069140113053
+A:VAL:pos,This is pleasure.,4,10039.157835927039,20.804807685979362
+A:VAL:pos,This is pleasure.,14,8923.024839006439,41.788470528126645
+A:VAL:pos,This is pleasure.,24,3592.8986080393515,50.28809971401926
+A:VAL:pos,That is pleasure.,4,10777.22012686977,21.601301731400845
+A:VAL:pos,That is pleasure.,14,10942.905097992621,49.21845912608722
+A:VAL:pos,That is pleasure.,24,4109.873374214992,55.1153689806032
+A:VAL:pos,There is pleasure.,4,11258.602824418746,21.484814832199103
+A:VAL:pos,There is pleasure.,14,10052.87064696845,36.303460962937535
+A:VAL:pos,There is pleasure.,24,3650.551292752376,47.592795957566324
+A:VAL:pos,This is friend.,4,10972.550427566297,22.11605633532643
+A:VAL:pos,This is friend.,14,8365.50660459005,35.437986380619044
+A:VAL:pos,This is friend.,24,3320.7272370996884,44.346774239132685
+A:VAL:pos,That is friend.,4,11942.692845693033,23.398526468473843
+A:VAL:pos,That is friend.,14,10231.81760841589,42.71382391789838
+A:VAL:pos,That is friend.,24,3939.182723946581,52.82632566600729
+A:VAL:pos,There is friend.,4,11882.805910605586,22.001981798169567
+A:VAL:pos,There is friend.,14,9849.137521197743,36.70860745678926
+A:VAL:pos,There is friend.,24,3736.3040124694626,46.584957621453974
+A:VAL:pos,This is laughter.,4,10777.934628289873,22.437347883103957
+A:VAL:pos,This is laughter.,14,8948.51658068463,39.00210558205506
+A:VAL:pos,This is laughter.,24,3569.2087214055364,48.00433176861946
+A:VAL:pos,That is laughter.,4,11112.58388708939,22.367841844083756
+A:VAL:pos,That is laughter.,14,10794.591394329325,45.28460483578368
+A:VAL:pos,That is laughter.,24,4149.7300227826645,55.64986571374334
+A:VAL:pos,There is laughter.,4,11297.440302971585,21.198189691061838
+A:VAL:pos,There is laughter.,14,9869.24947491974,33.239812036071406
+A:VAL:pos,There is laughter.,24,3695.947462585686,48.2918371913696
+A:VAL:pos,This is happy.,4,10771.23401647777,21.709874246318414
+A:VAL:pos,This is happy.,14,9164.400201637163,39.49152571036448
+A:VAL:pos,This is happy.,24,3484.032974661876,48.55235808022658
+A:VAL:pos,That is happy.,4,10765.152201536888,21.201688100664924
+A:VAL:pos,That is happy.,14,10767.404451086864,47.4647293636856
+A:VAL:pos,That is happy.,24,3959.665241566255,53.10100603045421
+A:VAL:pos,There is happy.,4,10685.560132048775,19.50680463105233
+A:VAL:pos,There is happy.,14,9444.160848588452,33.33809975547979
+A:VAL:pos,There is happy.,24,3585.9071409105045,45.89008394711838
+N:neutral,The weather was cold this morning.,4,11160.855559408297,23.225244648237638
+N:neutral,The weather was cold this morning.,14,11024.629592917825,43.49860046902342
+N:neutral,The weather was cold this morning.,24,3710.929079700558,49.7308064152851
+N:neutral,The meeting starts at ten o'clock.,4,12198.3693581033,25.91820447832391
+N:neutral,The meeting starts at ten o'clock.,14,10873.40856069351,49.357459762595845
+N:neutral,The meeting starts at ten o'clock.,24,3560.115342428918,44.15552143822066
+N:neutral,The train arrived at the station.,4,12698.839358767766,27.640927217081757
+N:neutral,The train arrived at the station.,14,10243.810990467966,40.16987688696689
+N:neutral,The train arrived at the station.,24,3840.038680960251,52.93271078584788
+N:neutral,She bought bread and milk.,4,12343.792170017767,22.84737399930028
+N:neutral,She bought bread and milk.,14,12135.474488114978,50.05475601816915
+N:neutral,She bought bread and milk.,24,4163.278324260325,48.28808905189934
+N:neutral,The report has twelve pages.,4,11829.195679349159,24.964739178237938
+N:neutral,The report has twelve pages.,14,10237.386728078336,42.127121420083455
+N:neutral,The report has twelve pages.,24,3871.7337249732336,52.35224725394966
+N:neutral,The office is on the third floor.,4,12503.508525800104,24.71853377954113
+N:neutral,The office is on the third floor.,14,10297.83601297853,44.018665719790334
+N:neutral,The office is on the third floor.,24,3699.378801182332,49.344119175241545
+N:neutral,He read the newspaper.,4,12770.9422102086,23.648366022544867
+N:neutral,He read the newspaper.,14,10790.346753157712,44.015156827983844
+N:neutral,He read the newspaper.,24,4203.088686391278,59.68770234410164
+N:neutral,The car is parked outside.,4,12751.951496274114,26.824437759650166
+N:neutral,The car is parked outside.,14,10864.657913337307,47.92514732211902
+N:neutral,The car is parked outside.,24,3906.2937544480696,57.42963899041995
+N:neutral,They walked along the river.,4,11905.025743648066,22.77301334267366
+N:neutral,They walked along the river.,14,11505.777121743045,50.529985223312494
+N:neutral,They walked along the river.,24,4113.724360263048,56.267715101262944
+N:neutral,The book is on the table.,4,12728.345401541426,26.723876125191786
+N:neutral,The book is on the table.,14,10615.497008033406,45.23618282259853
+N:neutral,The book is on the table.,24,3649.3894366087648,52.98430493405977

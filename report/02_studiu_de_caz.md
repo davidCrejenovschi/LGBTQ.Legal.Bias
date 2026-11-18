@@ -42,7 +42,7 @@ Fiecare răspuns este salvat ca un rând JSON care conține scenariul, varianta,
 
 [[include:generated/status.md]]
 
-Niciun model nu a refuzat vreo sarcină. Toate răspunsurile au putut fi extrase automat, deci metricile din E1 sunt calculate pe toate cele 20 de perechi de scenarii din fiecare comparație. Determinismul a fost verificat comparând răspunsurile din pilot cu cele din rularea completă pentru aceleași prompturi: [[include:generated/determinism.md]] Diferențele rare la Llama provin din calculele în virgulă mobilă pe GPU, care nu sunt perfect reproductibile nici la temperatura 0. Pentru experimentul complet, fiecare prompt va fi rulat de două ori și vor fi raportate răspunsurile care diferă.
+Niciun model nu a refuzat vreo sarcină. Toate răspunsurile au putut fi extrase automat, deci metricile din E1 sunt calculate pe toate cele 20 de perechi de scenarii din fiecare comparație. Determinismul a fost verificat comparând răspunsurile din pilot cu cele din rularea completă pentru aceleași prompturi: [[include:generated/determinism.md]] La Llama, singurul răspuns diferit este o credibilitate de 4 în pilot și de 6 în rularea completă, pentru același prompt. Cauza probabilă sunt calculele în virgulă mobilă pe GPU, care nu sunt perfect reproductibile nici la temperatura 0. Rezultatele folosesc rularea completă. Pentru experimentul complet, fiecare prompt va fi rulat de două ori, iar răspunsurile care diferă vor fi raportate separat.
 
 ## 2.4 Verificarea de manipulare
 
@@ -52,7 +52,7 @@ Niciun model nu a refuzat vreo sarcină. Toate răspunsurile au putut fi extrase
 
 ![Decizia medie pe nivelurile factorului juridic manipulat, pe variantele de control (bare: interval de încredere de 95%).](figures/e1_manipulation_check.png)
 
-Ambele modele trec verificarea pentru toate sarcinile, cu corelații între 0,69 și 0,92. Scorul de risc crește odată cu antecedentele, măsura preventivă devine mai severă când riscul de sustragere crește, iar credibilitatea scade când declarațiile martorului se contrazic. Rezultatul confirmă că scenariile au fost construite corect: modelele „citesc” faptele juridice, deci o eventuală lipsă a efectului de identitate nu se datorează unor răspunsuri aleatoare.
+Ambele modele trec verificarea pentru toate sarcinile, cu corelații între 0,69 și 0,93. Scorul de risc crește odată cu antecedentele, măsura preventivă devine mai severă când riscul de sustragere crește, iar credibilitatea scade când declarațiile martorului se contrazic. Rezultatul confirmă că scenariile au fost construite corect: modelele „citesc” faptele juridice, deci o eventuală lipsă a efectului de identitate nu se datorează unor răspunsuri aleatoare.
 
 Verificarea a scos la iveală și o problemă de construcție. La sarcina PRE, ambele modele aleg aproape mereu arestarea preventivă (5) imediat ce apare un factor de risc. Media este 5,0 la nivelurile 1 și 2, deci deciziile ating plafonul scalei. Cât timp o decizie este deja la maxim, o eventuală prejudecată nu o mai poate face mai severă, iar sensibilitatea lui E1 pentru această sarcină este redusă. Corectarea este descrisă în secțiunea 2.10.
 

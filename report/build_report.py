@@ -27,7 +27,6 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 from docx import Document  # noqa: E402
-from docx.enum.section import WD_SECTION  # noqa: E402,F401
 from docx.enum.table import WD_TABLE_ALIGNMENT  # noqa: E402
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK, WD_TAB_ALIGNMENT  # noqa: E402
 from docx.oxml import OxmlElement  # noqa: E402

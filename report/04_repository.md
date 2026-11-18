@@ -13,7 +13,7 @@ Table: Structura repository-ului.
 | `results/` | răspunsurile brute (JSONL, câte un rând pentru fiecare prompt) și tabelele de analiză (CSV, JSON) |
 | `report/` | capitolele raportului (Markdown), tabelele și figurile generate, scriptul care produce .docx |
 | `tests/` | 45 de teste unitare (pytest) |
-| `.github/workflows/tests.yml` | integrare continuă: testele rulează automat la fiecare `push` |
+| `.github/workflows/tests.yml` | integrare continuă: testele rulează automat la fiecare `push`, după publicarea repository-ului pe GitHub (deocamdată repository-ul este doar local) |
 
 Rularea completă a studiului de caz, de la șabloane la document, se face cu următoarele comenzi:
 
@@ -22,7 +22,10 @@ Rularea completă a studiului de caz, de la șabloane la document, se face cu ur
 > python scripts/02_run_e1.py --model ollama:llama3.1:latest
 > python scripts/02_run_e1.py --model hf:Qwen/Qwen2.5-1.5B-Instruct
 > python scripts/03_run_e2.py                  # stări ascunse + SEAT pe straturi
+> python scripts/03b_massive_activations.py    # activările masive ale primului token
 > python scripts/04_compas_prompts.py --n 60   # date reale
+> python scripts/02_run_e1.py --model ollama:llama3.1:latest --prompts data/compas/prompts.jsonl --outdir results/compas/e1_raw
+> python scripts/02_run_e1.py --model hf:Qwen/Qwen2.5-1.5B-Instruct --prompts data/compas/prompts.jsonl --outdir results/compas/e1_raw
 > python scripts/05_analyze.py                 # E1, H1b, verificarea de manipulare, E3, COMPAS
 > python scripts/06_figures.py
 > python scripts/07_report_tables.py

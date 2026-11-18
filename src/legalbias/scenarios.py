@@ -119,19 +119,21 @@ def changed_tokens(a: str, b: str) -> set[str]:
     return diff
 
 
-def check_invariance(s: Scenario) -> list[str]:
-    """Return violations: words outside IDENTITY_LEXICON that differ between a
-    variant and its reference / control (same gender). Empty list = OK."""
+def check_invariance(s: Scenario, variants: list[str] | None = None) -> list[str]:
+    """Condition (1): for every pair of variants with the same gender, the words
+    that differ must belong to the identity lexicon. Returns the violations
+    (empty list = OK)."""
     allowed = ids.IDENTITY_LEXICON | {"He", "She", "he", "she", "lives"}
+    vids = variants or [v.vid for v in ids.IDENTITIES]
+    rendered = {v: render(s, v) for v in vids}
     problems = []
-    for v in ids.IDENTITIES:
-        if v.mode == "control":
-            continue
-        others = [ids.ref(v.vid), ids.control(v.vid)]
-        for o in others:
-            bad = changed_tokens(render(s, v.vid), render(s, o)) - allowed
+    for i, a in enumerate(vids):
+        for b in vids[i + 1:]:
+            if ids.BY_ID[a].gender != ids.BY_ID[b].gender:
+                continue
+            bad = changed_tokens(rendered[a], rendered[b]) - allowed
             if bad:
-                problems.append(f"{s.sid}: {v.vid} vs {o}: {sorted(bad)}")
+                problems.append(f"{s.sid}: {a} vs {b}: {sorted(bad)}")
     return problems
 
 

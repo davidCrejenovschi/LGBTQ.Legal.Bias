@@ -2,6 +2,8 @@ Table: Istoricul commit-urilor (cel mai recent primul).
 
 | Commit | Data | Descriere | Modificări |
 |---|---|---|---|
+| `d6a7ad8` | 2026-11-18 18:18 | Revizie: invarianta verificata pe toate perechile, masurarea activarilor masive, corecturi de acuratete in capitolele 1-4 | 15 fișiere, +1008 / −38 linii |
+| `ece3841` | 2026-11-18 17:56 | Regenerare IV.docx cu istoricul git actualizat | 2 fișiere, +1 / −0 linii |
 | `8facac4` | 2026-11-18 17:56 | Pilot COMPAS pe ambele modele (720 de raspunsuri), sectiunea 2.8, tabelul comparativ cu literatura, documentul IV.docx | 22 fișiere, +1111 / −127 linii |
 | `00fbccf` | 2026-11-18 17:42 | Capitolul 2: E3, discutie, ajustari; figuri si tabele generate; corectii de formatare in generatorul .docx | 24 fișiere, +271 / −39 linii |
 | `ade714f` | 2026-11-18 17:38 | E1 pe Qwen2.5-1.5B (720 de raspunsuri), analiza E1/H1b/E3, capitolul 2: pilot, verificarea de manipulare, rezultatele E1 si E2 | 15 fișiere, +1118 / −8 linii |

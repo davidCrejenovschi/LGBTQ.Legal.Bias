@@ -25,7 +25,7 @@ Table: Sarcinile juridice și factorii relevanți juridic manipulați în scenar
 | Sarcina | Scala | Decizie nefavorabilă | Șabloane în studiul de caz | Factor juridic manipulat |
 |---|---|---|---|---|
 | REC – riscul de recidivă | 1 (risc minim) – 10 (risc maxim) | scor mai mare | furt, lovire, posesie de droguri, conducere sub influența alcoolului, delapidare la o firmă mică | antecedente: niciuna / una veche / trei recente |
-| PRE – măsura preventivă | 1 (fără măsură) – 5 (arestare preventivă) | măsură mai severă; ≥ 4 înseamnă privare de libertate | furt prin efracție, tâlhărie, trafic de droguri, delapidare la bancă, părăsirea locului accidentului | riscul de sustragere: domiciliu stabil și cooperare / fără domiciliu / rude în străinătate și bilet de avion |
+| PRE – măsura preventivă | 1 (fără măsură) – 5 (arestare preventivă) | măsură mai severă; ≥ 4 înseamnă privare de libertate | furt prin efracție, tâlhărie, trafic de droguri, delapidare la bancă, părăsirea locului accidentului | riscul de sustragere: domiciliu stabil și cooperare / fără domiciliu și refuzul declarației / rude în străinătate, bilet de avion și refuzul declarației |
 | CRED – credibilitatea martorului | 1 (deloc credibil) – 10 (complet credibil) | scor mai mic | tâlhărie la o benzinărie, accident rutier, furt dintr-un depozit, agresiune într-un parc, fraudă | consecvența declarațiilor: deplină / o mică neconcordanță / contradicții importante |
 
 Fiecare șablon conține câmpuri variabile, de exemplu vârsta, orașul, ocupația, valoarea prejudiciului sau condițiile în care martorul a văzut fapta. Unul dintre câmpuri este factorul juridic manipulat, ale cărui niveluri sunt ordonate după gravitate. Acest factor are un dublu rol: face scenariile mai variate și permite verificarea de manipulare din secțiunea 1.5, adică verificarea faptului că modelul reacționează la informațiile juridic relevante. Scenariile sunt construite intenționat la limită, fără o decizie evidentă, pentru ca modelul să aibă spațiu de interpretare.
@@ -35,6 +35,8 @@ Fiecare șablon conține câmpuri variabile, de exemplu vârsta, orașul, ocupa�
 ### 1.2.2 Variantele de identitate
 
 Fiecare scenariu este rescris în 12 variante (Tabelul 3). Genul persoanei rămâne constant în fiecare comparație, iar varianta heterosexuală cu același gen și același tip de semnalare este referința ref(v). Bisexualitatea nu poate fi semnalată implicit printr-un singur partener, așa că nu există variante implicite bisexuale. Numele partenerilor sunt rotite între patru nume masculine (Daniel, Michael, David, Thomas) și patru feminine (Emily, Sarah, Anna, Laura), pentru ca efectul unui anumit nume să nu se acumuleze.
+
+Două detalii de construcție contează la interpretare. Primul: variantele implicite adaugă o propoziție despre partener, iar existența unei familii este relevantă juridic (de exemplu, pentru riscul de sustragere). Comparația dintre o variantă implicită și controlul fără partener măsoară deci și efectul partenerului, nu doar al orientării. Din acest motiv, pentru variantele implicite referința principală rămâne varianta heterosexuală implicită, care are și ea un partener. Al doilea: în texte reale, orientarea heterosexuală este rareori menționată explicit, așa că însuși cuvântul „heterosexual” poate influența decizia. Varianta de control, fără nicio mențiune, permite separarea acestui efect de efectul etichetelor LGBTQ+.
 
 Table: Cele 12 variante de identitate generate pentru fiecare scenariu.
 
@@ -66,7 +68,7 @@ Promptul complet are trei părți: un mesaj de sistem comun („You are an assis
 
 ### 1.2.3 Date reale: setul COMPAS
 
-Pentru validarea pe date reale se folosește setul COMPAS publicat de ProPublica [22], cu persoane evaluate în comitatul Broward (Florida) în 2013–2014, același set folosit de Dressel și Farid [13] și de Chouldechova [23]. După filtrele din analiza originală ProPublica (arestarea la cel mult 30 de zile de evaluare, recidivă cunoscută, fapte care nu sunt simple contravenții) rămân 6.167 de dosare, cu o rată de recidivă în doi ani de 45,5%.
+Pentru validarea pe date reale se folosește setul COMPAS publicat de ProPublica [22], cu persoane evaluate în comitatul Broward (Florida) în 2013–2014, același set folosit de Dressel și Farid [13] și de Chouldechova [23]. După filtrele din analiza originală ProPublica (arestarea la cel mult 30 de zile de evaluare, recidivă cunoscută, fapte care nu sunt simple contravenții) rămân 6.172 de dosare din 7.214. După eliminarea celor 5 dosare fără descrierea faptei rămân 6.167, cu o rată de recidivă în doi ani de 45,5%.
 
 Fiecare dosar este transformat într-un profil scurt, construit după modelul descrierilor pe care Dressel și Farid le-au arătat participanților umani: sexul, vârsta, fapta de care este acuzată persoana, gradul faptei (felony sau misdemeanor), numărul de condamnări anterioare și numărul de fapte comise ca minor. Rasa este omisă intenționat. Peste acest profil se adaugă variantele de identitate, ca la scenariile sintetice, păstrând genul din dosar (6 variante pe dosar). Avantajul acestui set este că are o valoare reală de referință (dacă persoana a recidivat în doi ani), așa că pe lângă diferențele contrafactuale se pot calcula acuratețea, aria de sub curba ROC (AUC) și ratele de eroare pe fiecare variantă. Rezultatele pot fi comparate direct cu scorul COMPAS al acelorași persoane și cu acuratețea raportată în [13].
 
@@ -125,7 +127,9 @@ $$\mathrm{RR}(v)=\frac{1}{|S_t|}\sum_{s\in S_t}\mathbf{1}\left[d(s,v)=\bot\right
 
 Varianta de control arată care dintre grupuri se abate de la comportamentul obișnuit al modelului. Pentru orice variantă care nu este de control, inclusiv cele heterosexuale, se calculează aceleași metrici față de ctrl(v), cu Δ^{ctrl}(s, v) = σₜ [d(s, v) − d(s, ctrl(v))]. Pentru ipoteza H1b se compară, pe același scenariu, prejudiciul din varianta implicită cu cel din varianta explicită:
 
-$$D(s) = \Delta(s,v_{imp}) - \Delta(s,v_{exp}), \qquad (v_{imp},v_{exp}) \in \{(\mathrm{M\_gay\_imp},\mathrm{M\_gay\_exp}),\ (\mathrm{F\_les\_imp},\mathrm{F\_les\_exp})\}$$ (8)
+$$D(s) = \Delta(s,v_{imp}) - \Delta(s,v_{exp})$$ (8)
+
+unde perechile (v_{imp}, v_{exp}) sunt (M_gay_imp, M_gay_exp) și (F_les_imp, F_les_exp). Bisexualitatea nu are variantă implicită, deci nu intră în această comparație.
 
 Cu aceste notații, ipotezele din Lab III devin:
 
@@ -139,15 +143,15 @@ Testele sunt bilaterale, pentru că un model poate favoriza un grup (Tamkin et a
 
 Pentru o propoziție x cu n tokeni, notăm cu H_{l}[i] ∈ ℝᵖ starea ascunsă a tokenului i în stratul l. Reprezentarea propoziției este media stărilor ascunse, fără primul token:
 
-$$h_\ell(x)=\frac{1}{n-1}\sum_{i=2}^{n} H_\ell[i]$$ (9)
+$$h_l(x)=\frac{1}{n-1}\sum_{i=2}^{n} H_l[i]$$ (9)
 
-Primul token este exclus deoarece, în modelele decoder, prima poziție funcționează ca „attention sink” [30] și are câteva dimensiuni cu valori de sute de ori mai mari decât restul („massive activations” [29]). În studiul de caz, păstrarea lui a dus la o similaritate cosinus medie de aproximativ 1,000 între propoziții oarecare în straturile 2–26, deci orice test bazat pe cosinus devenea neinformativ. Vectorii sunt apoi standardizați pe fiecare dimensiune, folosind media și abaterea standard calculate pe toate propozițiile analizate. Este o extensie a centrării propuse în Lab III [18], [33]: centrarea elimină direcția comună, iar scalarea împiedică dimensiunile cu valori foarte mari să domine cosinusul. Rezultatele sunt raportate și pentru vectorii bruți și pentru cei doar centrați, ca analiză de robustețe.
+Primul token este exclus deoarece, în modelele decoder, prima poziție funcționează ca „attention sink” [30] și are câteva dimensiuni cu valori de mii de ori mai mari decât restul („massive activations” [29]). În Qwen2.5-1.5B, valoarea maximă a primului token este de aproximativ 3.200–15.200 de ori mai mare decât valoarea mediană, față de cel mult 72 de ori la ceilalți tokeni. În studiul de caz, păstrarea lui a dus la o similaritate cosinus medie de aproximativ 1,000 între propoziții oarecare în straturile 2–26, deci orice test bazat pe cosinus devenea neinformativ. Vectorii sunt apoi standardizați pe fiecare dimensiune, folosind media și abaterea standard calculate pe toate propozițiile analizate. Este o extensie a centrării propuse în Lab III [18], [33]: centrarea elimină direcția comună, iar scalarea împiedică dimensiunile cu valori foarte mari să domine cosinusul. Rezultatele sunt raportate și pentru vectorii bruți și pentru cei doar centrați, ca analiză de robustețe.
 
 Pentru o variantă v, notăm cu X mulțimea propozițiilor care o conțin, cu Y propozițiile pentru ref(v), cu A polul negativ și cu B polul pozitiv al conceptului c. Asocierea unei propoziții w și mărimea efectului în stratul l sunt [4], [5]:
 
 $$s(w,A,B)=\frac{1}{|A|}\sum_{a\in A}\cos(w,a)-\frac{1}{|B|}\sum_{b\in B}\cos(w,b)$$ (10)
 
-$$d_\ell(v,c)=\frac{\mathrm{mean}_{x\in X}\,s(x,A,B)-\mathrm{mean}_{y\in Y}\,s(y,A,B)}{\mathrm{std}_{w\in X\cup Y}\,s(w,A,B)}$$ (11)
+$$d_l(v,c)=\frac{\mathrm{mean}_{x\in X}\,s(x,A,B)-\mathrm{mean}_{y\in Y}\,s(y,A,B)}{\mathrm{std}_{w\in X\cup Y}\,s(w,A,B)}$$ (11)
 
 O valoare d_{l} > 0 înseamnă că identitatea LGBTQ+ este mai apropiată de polul negativ (periculos, vinovat, necinstit) decât identitatea heterosexuală. Semnificația se verifică prin testul de permutare unilateral al lui Caliskan et al., pe 10.000 de reîmpărțiri aleatoare ale mulțimii X ∪ Y:
 
@@ -155,9 +159,9 @@ $$p=\Pr_i\left[S(X_i,Y_i)\geq S(X,Y)\right], \qquad S(X,Y)=\sum_{x\in X}s(x,A,B)
 
 Deoarece propozițiile din X și Y formează perechi (același cadru, alt termen), se calculează și o variantă pe perechi a testului. Variația dintre cadre nu are legătură cu identitatea, iar varianta pe perechi o elimină. Cu δⱼ = s(xⱼ) − s(yⱼ) pentru cadrul j, mărimea efectului este d_{z} = mean(δ) / std(δ), iar semnificația este dată de un test exact sign-flip pe toate cele 2¹⁰ = 1.024 de combinații de semne. Rezultatul pe model este media pe straturi:
 
-$$\bar{d}(v,c)=\frac{1}{L}\sum_{\ell=1}^{L} d_\ell(v,c)$$ (13)
+$$\bar{d}(v,c)=\frac{1}{L}\sum_{l=1}^{L} d_l(v,c)$$ (13)
 
-Ipoteza nulă pentru E2 este d̄(v, c) = 0, iar alternativa (unilaterală, ca în WEAT) este d̄(v, c) > 0.
+Testul (12) se aplică separat pe fiecare strat, cu ipoteza nulă d_{l}(v, c) = 0 și alternativa unilaterală d_{l}(v, c) > 0, ca în WEAT. Rezultatul pentru un model este rezumat prin media d̄(v, c) și prin proporția straturilor cu p < 0,05. Valorile p pe straturi nu sunt corectate pentru comparații multiple, așa că proporția este o măsură descriptivă: în absența oricărui efect, ar fi în jur de 5%.
 
 ### 1.3.4 Modelul pentru legătura dintre niveluri (E3)
 
@@ -175,7 +179,7 @@ Același coeficient se calculează și pentru testul generic de valență, ρ_{V
 - **Intervalele de încredere de 95%** sunt calculate prin bootstrap cu percentile [27], cu 10.000 de reeșantionări. Unitatea reeșantionată este scenariul, astfel încât perechile rămân împreună.
 - Pentru E2 se folosesc testul de permutare (12) și testul sign-flip, iar pentru E3, testul de permutare pentru ρ. Pragul de semnificație este α = 0,05.
 
-**Puterea statistică.** Cu aproximarea normală, cel mai mic efect standardizat pe perechi care poate fi detectat cu putere 0,8 este d_{z} = (z₀,₉₇₅ + z₀,₈) / √n. Pentru studiul de caz (n = 20 de scenarii pe sarcină) rezultă d_{z} ≈ 0,63 fără corecție și 0,88 după corecția Holm pentru 24 de teste. Pentru experimentul complet (n = 100) valorile scad la 0,28 și, respectiv, 0,39. Studiul de caz poate detecta deci doar efecte mari. Rolul lui este să ilustreze metodologia, iar estimările lui servesc la dimensionarea experimentului complet.
+**Puterea statistică.** Cu aproximarea normală, cel mai mic efect standardizat pe perechi care poate fi detectat cu putere 0,8 este d_{z} = (z₀,₉₇₅ + z₀,₈) / √n. Pentru studiul de caz (n = 20 de scenarii pe sarcină) rezultă d_{z} ≈ 0,63 fără corecție și 0,88 la pragul cel mai strict al corecției Holm pentru 24 de teste (α/24). Pentru experimentul complet (n = 100) valorile scad la 0,28 și, respectiv, 0,39. Studiul de caz poate detecta deci doar efecte mari. Rolul lui este să ilustreze metodologia, iar estimările lui servesc la dimensionarea experimentului complet.
 
 ## 1.5 Validarea rezultatelor
 
@@ -217,7 +221,7 @@ Table: Tehnologiile folosite și alternativele neselectate.
 | Statistică | NumPy, SciPy, pandas | teste exacte și bootstrap scrise explicit, verificate prin teste unitare | statsmodels, pingouin (dependențe în plus pentru aceleași teste) |
 | API-uri comerciale | apeluri HTTP directe (urllib) | același cod pentru OpenAI, Gemini (endpoint compatibil OpenAI) și Anthropic, fără SDK-uri | SDK-urile oficiale, LiteLLM |
 | Raport | Markdown, generat automat în .docx (python-docx) | modificările textului se văd în istoricul git | LaTeX/Overleaf, editarea directă în Word (fișier binar) |
-| Teste și integrare continuă | pytest, GitHub Actions | testele rulează la fiecare modificare | Jenkins (necesită un server propriu) |
+| Teste și integrare continuă | pytest, GitHub Actions | testele rulează automat la fiecare push pe GitHub | Jenkins (necesită un server propriu) |
 
 ## 1.8 Dimensiunea experimentului complet
 
