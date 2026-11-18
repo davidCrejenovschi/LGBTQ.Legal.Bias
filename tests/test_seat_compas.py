@@ -26,6 +26,22 @@ def test_effect_size_sign_and_permutation():
     assert seat.permutation_p(Y, X, A, B) > 0.99
 
 
+def test_paired_effect_detects_consistent_shift():
+    X, Y, A, B = _clusters()
+    dz, p = seat.paired_effect(X, Y, A, B)
+    assert dz > 1 and p <= 1 / 256 + 1e-12            # exact sign-flip, 2^8 patterns
+    dz_rev, p_rev = seat.paired_effect(Y, X, A, B)
+    assert dz_rev == pytest.approx(-dz) and p_rev > 0.99
+
+
+def test_standardize_gives_unit_variance():
+    rng = np.random.default_rng(3)
+    H = rng.normal(size=(50, 8)) * np.array([1, 1, 1, 1, 1, 1, 1, 500.0])  # one "massive" dimension
+    Z = seat.standardize(H)
+    assert np.allclose(Z.mean(axis=0), 0, atol=1e-9)
+    assert np.allclose(Z.std(axis=0), 1)
+
+
 def test_effect_size_null_is_small():
     rng = np.random.default_rng(1)
     X, Y, A, B = (rng.normal(size=(10, 32)) for _ in range(4))

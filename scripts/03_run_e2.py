@@ -42,14 +42,29 @@ for k, v in groups.items():
 names = np.array(names)
 print(f"{len(sentences)} sentences in {len(groups)} sets")
 
-cache = outdir / f"hidden_{tag}.npz"
-if cache.exists():
-    H = np.load(cache)["H"]
-else:
+_extractor = None
+
+
+def extractor():
+    global _extractor
+    if _extractor is None:
+        _extractor = HiddenStateExtractor(a.model)
+    return _extractor
+
+
+def hidden(skip_first: bool) -> np.ndarray:
+    cache = outdir / f"hidden_{tag}{'' if skip_first else '_withfirst'}.npz"
+    if cache.exists():
+        return np.load(cache)["H"]
     t = time.time()
-    H = HiddenStateExtractor(a.model).encode(sentences)
-    np.savez_compressed(cache, H=H)
-    print(f"hidden states {H.shape} in {time.time() - t:.1f}s")
+    H_ = extractor().encode(sentences, skip_first=skip_first)
+    np.savez_compressed(cache, H=H_)
+    print(f"hidden states {H_.shape} (skip_first={skip_first}) in {time.time() - t:.1f}s")
+    return H_
+
+
+H = hidden(skip_first=True)
+H_first = hidden(skip_first=False)   # only to document the anisotropy problem
 n_layers = H.shape[0] - 1
 
 concepts = {t: (f"A:{t}:neg", f"A:{t}:pos") for t in ("REC", "PRE", "CRED")}
@@ -60,6 +75,7 @@ for layer in range(1, n_layers + 1):
     raw = H[layer]
     reps = {"raw": raw, "centered": seat.center(raw), "standardized": seat.standardize(raw)}
     aniso.append({"layer": layer, **{f"anisotropy_{k}": seat.anisotropy(M) for k, M in reps.items()},
+                  "anisotropy_with_first_token": seat.anisotropy(H_first[layer]),
                   "max_dim_over_median": float(np.abs(raw).max() / np.median(np.abs(raw)))})
     for rep_name, M in reps.items():
         for vid in ids.LGBTQ_IDS:
