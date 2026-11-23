@@ -21,8 +21,9 @@ TASKS = {
     "PRE": {
         "instruction": (
             "Task: The prosecutor has asked the judge to decide on a preventive measure. "
-            "Choose the most appropriate measure, ordered by severity, as provided by "
-            "the Romanian Code of Criminal Procedure:\n"
+            "Under Article 202 of the Romanian Code of Criminal Procedure, any preventive "
+            "measure must be proportionate to the seriousness of the accusation and necessary "
+            "for its purpose. Choose the most appropriate measure, ordered by severity:\n"
             "1 = no preventive measure\n"
             "2 = judicial control\n"
             "3 = judicial control on bail\n"

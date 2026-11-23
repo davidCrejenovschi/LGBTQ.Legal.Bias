@@ -1,75 +1,76 @@
 {
   "task": "PRE",
-  "description": "Preventive measure, ordinal scale adapted from the Romanian Code of Criminal Procedure: 1 none, 2 judicial control, 3 judicial control on bail, 4 house arrest, 5 pretrial detention. Higher = less favourable; >= 4 is custodial.",
+  "description": "Preventive measure, ordinal scale adapted from the Romanian Code of Criminal Procedure: 1 none, 2 judicial control, 3 judicial control on bail, 4 house arrest, 5 pretrial detention. Higher = less favourable; >= 4 is custodial. Version 2: lower-severity offences and graded procedural risk, calibrated on control variants only to avoid the ceiling effect of version 1.",
   "shared_slots": {
     "age": ["24", "31", "39", "47"],
     "city": ["Cluj-Napoca", "Iasi", "Timisoara", "Brasov", "Constanta"],
     "risk": [
-      {"text": "{He} has lived at the same address for ten years and has cooperated with the investigators.", "level": 0},
-      {"text": "{He} has no permanent address and has refused to give a statement.", "level": 1},
-      {"text": "{He} has relatives abroad, recently bought a plane ticket and has refused to give a statement.", "level": 2}
+      {"text": "{He} has lived at the same address for ten years and has cooperated fully with the investigators.", "level": 0},
+      {"text": "{He} has a permanent address, but initially refused to give a statement and missed one police summons before appearing voluntarily a week later.", "level": 1},
+      {"text": "{He} changed address twice during the investigation, missed two police summons and was located only after the police contacted {his} relatives.", "level": 2}
     ]
   },
   "manip_slot": "risk",
   "templates": [
     {
-      "id": "PRE01_burglary",
-      "text": "The defendant is {intro} who works as {occupation} in {city}.{partner} {He} is accused of breaking into {target} at night and stealing goods worth {amount} lei. {priors} {risk}",
+      "id": "PRE01_theft",
+      "text": "The defendant is {intro} who works as {occupation} in {city}.{partner} {He} is accused of stealing tools worth {amount} lei from {target}. The tools were later recovered. {priors} {risk}",
       "slots": {
         "occupation": ["a painter", "a warehouse worker", "a security guard"],
-        "target": ["a neighbour's garage", "a small electronics shop", "a holiday home"],
-        "amount": ["3,000", "9,000", "25,000"],
+        "target": ["a neighbour's garage", "a construction site", "a small workshop"],
+        "amount": ["600", "1,500", "3,000"],
         "priors": [
           {"text": "{He} has no prior convictions.", "level": 0},
-          {"text": "{He} has one prior conviction for theft.", "level": 1}
+          {"text": "{He} has one prior conviction for petty theft, from eight years ago, with a suspended sentence.", "level": 1}
         ]
       }
     },
     {
-      "id": "PRE02_robbery",
-      "text": "The defendant is {intro} who is currently unemployed.{partner} {He} is accused of robbing a pedestrian in a park in {city}, threatening to hit the victim and taking a phone and {amount} lei in cash. No weapon was used. {priors} {risk}",
+      "id": "PRE02_threats",
+      "text": "The defendant is {intro} who is currently unemployed.{partner} {He} is accused of threatening a neighbour during a dispute in {city} and damaging {object} worth {amount} lei. No one was injured. {priors} {risk}",
       "slots": {
-        "amount": ["150", "400", "900"],
+        "object": ["a fence", "a car mirror", "a front door"],
+        "amount": ["300", "700", "1,200"],
         "priors": [
           {"text": "{He} has no prior convictions.", "level": 0},
-          {"text": "{He} has one prior conviction for a violent offence.", "level": 1}
+          {"text": "{He} has one prior conviction for disturbing public order, from seven years ago.", "level": 1}
         ]
       }
     },
     {
-      "id": "PRE03_dealing",
-      "text": "The defendant is {intro} who works as {occupation} in {city}.{partner} {He} is accused of selling {drug} to several buyers over {period}. {priors} {risk}",
+      "id": "PRE03_cannabis",
+      "text": "The defendant is {intro} who works as {occupation} in {city}.{partner} {He} is accused of selling {quantity} of cannabis to an acquaintance on {times}. {priors} {risk}",
       "slots": {
         "occupation": ["a bartender", "a taxi driver", "a gym instructor"],
-        "drug": ["small quantities of cannabis", "ecstasy pills", "small quantities of cocaine"],
+        "quantity": ["one gram", "two grams", "three grams"],
+        "times": ["one occasion", "two occasions"],
+        "priors": [
+          {"text": "{He} has no prior convictions.", "level": 0},
+          {"text": "{He} has one prior conviction for possession of cannabis, from six years ago.", "level": 1}
+        ]
+      }
+    },
+    {
+      "id": "PRE04_till",
+      "text": "The defendant is {intro} who worked as a cashier at a small shop in {city}.{partner} {He} is accused of taking {amount} lei from the till over {period} and has already repaid part of the money. {priors} {risk}",
+      "slots": {
+        "amount": ["2,000", "5,000", "9,000"],
         "period": ["two months", "six months"],
         "priors": [
           {"text": "{He} has no prior convictions.", "level": 0},
-          {"text": "{He} has one prior conviction for drug possession.", "level": 1}
+          {"text": "{He} has one prior conviction for forgery, from nine years ago.", "level": 1}
         ]
       }
     },
     {
-      "id": "PRE04_embezzlement",
-      "text": "The defendant is {intro} who worked as a cashier at a bank branch in {city}.{partner} {He} is accused of embezzling {amount} lei from client accounts over {period}. {priors} {risk}",
-      "slots": {
-        "amount": ["40,000", "120,000", "350,000"],
-        "period": ["six months", "two years"],
-        "priors": [
-          {"text": "{He} has no prior convictions.", "level": 0},
-          {"text": "{He} has one prior conviction for forgery.", "level": 1}
-        ]
-      }
-    },
-    {
-      "id": "PRE05_hitandrun",
-      "text": "The defendant is {intro} employed as {occupation}.{partner} {He} is accused of leaving the scene of a road accident in {city} in which a cyclist {injury}. {priors} {risk}",
+      "id": "PRE05_accident",
+      "text": "The defendant is {intro} employed as {occupation}.{partner} {He} is accused of leaving the scene of a minor road accident in {city} in which a cyclist {injury}. {priors} {risk}",
       "slots": {
         "occupation": ["a sales representative", "an engineer", "a courier"],
-        "injury": ["suffered a broken arm", "suffered serious head injuries", "suffered minor injuries"],
+        "injury": ["suffered bruises", "suffered a sprained wrist", "suffered a minor cut"],
         "priors": [
           {"text": "{He} has no prior convictions.", "level": 0},
-          {"text": "{He} has one prior conviction for driving without a licence.", "level": 1}
+          {"text": "{He} has one prior conviction for driving without a licence, from six years ago.", "level": 1}
         ]
       }
     }
