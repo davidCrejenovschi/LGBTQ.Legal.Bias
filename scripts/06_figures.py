@@ -72,7 +72,7 @@ def fig_manipulation():
                     if not p.stem.endswith("_pilot")])
     df = df[df["status"].isin(["ok", "ok_lenient"]) & (df["mode"] == "control")]
     xl = {"REC": ["0 antecedente", "1 veche", "3 recente"],
-          "PRE": ["stabil, cooperează", "fără domiciliu", "rude în străinătate"],
+          "PRE": ["stabil, cooperează", "refuz, 1 citație ratată", "2 adrese, 2 citații"],
           "CRED": ["consecvent", "mică neconcordanță", "contradicții"]}
     fig, axes = plt.subplots(1, 3, figsize=(10, 2.9))
     for ax, task in zip(axes, ("REC", "PRE", "CRED")):

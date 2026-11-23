@@ -327,7 +327,7 @@ def expectations():
          "diferențe sistematice în decizii pentru vârstă, gen, rasă și dialect",
          "similar: diferențe nenule și pentru orientarea sexuală",
          "MSD pe variante LGBTQ+. Llama: " + model_summary("ollama/llama3.1:latest") + ". Qwen: " +
-         model_summary("hf/Qwen2.5-1.5B-Instruct") + f". PRE: între {f(e[e.task == 'PRE'].MSD.min(), 2, True)} și {f(e[e.task == 'PRE'].MSD.max(), 2, True)} (plafon)"],
+         model_summary("hf/Qwen2.5-1.5B-Instruct") + f". PRE: între {f(e[e.task == 'PRE'].MSD.min(), 2, True)} și {f(e[e.task == 'PRE'].MSD.max(), 2, True)} (Llama variază, Qwen la plafon)"],
         ["Explicit vs. implicit (H1b)", "Hofmann et al. [2]",
          "stereotipuri declarate pozitive, asocieri ascunse negative; RLHF corectează doar ce este declarat",
          "similar: efect favorabil sau nul la semnalarea explicită, mai defavorabil la cea implicită",

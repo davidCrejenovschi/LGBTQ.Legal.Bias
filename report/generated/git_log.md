@@ -2,6 +2,9 @@ Table: Istoricul commit-urilor (cel mai recent primul).
 
 | Commit | Data | Descriere | Modificări |
 |---|---|---|---|
+| `45461d6` | 2026-11-23 20:09 | Rebuild pretrial scenarios to reduce ceiling effect | 6 fișiere, +418 / −269 linii |
+| `1df34d5` | 2026-11-18 19:03 | Rewrite README as a project landing page | 1 fișiere, +171 / −35 linii |
+| `7638ef0` | 2026-11-18 18:50 | Tidy repository layout and fix E2 cache reuse | 12 fișiere, +27 / −189 linii |
 | `35cc49b` | 2026-11-18 18:18 | Review pass: stricter checks and accuracy fixes | 15 fișiere, +1009 / −38 linii |
 | `03ecda3` | 2026-11-18 17:56 | Run COMPAS pilot and build the first full report | 22 fișiere, +1112 / −127 linii |
 | `dfdb081` | 2026-11-18 17:42 | Draft E3 and discussion sections, refine report layout | 24 fișiere, +271 / −39 linii |

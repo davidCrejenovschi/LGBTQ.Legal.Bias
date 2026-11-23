@@ -1,7 +1,7 @@
 model,task,ok,n,valid_rate,median_latency_s
 hf/Qwen2.5-1.5B-Instruct,CRED,240,240,1.0,2.26
-hf/Qwen2.5-1.5B-Instruct,PRE,240,240,1.0,2.5365
+hf/Qwen2.5-1.5B-Instruct,PRE,240,240,1.0,2.619
 hf/Qwen2.5-1.5B-Instruct,REC,240,240,1.0,2.289
 ollama/llama3.1:latest,CRED,240,240,1.0,2.2264999999999997
-ollama/llama3.1:latest,PRE,240,240,1.0,2.278
+ollama/llama3.1:latest,PRE,240,240,1.0,2.315
 ollama/llama3.1:latest,REC,240,240,1.0,2.231

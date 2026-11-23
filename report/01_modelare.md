@@ -18,19 +18,21 @@ Toate datele de intrare sunt generate determinist (sămânța 2026) din fișiere
 
 ### 1.2.1 Scenarii juridice generate din șabloane
 
-Studiul folosește trei sarcini juridice, fiecare cu o scală ordonată și cu o direcție clară a deciziei nefavorabile (Tabelul 2). Pentru măsura preventivă, scala urmează măsurile prevăzute de art. 202 din Codul de procedură penală (controlul judiciar, controlul judiciar pe cauțiune, arestul la domiciliu, arestarea preventivă), la care se adaugă varianta „fără măsură preventivă”. Reținerea nu este inclusă, deoarece este dispusă de organele de urmărire penală pentru cel mult 24 de ore și nu de judecător.
+Studiul folosește trei sarcini juridice, fiecare cu o scală ordonată și cu o direcție clară a deciziei nefavorabile (Tabelul 2). Pentru măsura preventivă, scala urmează măsurile prevăzute de art. 202 din Codul de procedură penală (controlul judiciar, controlul judiciar pe cauțiune, arestul la domiciliu, arestarea preventivă), la care se adaugă varianta „fără măsură preventivă”. Instrucțiunea amintește și regula din art. 202 alin. (3): măsura trebuie să fie proporțională cu gravitatea acuzației și necesară pentru scopul urmărit. Reținerea nu este inclusă, deoarece este dispusă de organele de urmărire penală pentru cel mult 24 de ore și nu de judecător.
 
 Table: Sarcinile juridice și factorii relevanți juridic manipulați în scenarii.
 
 | Sarcina | Scala | Decizie nefavorabilă | Șabloane în studiul de caz | Factor juridic manipulat |
 |---|---|---|---|---|
 | REC – riscul de recidivă | 1 (risc minim) – 10 (risc maxim) | scor mai mare | furt, lovire, posesie de droguri, conducere sub influența alcoolului, delapidare la o firmă mică | antecedente: niciuna / una veche / trei recente |
-| PRE – măsura preventivă | 1 (fără măsură) – 5 (arestare preventivă) | măsură mai severă; ≥ 4 înseamnă privare de libertate | furt prin efracție, tâlhărie, trafic de droguri, delapidare la bancă, părăsirea locului accidentului | riscul de sustragere: domiciliu stabil și cooperare / fără domiciliu și refuzul declarației / rude în străinătate, bilet de avion și refuzul declarației |
+| PRE – măsura preventivă | 1 (fără măsură) – 5 (arestare preventivă) | măsură mai severă; ≥ 4 înseamnă privare de libertate | furt de unelte, amenințare și distrugere, vânzarea unor cantități mici de cannabis, sustragere din casa unui magazin, părăsirea locului unui accident ușor | riscul de sustragere: domiciliu stabil și cooperare / refuzul declarației și o citație ratată / două schimbări de adresă și două citații ratate |
 | CRED – credibilitatea martorului | 1 (deloc credibil) – 10 (complet credibil) | scor mai mic | tâlhărie la o benzinărie, accident rutier, furt dintr-un depozit, agresiune într-un parc, fraudă | consecvența declarațiilor: deplină / o mică neconcordanță / contradicții importante |
 
 Fiecare șablon conține câmpuri variabile, de exemplu vârsta, orașul, ocupația, valoarea prejudiciului sau condițiile în care martorul a văzut fapta. Unul dintre câmpuri este factorul juridic manipulat, ale cărui niveluri sunt ordonate după gravitate. Acest factor are un dublu rol: face scenariile mai variate și permite verificarea de manipulare din secțiunea 1.5, adică verificarea faptului că modelul reacționează la informațiile juridic relevante. Scenariile sunt construite intenționat la limită, fără o decizie evidentă, pentru ca modelul să aibă spațiu de interpretare.
 
 În studiul de caz sunt folosite 5 șabloane pe sarcină, fiecare completat de 4 ori, adică 20 de scenarii pe sarcină și 60 în total. Nivelurile factorului manipulat sunt parcurse ciclic, iar celelalte câmpuri sunt alese aleator cu o sămânță fixă, fără duplicate. În experimentul complet vor fi 10–15 șabloane pe sarcină și aproximativ 100 de scenarii pe sarcină.
+
+Scenariile PRE au fost refăcute după prima rulare, în care deciziile atingeau plafonul scalei. Noua versiune a fost calibrată numai pe variantele de control, înainte de a calcula vreo diferență între identități pentru noile scenarii, cu criterii fixate dinainte: media între 2,5 și 3,5, între 20% și 60% măsuri privative de libertate, cel mult 60% din răspunsuri pe aceeași valoare și o corelație pozitivă cu factorul de risc. După trei iterații, formularea a fost înghețată, deși nu toate criteriile erau îndeplinite (secțiunea 2.4).
 
 ### 1.2.2 Variantele de identitate
 

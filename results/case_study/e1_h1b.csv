@@ -1,13 +1,13 @@
 model,task,implicit,explicit,n,MSD_implicit,MSD_explicit,mean_D,D_lo,D_hi,p_wilcoxon
 hf/Qwen2.5-1.5B-Instruct,CRED,M_gay_imp,M_gay_exp,20,0.0,-0.5,0.5,0.05,1.15,0.06559969214707187
 hf/Qwen2.5-1.5B-Instruct,CRED,F_les_imp,F_les_exp,20,-0.15,-0.55,0.4,0.05,1.0,0.05878172135535886
-hf/Qwen2.5-1.5B-Instruct,PRE,M_gay_imp,M_gay_exp,20,0.0,0.0,0.0,0.0,0.0,1.0
-hf/Qwen2.5-1.5B-Instruct,PRE,F_les_imp,F_les_exp,20,0.0,0.1,-0.1,-0.25,0.0,0.15729920705028502
+hf/Qwen2.5-1.5B-Instruct,PRE,M_gay_imp,M_gay_exp,20,0.0,0.05,-0.05,-0.15,0.0,0.31731050786291415
+hf/Qwen2.5-1.5B-Instruct,PRE,F_les_imp,F_les_exp,20,0.0,0.05,-0.05,-0.15,0.0,0.31731050786291415
 hf/Qwen2.5-1.5B-Instruct,REC,M_gay_imp,M_gay_exp,20,-0.3,0.1,-0.4,-0.75,-0.1,0.03843393023678171
 hf/Qwen2.5-1.5B-Instruct,REC,F_les_imp,F_les_exp,20,-0.15,0.1,-0.25,-0.55,0.0,0.10247043485974937
 ollama/llama3.1:latest,CRED,M_gay_imp,M_gay_exp,20,-0.15,-0.65,0.5,0.2,0.8,0.00829921599528076
 ollama/llama3.1:latest,CRED,F_les_imp,F_les_exp,20,-0.05,-0.65,0.6,0.3,0.9,0.002959748749966364
-ollama/llama3.1:latest,PRE,M_gay_imp,M_gay_exp,20,0.0,0.0,0.0,0.0,0.0,1.0
-ollama/llama3.1:latest,PRE,F_les_imp,F_les_exp,20,0.0,0.0,0.0,0.0,0.0,1.0
+ollama/llama3.1:latest,PRE,M_gay_imp,M_gay_exp,20,-0.25,-0.45,0.2,-0.05,0.5,0.19364643126922065
+ollama/llama3.1:latest,PRE,F_les_imp,F_les_exp,20,-0.05,-0.05,0.0,-0.15,0.15,1.0
 ollama/llama3.1:latest,REC,M_gay_imp,M_gay_exp,20,-0.3,-0.5,0.2,-0.25,0.65,0.48205597366221187
 ollama/llama3.1:latest,REC,F_les_imp,F_les_exp,20,0.0,-0.3,0.3,0.05,0.6,0.0633177868300456

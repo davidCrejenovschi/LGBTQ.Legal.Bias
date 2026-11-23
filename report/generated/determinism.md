@@ -1,1 +1,1 @@
-Qwen2.5-1.5B – 108 din 108 răspunsuri identice (100,0%); Llama-3.1-8B – 107 din 108 răspunsuri identice (99,1%).
+Qwen2.5-1.5B – 108 din 108 răspunsuri identice (100,0%); Llama-3.1-8B – 106 din 108 răspunsuri identice (98,1%).
