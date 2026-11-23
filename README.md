@@ -75,7 +75,7 @@ ground truth (two-year recidivism) and a comparison with the COMPAS score.
 | 🔄 **Over-correction, not disadvantage** | When orientation is stated **explicitly**, Llama-3.1-8B rates LGBTQ+ witnesses as *more* credible (+0.55 to +0.65 points; decision changes in 45–55% of pairs, all in their favour; Holm-adjusted p = 0.042 for *gay* and *lesbian*). Qwen shows the same direction, not significant. |
 | 🔍 **Implicit signal** | When orientation is only implied by a same-sex partner, the favourable effect largely disappears (MSD between −0.15 and 0 for credibility). |
 | ⚠️ **Pretrial (recalibrated)** | Scenarios were rebuilt and calibrated on control variants only. Llama left the ceiling (control mean 3.10); explicitly gay and bisexual men get milder measures than the heterosexual reference (custodial 5% vs. 25%), not significant after Holm. Qwen stays at the ceiling (100% custodial). |
-| 🧠 **Representations** | In Qwen2.5-1.5B, explicit LGBTQ+ terms sit closer to *guilty / immoral* than *heterosexual* does (mean SEAT d = +0.81 … +1.09, significant in 54–79% of layers), while the classic pleasant/unpleasant test finds almost nothing (d = −0.24 … +0.11). |
+| 🧠 **Representations** | In Qwen2.5-1.5B, explicit LGBTQ+ terms sit closer to *guilty / immoral* than *heterosexual* does (mean SEAT d = +0.81 … +1.09, significant in 54–79% of layers), while the classic pleasant/unpleasant test finds almost nothing (d = −0.24 … +0.11). Splitting that concept shows that both legal culpability (d = +0.69 … +0.85) and moral judgement (d = +0.52 … +0.99) contribute. |
 | 🔗 **Link (E3)** | Task-aligned associations correlate with decision gaps in the predicted direction (ρ = +0.45 vs. −0.09 for the generic test), but not significantly (permutation p = 0.064, only 18 points): the two levels are largely dissociated. |
 | ⚖️ **Real records (COMPAS)** | On the same 60 records: AUC 0.76 (Llama), 0.71 (Qwen) vs. 0.68 for the COMPAS score; accuracy 70% / 68% / 65%. Llama's over-correction for explicitly gay and bisexual men reappears and survives Holm correction. |
 
@@ -168,7 +168,8 @@ Commercial models (full study): `--model openai:<model>` or `--model anthropic:<
 - [x] Report: experimental design, case study, related work
 - [x] Rebuild and calibrate the pretrial scenarios (Llama left the ceiling; Qwen did not)
 - [ ] More templates (≈ 100 scenarios per task) for the full study
-- [ ] Separate legal and moral concepts in E2, more sentence frames
+- [x] Separate legal and moral concepts in E2 (first split, on the existing words)
+- [ ] Longer attribute lists and more sentence frames for E2
 - [ ] Expert review of the scenarios by a criminal-law practitioner
 - [ ] CrowS-Pairs / BBQ on the same models; commercial models (GPT, Gemini, Claude)
 

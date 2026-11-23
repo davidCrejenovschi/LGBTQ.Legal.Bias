@@ -220,6 +220,22 @@ def e2():
          "neplăcut–plăcut (bază)"], rows))
 
 
+def e2_split():
+    d = pd.read_csv(CS / "e2_legal_moral_Qwen2.5-1.5B-Instruct.csv")
+    rows = []
+    for vid in VID_ORDER:
+        row = [VID[vid]]
+        for part in ("legal", "moral"):
+            s = d[(d.vid == vid) & (d.part == part)]
+            row.append(f"{f(s.d.mean(), 2, True)} ({pct((s.p < 0.05).mean())})")
+        rows.append(row)
+    write("e2_split.md", table(
+        "Conceptul vinovat–nevinovat separat în culpabilitate juridică și judecată morală "
+        "(Qwen2.5-1.5B-Instruct, vectori standardizați): d̄ pe cele 28 de straturi și, în paranteză, "
+        "proporția straturilor cu p < 0,05.",
+        ["Varianta", "culpabilitate juridică", "judecată morală"], rows))
+
+
 def e3():
     s = json.loads((CS / "e3_summary.json").read_text())
     lab = {"task_aligned": "concept aliniat pe sarcină, toate sarcinile",
@@ -389,6 +405,7 @@ if __name__ == "__main__":
     e1_control()
     h1b()
     e2()
+    e2_split()
     if (CS / "e3_summary.json").exists():
         e3()
     compas_tables()

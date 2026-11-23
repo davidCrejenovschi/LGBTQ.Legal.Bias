@@ -78,7 +78,7 @@ Fiecare dosar este transformat într-un profil scurt, construit după modelul de
 
 Pentru E2, termenii de identitate sunt introduși în 10 propoziții „neutre” (bleached), după modelul testului SEAT [5], de exemplu „This is a gay man.” sau „The defendant is a lesbian woman.”. Pentru semnalarea implicită sunt folosite 10 propoziții cu partenerul, de exemplu „He lives with his husband.” față de „He lives with his wife.”. Propozițiile pentru LGBTQ+ și cele pentru referința heterosexuală folosesc aceleași cadre, deci formează perechi.
 
-Conceptele juridice sunt alese astfel încât să corespundă celor trei sarcini (Tabelul 4). Fiecare pol are 8 cuvinte, introduse în 3 cadre („This person is dangerous.”), adică 24 de propoziții pe pol. Ca termen de comparație se folosește și testul clasic de valență plăcut–neplăcut al lui Caliskan et al. [4]. Alte 10 propoziții fără legătură cu tema completează mulțimea folosită pentru centrare.
+Conceptele juridice sunt alese astfel încât să corespundă celor trei sarcini (Tabelul 4). Fiecare pol are 8 cuvinte, introduse în 3 cadre („This person is dangerous.”), adică 24 de propoziții pe pol. Ca termen de comparație se folosește și testul clasic de valență plăcut–neplăcut al lui Caliskan et al. [4]. Alte 10 propoziții fără legătură cu tema completează mulțimea folosită pentru centrare. Conceptul vinovat–nevinovat este analizat și pe două jumătăți disjuncte, culpabilitate juridică și judecată morală (secțiunea 2.6).
 
 Table: Perechile de concepte folosite în E2.
 

@@ -14,7 +14,7 @@ Table: Structura repository-ului.
 | `results/` | răspunsurile brute (JSONL, câte un rând pentru fiecare prompt) și tabelele de analiză (CSV, JSON) |
 | `report/` | capitolele raportului (Markdown), tabelele și figurile generate, scriptul care produce .docx |
 | `tests/` | 46 de teste unitare (pytest) |
-| `.github/workflows/tests.yml` | integrare continuă: testele rulează automat la fiecare `push`, după publicarea repository-ului pe GitHub (deocamdată repository-ul este doar local) |
+| `.github/workflows/tests.yml` | integrare continuă: testele rulează automat pe GitHub la fiecare `push` |
 
 Rularea completă a studiului de caz, de la șabloane la document, se face cu următoarele comenzi:
 

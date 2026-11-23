@@ -2,6 +2,8 @@ Table: Istoricul commit-urilor (cel mai recent primul).
 
 | Commit | Data | Descriere | Modificări |
 |---|---|---|---|
+| `58b98b1` | 2026-11-23 20:30 | Add legal and moral split of the guilt concept | 5 fișiere, +96 / −4 linii |
+| `c41a438` | 2026-11-23 20:29 | Rerun pretrial task and update the report | 34 fișiere, +667 / −662 linii |
 | `45461d6` | 2026-11-23 20:09 | Rebuild pretrial scenarios to reduce ceiling effect | 6 fișiere, +418 / −269 linii |
 | `1df34d5` | 2026-11-18 19:03 | Rewrite README as a project landing page | 1 fișiere, +171 / −35 linii |
 | `7638ef0` | 2026-11-18 18:50 | Tidy repository layout and fix E2 cache reuse | 12 fișiere, +27 / −189 linii |
