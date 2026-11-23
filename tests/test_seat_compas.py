@@ -65,6 +65,15 @@ def test_seat_sentence_sets():
     assert len(allset["A:REC:neg"]) == len(allset["A:REC:pos"]) == 24
 
 
+def test_legal_moral_split_partitions_the_guilt_concept():
+    sets = load_sets()
+    legal, moral = sets["pre_split"]["legal"], sets["pre_split"]["moral"]
+    original = sets["concepts"]["PRE"]
+    for pole in ("negative", "positive"):
+        assert not set(legal[pole]) & set(moral[pole])
+        assert set(legal[pole]) | set(moral[pole]) == set(original[pole])
+
+
 def test_compas_scenarios(tmp_path):
     df = pd.DataFrame({
         "id": [1, 2], "sex": ["Male", "Female"], "age": [25, 41],

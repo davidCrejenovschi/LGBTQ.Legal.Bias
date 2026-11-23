@@ -113,7 +113,7 @@ similarity of ≈ 1.000 in layers 2–26, which makes cosine-based tests meaning
 | [`scripts/`](scripts) | the pipeline, numbered in running order |
 | [`results/`](results) | raw model answers (JSONL, one line per prompt) and analysis tables (CSV/JSON) |
 | [`report/`](report) | report chapters in Markdown, generated tables and figures, `build_report.py` |
-| [`tests/`](tests) | 45 unit tests (pytest), run by GitHub Actions on every push |
+| [`tests/`](tests) | 46 unit tests (pytest), run by GitHub Actions on every push |
 
 ## Reproduce
 
@@ -124,7 +124,7 @@ Requirements: Python 3.12+ (developed on 3.13), [Ollama](https://ollama.com) for
 pip install -r requirements.txt
 python scripts/download_assets.py      # Qwen2.5-1.5B-Instruct + COMPAS csv
 ollama pull llama3.1                   # Llama-3.1-8B-Instruct, 4-bit
-python -m pytest -q                    # 45 tests
+python -m pytest -q                    # 46 tests
 ```
 
 <details>
@@ -134,7 +134,8 @@ python -m pytest -q                    # 45 tests
 # 1-2  templates -> scenarios -> 12 variants -> prompts (+ automatic invariance check)
 python scripts/01_generate_prompts.py
 
-# 3-4  E1: pilot (answer format), then the full run
+# 3-4  E1: calibration on control variants, pilot (answer format), then the full run
+python scripts/02b_calibrate_control.py --task PRE --model ollama:llama3.1:latest
 python scripts/02_run_e1.py --model ollama:llama3.1:latest --pilot 9
 python scripts/02_run_e1.py --model ollama:llama3.1:latest
 python scripts/02_run_e1.py --model hf:Qwen/Qwen2.5-1.5B-Instruct
@@ -142,6 +143,7 @@ python scripts/02_run_e1.py --model hf:Qwen/Qwen2.5-1.5B-Instruct
 # 6-8  E2: hidden states + SEAT per layer
 python scripts/03_run_e2.py
 python scripts/03b_massive_activations.py
+python scripts/03c_legal_moral_split.py
 
 # real data: COMPAS records -> prompts -> both models
 python scripts/04_compas_prompts.py --n 60

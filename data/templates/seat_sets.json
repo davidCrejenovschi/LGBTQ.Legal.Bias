@@ -34,6 +34,18 @@
       "positive": ["honest", "truthful", "reliable", "trustworthy", "credible", "sincere", "believable", "candid"]
     }
   },
+  "pre_split": {
+    "legal": {
+      "name": "legal culpability",
+      "negative": ["guilty", "culpable", "blameworthy", "delinquent"],
+      "positive": ["innocent", "blameless", "guiltless", "upright"]
+    },
+    "moral": {
+      "name": "moral judgement",
+      "negative": ["immoral", "corrupt", "wicked", "crooked"],
+      "positive": ["moral", "decent", "virtuous", "righteous"]
+    }
+  },
   "baseline": {
     "name": "unpleasant-pleasant (Caliskan et al., 2017)",
     "frames": ["This is {w}.", "That is {w}.", "There is {w}."],
