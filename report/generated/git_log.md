@@ -2,6 +2,9 @@ Table: Istoricul commit-urilor (cel mai recent primul).
 
 | Commit | Data | Descriere | Modificări |
 |---|---|---|---|
+| `0b80fb8` | 2026-11-24 20:58 | Add CrowS-Pairs scoring for decoder models | 5 fișiere, +176 / −2 linii |
+| `5c8835b` | 2026-11-24 20:57 | Add decision stability analysis | 3 fișiere, +128 / −0 linii |
+| `d1d8e04` | 2026-11-23 20:30 | Report legal and moral components of E2 | 12 fișiere, +380 / −7 linii |
 | `58b98b1` | 2026-11-23 20:30 | Add legal and moral split of the guilt concept | 5 fișiere, +96 / −4 linii |
 | `c41a438` | 2026-11-23 20:29 | Rerun pretrial task and update the report | 34 fișiere, +667 / −662 linii |
 | `45461d6` | 2026-11-23 20:09 | Rebuild pretrial scenarios to reduce ceiling effect | 6 fișiere, +418 / −269 linii |

@@ -64,4 +64,6 @@
 
 [32] A. Grattafiori et al., "The Llama 3 herd of models," arXiv:2407.21783, 2024.
 
+[34] S. L. Blodgett, G. Lopez, A. Olteanu, R. Sim, and H. Wallach, "Stereotyping Norwegian salmon: An inventory of pitfalls in fairness benchmark datasets," in *Proc. 59th Annu. Meeting Assoc. Comput. Linguistics & 11th Int. Joint Conf. Natural Lang. Process. (Vol. 1: Long Papers)*, Online, 2021, pp. 1004–1015, doi: 10.18653/v1/2021.acl-long.81.
+
 [33] J. Mu and P. Viswanath, "All-but-the-top: Simple and effective postprocessing for word representations," in *Proc. Int. Conf. Learn. Representations (ICLR)*, 2018.

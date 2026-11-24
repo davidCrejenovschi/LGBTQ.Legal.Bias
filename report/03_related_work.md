@@ -78,10 +78,16 @@ Table: Seturile de date reale pregătite pentru validare.
 | Set de date | Folosit în | Ce conține | Cum este folosit aici | Stare |
 |---|---|---|---|---|
 | COMPAS, ProPublica (compas-scores-two-years.csv) | [13], [22], [23] | 6.167 de dosare (după filtrare), recidiva reală în 2 ani, scorul COMPAS | profiluri de tip Dressel și Farid cu cele 6 variante de identitate; AUC, acuratețe, FPR/FNR pe variantă; comparație cu COMPAS | descărcat, încărcat și testat; pilot pe 60 de dosare (secțiunea 2.8) |
-| CrowS-Pairs, subsetul pentru orientarea sexuală | [6] | 84 de perechi de propoziții | scorul de preferință pentru stereotip al fiecărui model, pentru a-l plasa față de rezultatele publicate | planificat |
+| CrowS-Pairs, subsetul pentru orientarea sexuală | [6] | 84 de perechi de propoziții (72 „stereo”, 12 „antistereo”) | proporția perechilor în care modelul preferă propoziția stereotipă, pentru a plasa modelul față de literatură | rulat pe Qwen (vezi mai jos); Llama nu, deoarece scorarea folosește biblioteca Transformers, iar Llama rulează prin Ollama |
 | BBQ, categoria sexual_orientation | [7] | întrebări în context ambiguu și dezambiguizat | scorul de bias din BBQ, comparat cu prejudecata din deciziile juridice ale acelorași modele | planificat |
 | WinoQueer | [1] | perechi de propoziții anti-LGBTQ+ / heterosexuale | termenii de identitate (deja folosiți) și scorul WinoQueer pe modelele open-weights | termeni preluați; scor planificat |
 
 Setul COMPAS este singurul care are o valoare reală de referință pentru decizie, așa că a fost pregătit primul. Pașii parcurși sunt: descărcarea fișierului din repository-ul public ProPublica (script `scripts/download_assets.py`), aplicarea acelorași filtre ca în analiza originală, extragerea unui eșantion echilibrat (jumătate persoane care au recidivat), construirea profilurilor și a celor 6 variante de identitate pe dosar (script `scripts/04_compas_prompts.py`, verificat prin teste unitare) și rularea modelelor (secțiunea 2.8). Celelalte trei seturi vor fi folosite pentru a verifica dacă un model cu prejudecăți mari pe benchmark-urile generale are și diferențe mari în deciziile juridice. Este o întrebare de tip extrinsec–extrinsec, complementară lui E3.
+
+**Primul benchmark public: CrowS-Pairs.** Subsetul pentru orientarea sexuală a fost rulat pe Qwen2.5-1.5B-Instruct. Metrica originală folosește pseudo-probabilitatea modelelor cu mască. Pentru un model decoder am comparat log-probabilitatea totală a celor două propoziții, cu un token de start înaintea fiecăreia, și am raportat și varianta normalizată pe token. Procentul nu poate fi deci comparat direct cu valorile publicate pentru BERT sau RoBERTa.
+
+[[include:generated/crows.md]]
+
+Qwen preferă propoziția mai stereotipă în 82% din perechi (IÎ 95%: 74–89%; p < 0,001 față de 50%), iar rezultatul se păstrează la normalizarea pe token (77%). Pe un benchmark general, modelul are deci o preferință clară pentru formulările stereotipe despre persoanele LGBTQ+, în acord cu asocierile din E2. În deciziile juridice din E1 însă nu le tratează mai defavorabil. Disocierea seamănă cu cea din E3: un scor ridicat pe un benchmark general nu prezice direct comportamentul în decizii. Setul are și probleme de calitate cunoscute [34]. Unele perechi compară termeni care nu țin de orientarea sexuală (de exemplu, un nume masculin cu unul feminin sau „lesbians” cu „white”), așa că rezultatul trebuie citit ca orientativ.
 
 \newpage

@@ -78,6 +78,7 @@ ground truth (two-year recidivism) and a comparison with the COMPAS score.
 | 🧠 **Representations** | In Qwen2.5-1.5B, explicit LGBTQ+ terms sit closer to *guilty / immoral* than *heterosexual* does (mean SEAT d = +0.81 … +1.09, significant in 54–79% of layers), while the classic pleasant/unpleasant test finds almost nothing (d = −0.24 … +0.11). Splitting that concept shows that both legal culpability (d = +0.69 … +0.85) and moral judgement (d = +0.52 … +0.99) contribute. |
 | 🔗 **Link (E3)** | Task-aligned associations correlate with decision gaps in the predicted direction (ρ = +0.45 vs. −0.09 for the generic test), but not significantly (permutation p = 0.064, only 18 points): the two levels are largely dissociated. |
 | ⚖️ **Real records (COMPAS)** | On the same 60 records: AUC 0.76 (Llama), 0.71 (Qwen) vs. 0.68 for the COMPAS score; accuracy 70% / 68% / 65%. Llama's over-correction for explicitly gay and bisexual men reappears and survives Holm correction. |
+| 📏 **Public benchmark (CrowS-Pairs)** | On the 84 sexual-orientation pairs, Qwen prefers the more stereotyping sentence in 82% of pairs (95% CI 74–89%), yet it does not treat LGBTQ+ people worse in the legal decisions. The metric is adapted to decoder models, so it is not comparable with published masked-LM scores. |
 
 <p align="center">
   <img src="report/figures/e1_msd_forest.png" width="900" alt="Mean signed difference per identity variant, task and model"><br>
@@ -113,7 +114,7 @@ similarity of ≈ 1.000 in layers 2–26, which makes cosine-based tests meaning
 | [`scripts/`](scripts) | the pipeline, numbered in running order |
 | [`results/`](results) | raw model answers (JSONL, one line per prompt) and analysis tables (CSV/JSON) |
 | [`report/`](report) | report chapters in Markdown, generated tables and figures, `build_report.py` |
-| [`tests/`](tests) | 46 unit tests (pytest), run by GitHub Actions on every push |
+| [`tests/`](tests) | 52 unit tests (pytest), run by GitHub Actions on every push |
 
 ## Reproduce
 
@@ -124,7 +125,7 @@ Requirements: Python 3.12+ (developed on 3.13), [Ollama](https://ollama.com) for
 pip install -r requirements.txt
 python scripts/download_assets.py      # Qwen2.5-1.5B-Instruct + COMPAS csv
 ollama pull llama3.1                   # Llama-3.1-8B-Instruct, 4-bit
-python -m pytest -q                    # 46 tests
+python -m pytest -q                    # 52 tests
 ```
 
 <details>
@@ -152,6 +153,8 @@ python scripts/02_run_e1.py --model hf:Qwen/Qwen2.5-1.5B-Instruct --prompts data
 
 # 5, 9  analysis (E1, H1b, manipulation check, E3, COMPAS), figures, report
 python scripts/05_analyze.py
+python scripts/05b_stability.py        # needs a second run in results/case_study/stability/e1_raw
+python scripts/download_assets.py --crows && python scripts/08_crows_pairs.py
 python scripts/06_figures.py
 python scripts/07_report_tables.py
 python report/build_report.py          # -> docs/IV.docx
@@ -171,7 +174,8 @@ Commercial models (full study): `--model openai:<model>` or `--model anthropic:<
 - [x] Separate legal and moral concepts in E2 (first split, on the existing words)
 - [ ] Longer attribute lists and more sentence frames for E2
 - [ ] Expert review of the scenarios by a criminal-law practitioner
-- [ ] CrowS-Pairs / BBQ on the same models; commercial models (GPT, Gemini, Claude)
+- [x] CrowS-Pairs (sexual orientation) on Qwen
+- [ ] BBQ; commercial models (GPT, Gemini, Claude)
 
 ## Data, models and ethics
 

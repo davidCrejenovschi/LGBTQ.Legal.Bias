@@ -13,6 +13,6 @@ Documentul conține partea aplicativă a raportului de cercetare: modelarea expe
 - **Capitolul 3 – Lucrări similare și pregătirea validării pe date reale** (cerința 3) devine capitolul 2 „Lucrări similare”.
 - **Capitolul 4 – Repository-ul de cod** (cerința 4) descrie organizarea codului, modul de rulare și istoricul modificărilor.
 
-Referințele continuă numerotarea bibliografiei din Lab III ([1]–[21]); sursele adăugate în acest laborator au numerele [22]–[33].
+Referințele continuă numerotarea bibliografiei din Lab III ([1]–[21]); sursele adăugate în acest laborator au numerele [22]–[34].
 
 \newpage

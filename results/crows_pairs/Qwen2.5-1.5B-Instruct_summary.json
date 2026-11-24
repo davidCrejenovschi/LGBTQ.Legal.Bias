@@ -1,0 +1,15 @@
+{
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "n_pairs": 84,
+  "share_prefers_stereotype": 0.8214285714285714,
+  "ci95": [
+    0.7380952380952381,
+    0.8928571428571429
+  ],
+  "p_binomial_vs_50": 1.938192405161976e-09,
+  "share_prefers_stereotype_per_token": 0.7738095238095238,
+  "share_antistereo": 0.6666666666666666,
+  "n_antistereo": 12,
+  "share_stereo": 0.8472222222222222,
+  "n_stereo": 72
+}

@@ -294,6 +294,27 @@ def compas_tables():
     write("compas.md", out)
 
 
+def crows():
+    path = ROOT / "results" / "crows_pairs" / "Qwen2.5-1.5B-Instruct_summary.json"
+    if not path.exists():
+        return None
+    s = json.loads(path.read_text(encoding="utf-8"))
+    rows = [
+        ["toate perechile", str(s["n_pairs"]), pct(s["share_prefers_stereotype"]),
+         f"[{pct(s['ci95'][0])};{NB}{pct(s['ci95'][1])}]", pv(s["p_binomial_vs_50"])],
+        ["tip „stereo”", str(s["n_stereo"]), pct(s["share_stereo"]), "–", "–"],
+        ["tip „antistereo”", str(s["n_antistereo"]), pct(s["share_antistereo"]), "–", "–"],
+        ["toate, normalizat pe token", str(s["n_pairs"]),
+         pct(s["share_prefers_stereotype_per_token"]), "–", "–"],
+    ]
+    write("crows.md", table(
+        "CrowS-Pairs, subsetul pentru orientarea sexuală, pe Qwen2.5-1.5B-Instruct: proporția "
+        "perechilor în care modelul preferă propoziția mai stereotipă (50% = nicio preferință; "
+        "adaptare pentru modele decoder, prin log-probabilitatea întregii propoziții).",
+        ["Perechi", "n", "Preferă stereotipul", "IÎ 95% (bootstrap)", "p binomial (vs. 50%)"], rows))
+    return s
+
+
 def expectations():
     """Table for section 3.8: literature reference, expectation, case-study evidence."""
     e = pd.read_csv(CS / "e1_vs_reference.csv")
@@ -371,6 +392,14 @@ def expectations():
          "FPR aproape dublă pentru inculpații de culoare la COMPAS",
          "diferențe mici între variantele de orientare", fpr_txt],
     ]
+    crows_s = crows()
+    if crows_s:
+        rows.append(["Preferința pentru stereotip (CrowS-Pairs)", "Nangia et al. [6]",
+                     "modelele cu mască testate preferă propoziția stereotipă în peste 50% din perechi",
+                     "similar: peste 50%",
+                     f"Qwen: {pct(crows_s['share_prefers_stereotype'])} "
+                     f"[{pct(crows_s['ci95'][0])}; {pct(crows_s['ci95'][1])}] din 84 de perechi "
+                     "(metrică adaptată pentru decoder)"])
     write("expectations.md", table(
         "Metricile la care se așteaptă rezultate similare sau mai bune decât în literatură și "
         "ce arată studiul de caz.",

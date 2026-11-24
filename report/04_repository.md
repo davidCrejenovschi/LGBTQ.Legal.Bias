@@ -13,12 +13,12 @@ Table: Structura repository-ului.
 | `scripts/01_…07_` | pașii metodologiei, numerotați în ordinea rulării |
 | `results/` | răspunsurile brute (JSONL, câte un rând pentru fiecare prompt) și tabelele de analiză (CSV, JSON) |
 | `report/` | capitolele raportului (Markdown), tabelele și figurile generate, scriptul care produce .docx |
-| `tests/` | 46 de teste unitare (pytest) |
+| `tests/` | 52 de teste unitare (pytest) |
 | `.github/workflows/tests.yml` | integrare continuă: testele rulează automat pe GitHub la fiecare `push` |
 
 Rularea completă a studiului de caz, de la șabloane la document, se face cu următoarele comenzi:
 
-> python scripts/download_assets.py            # Qwen2.5-1.5B-Instruct + COMPAS
+> python scripts/download_assets.py            # Qwen2.5-1.5B-Instruct + COMPAS + CrowS-Pairs
 > python scripts/01_generate_prompts.py        # 720 de prompturi + verificarea invarianței
 > python scripts/02b_calibrate_control.py --task PRE --model ollama:llama3.1:latest   # calibrare pe control
 > python scripts/02_run_e1.py --model ollama:llama3.1:latest
@@ -30,12 +30,14 @@ Rularea completă a studiului de caz, de la șabloane la document, se face cu ur
 > python scripts/02_run_e1.py --model ollama:llama3.1:latest --prompts data/compas/prompts.jsonl --outdir results/compas/e1_raw
 > python scripts/02_run_e1.py --model hf:Qwen/Qwen2.5-1.5B-Instruct --prompts data/compas/prompts.jsonl --outdir results/compas/e1_raw
 > python scripts/05_analyze.py                 # E1, H1b, verificarea de manipulare, E3, COMPAS
+> python scripts/05b_stability.py              # stabilitatea deciziilor între două rulări
+> python scripts/08_crows_pairs.py             # CrowS-Pairs (orientare sexuală) pe Qwen
 > python scripts/06_figures.py
 > python scripts/07_report_tables.py
 > python report/build_report.py                # docs/IV.docx
 > python -m pytest -q
 
-**Testele automate** acoperă: generarea deterministă a scenariilor și invarianța contrafactuală (inclusiv un test care verifică faptul că o modificare în afara cuvintelor de identitate este detectată), extragerea deciziei și detectarea refuzurilor, metricile (direcția semnului pentru fiecare sarcină, ratele de privare de libertate, RD, DIR, eliminarea perechilor incomplete), testele statistice (corecția Holm, McNemar exact, rang-biserial și Wilcoxon pe valori calculate de mână, bootstrap, puterea minimă detectabilă, Spearman), testele SEAT (semnul efectului, testul de permutare, varianta pe perechi, centrarea și standardizarea) și conversia dosarelor COMPAS în scenarii.
+**Testele automate** acoperă: generarea deterministă a scenariilor și invarianța contrafactuală (inclusiv un test care verifică faptul că o modificare în afara cuvintelor de identitate este detectată), extragerea deciziei și detectarea refuzurilor, metricile (direcția semnului pentru fiecare sarcină, ratele de privare de libertate, RD, DIR, eliminarea perechilor incomplete), testele statistice (corecția Holm, McNemar exact, rang-biserial și Wilcoxon pe valori calculate de mână, bootstrap, puterea minimă detectabilă, Spearman), testele SEAT (semnul efectului, testul de permutare, varianta pe perechi, centrarea și standardizarea) conversia dosarelor COMPAS în scenarii, compararea a două rulări (stabilitate și replicare) și scorarea CrowS-Pairs.
 
 **Istoricul modificărilor.** Tabelul de mai jos este generat din `git log` la momentul producerii documentului.
 
