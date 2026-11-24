@@ -141,3 +141,37 @@ def manipulation_check(df: pd.DataFrame) -> pd.DataFrame:
         rows.append({"model": model, "task": task, "n": len(g), "rho": rho, "p": p,
                      "mean_by_level": means})
     return pd.DataFrame(rows)
+
+
+def stability_table(run_a: pd.DataFrame, run_b: pd.DataFrame) -> pd.DataFrame:
+    """Agreement between two runs of the same prompts with the same model.
+
+    Per (model, task): number of prompts answered in both runs, exact agreement,
+    mean absolute difference and the 'noise flip rate' = share of prompts whose
+    decision changes although nothing in the prompt changed. The noise flip rate
+    is the CFR one would observe with no identity change at all."""
+    keep = ["model", "task", "pid", "value"]
+    a = run_a[run_a["status"].isin(OK_STATUSES)][keep]
+    b = run_b[run_b["status"].isin(OK_STATUSES)][keep]
+    m = a.merge(b, on=["model", "task", "pid"], suffixes=("_a", "_b"))
+    rows = []
+    for (model, task), g in m.groupby(["model", "task"]):
+        diff = (g["value_a"] - g["value_b"]).abs()
+        rows.append({"model": model, "task": task, "n": len(g),
+                     "agreement": float((diff == 0).mean()),
+                     "noise_flip_rate": float((diff != 0).mean()),
+                     "mean_abs_diff": float(diff.mean()), "max_abs_diff": float(diff.max())})
+    return pd.DataFrame(rows)
+
+
+def replication_table(e1_a: pd.DataFrame, e1_b: pd.DataFrame, alpha: float = 0.05) -> pd.DataFrame:
+    """Compare E1 results of two runs. An effect is 'replicated' only if it has
+    the same sign and a Holm-adjusted p < alpha in both runs (rule fixed in advance;
+    the first run stays the primary result)."""
+    cols = ["model", "task", "vid", "MSD", "CFR", "p_wilcoxon_holm"]
+    m = e1_a[cols].merge(e1_b[cols], on=["model", "task", "vid"], suffixes=("_a", "_b"))
+    m["same_sign"] = np.sign(m["MSD_a"]) == np.sign(m["MSD_b"])
+    m["significant_a"] = m["p_wilcoxon_holm_a"] < alpha
+    m["significant_b"] = m["p_wilcoxon_holm_b"] < alpha
+    m["replicated"] = m["same_sign"] & m["significant_a"] & m["significant_b"]
+    return m
