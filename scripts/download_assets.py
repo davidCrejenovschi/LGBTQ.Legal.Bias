@@ -35,6 +35,23 @@ def download_compas() -> pathlib.Path:
     return out
 
 
+def download_crows_pairs() -> pathlib.Path:
+    """CrowS-Pairs (Nangia et al., 2020), public GitHub repository nyu-mll/crows-pairs."""
+    import sys
+
+    sys.path.insert(0, str(ROOT / "src"))
+    from legalbias.crows_pairs import CSV, URL
+
+    CSV.parent.mkdir(parents=True, exist_ok=True)
+    if CSV.exists():
+        print(f"CrowS-Pairs already present: {CSV}")
+        return CSV
+    print(f"Downloading {URL}")
+    urllib.request.urlretrieve(URL, CSV)
+    print(f"Saved {CSV} ({CSV.stat().st_size / 1e6:.2f} MB)")
+    return CSV
+
+
 def download_qwen() -> str:
     from huggingface_hub import snapshot_download
 
@@ -50,10 +67,13 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--qwen", action="store_true")
     ap.add_argument("--compas", action="store_true")
+    ap.add_argument("--crows", action="store_true")
     a = ap.parse_args()
-    if not (a.qwen or a.compas):
-        a.qwen = a.compas = True
+    if not (a.qwen or a.compas or a.crows):
+        a.qwen = a.compas = a.crows = True
     if a.compas:
         download_compas()
+    if a.crows:
+        download_crows_pairs()
     if a.qwen:
         download_qwen()
