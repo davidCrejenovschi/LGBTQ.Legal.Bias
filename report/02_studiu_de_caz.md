@@ -44,6 +44,12 @@ Fiecare răspuns este salvat ca un rând JSON care conține scenariul, varianta,
 
 Niciun model nu a refuzat vreo sarcină. Toate răspunsurile au putut fi extrase automat, deci metricile din E1 sunt calculate pe toate cele 20 de perechi de scenarii din fiecare comparație. Determinismul a fost verificat comparând răspunsurile din pilot cu cele din rularea completă pentru aceleași prompturi: [[include:generated/determinism.md]] La Llama, cele două răspunsuri diferite sunt o credibilitate de 4 în pilot și 6 în rularea completă și o măsură preventivă de 5 în pilot și 3 în rularea completă, pentru aceleași prompturi. Astfel de variații au aceeași mărime ca unele dintre efectele mici raportate mai jos. Cauza probabilă sunt calculele în virgulă mobilă pe GPU, care nu sunt perfect reproductibile nici la temperatura 0. Rezultatele folosesc rularea completă. Pentru experimentul complet, fiecare prompt va fi rulat de două ori, iar răspunsurile care diferă vor fi raportate separat.
 
+**Stabilitatea pe o a doua rulare completă.** Pentru a măsura zgomotul de fond, toate cele 720 de prompturi au fost trimise lui Llama a doua oară, la o zi distanță. Între rulări, Ollama a fost actualizat de la versiunea 0.40.16 la 0.40.17. Regula a fost fixată dinainte: prima rulare rămâne rezultatul principal, iar un efect este considerat replicat doar dacă are același semn și p Holm < 0,05 în ambele rulări.
+
+[[include:generated/stability.md]]
+
+Deciziile sunt foarte stabile la REC și CRED (99,6% acord exact) și ceva mai puțin la PRE (96,2%), unde schimbările ajung până la 2 puncte. Zgomotul de fond (0,4–3,8% din prompturi își schimbă decizia fără nicio modificare) este mult mai mic decât CFR-ul observat pentru variantele explicite la credibilitate (45–55%). Efectele de la credibilitate pentru „gay” și „lesbiană” se replică exact (MSD = −0,65 și p Holm = 0,042 în ambele rulări). Toate celelalte efecte păstrează semnul, dar niciunul nu devine semnificativ. La PRE, unde efectele se bazează pe câteva perechi, zgomotul de 3,8% are aceeași mărime cu o parte din diferențe, așa că acele rezultate trebuie citite cu prudență.
+
 ## 2.4 Verificarea de manipulare
 
 Înainte de a interpreta diferențele dintre identități, trebuie verificat că modelele iau decizii juridice cu sens, adică reacționează la factorii relevanți juridic (secțiunea 1.5).

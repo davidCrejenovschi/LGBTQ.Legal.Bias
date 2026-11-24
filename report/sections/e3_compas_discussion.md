@@ -18,7 +18,7 @@ Figura arată și un rezultat calitativ important: cele două niveluri sunt diso
 
 **Ce arată studiul de caz despre modele (rezultate preliminare).**
 
-- Nu există dovezi că persoanele LGBTQ+ ar fi tratate mai defavorabil în decizii (H1a nu este susținută pe acest set). Efectele observate merg mai ales în sens opus. Când orientarea este numită explicit, ambele modele consideră martorii LGBTQ+ mai credibili, iar Llama acordă și un risc de recidivă mai mic. Efectul este semnificativ după corecție pentru Llama, la „gay” și „lesbiană”.
+- Nu există dovezi că persoanele LGBTQ+ ar fi tratate mai defavorabil în decizii (H1a nu este susținută pe acest set). Efectele observate merg mai ales în sens opus. Când orientarea este numită explicit, ambele modele consideră martorii LGBTQ+ mai credibili, iar Llama acordă și un risc de recidivă mai mic. Efectul este semnificativ după corecție pentru Llama, la „gay” și „lesbiană”, și s-a replicat într-o a doua rulare completă.
 - La credibilitate, când orientarea este doar sugerată prin partener, efectul favorabil dispare aproape complet la ambele modele. Faptul că semnalarea explicită și cea implicită dau rezultate diferite este cea mai consecventă observație a studiului de caz. Direcția diferenței nu este însă mereu aceeași: la Qwen, pentru riscul de recidivă, varianta implicită este cea tratată mai favorabil. Observația este compatibilă cu mecanismul descris de Hofmann et al. [2] și susține includerea ambelor tipuri de semnalare (beneficiul B1).
 - În reprezentările interne ale Qwen există o asociere puternică între etichetele LGBTQ+ și vinovăție sau imoralitate, pe care testul generic din literatură nu o detectează.
 - Asocierile din reprezentări nu se transmit direct în decizii (E3 neconcludent, cu disocieri clare).
@@ -38,6 +38,6 @@ Figura arată și un rezultat calitativ important: cele două niveluri sunt diso
 - **Atributele din E2.** Prima separare între culpabilitatea juridică și judecata morală a fost făcută pe cuvintele existente (secțiunea 2.6). Urmează liste mai lungi pentru fiecare parte, un test formal al diferenței dintre ele și creșterea numărului de cadre de la 10 la cel puțin 30.
 - **Modelele.** E2 va fi rulat pe cele trei modele open-weights de 7–9 miliarde de parametri, cuantizate pe 4 biți pe GPU (PyTorch cu CUDA), iar E1 pe cele trei modele comerciale.
 - **Motivarea în text liber.** Pe un subset de scenarii, modelele vor fi rugate să-și motiveze decizia, pentru a verifica dacă orientarea sexuală este menționată sau folosită ca argument.
-- **Determinismul.** Fiecare prompt va fi rulat de două ori, iar răspunsurile diferite vor fi raportate separat.
+- **Determinismul.** Pentru Llama, a doua rulare completă a fost deja făcută (secțiunea 2.3). În experimentul complet se va repeta pentru toate modelele, iar răspunsurile diferite vor fi raportate separat.
 
 \newpage

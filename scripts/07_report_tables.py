@@ -294,6 +294,41 @@ def compas_tables():
     write("compas.md", out)
 
 
+def stability_tables():
+    path = CS / "stability" / "stability.csv"
+    if not path.exists():
+        return
+    s = pd.read_csv(path)
+    e1 = pd.read_csv(CS / "e1_vs_reference.csv")
+    rows = []
+    for r in s.itertuples():
+        cfr = e1[(e1.model == r.model) & (e1.task == r.task)].CFR
+        rows.append([MODEL[r.model], r.task, str(int(r.n)), f(100 * r.agreement, 1) + "%", f(100 * r.noise_flip_rate, 1) + "%",
+                     f(r.mean_abs_diff, 3), f(r.max_abs_diff, 0),
+                     f"{pct(cfr.min())}–{pct(cfr.max())}"])
+    out = table(
+        "Stabilitatea deciziilor: aceleași 720 de prompturi rulate de două ori. Rata de schimbare "
+        "fără nicio modificare a promptului este zgomotul de fond al CFR.",
+        ["Model", "Sarcina", "Prompturi", "Acord exact", "Schimbări fără modificare",
+         "Diferența medie", "Diferența maximă", "CFR (prima rulare, variante LGBTQ+)"], rows)
+    rep = pd.read_csv(CS / "stability" / "replication.csv")
+    rows = []
+    for task in TASKS:
+        for vid in VID_ORDER:
+            r = rep[(rep.task == task) & (rep.vid == vid)]
+            if r.empty:
+                continue
+            r = r.iloc[0]
+            rows.append([task, VID[vid], f"{f(r.MSD_a, 2, True)} / {f(r.MSD_b, 2, True)}",
+                         f"{pv(r.p_wilcoxon_holm_a)} / {pv(r.p_wilcoxon_holm_b)}",
+                         "da" if r.replicated else "nu"])
+    out += "\n" + table(
+        "Replicarea efectelor E1 pentru Llama-3.1-8B în a doua rulare (prima / a doua). Un efect "
+        "este replicat doar dacă are același semn și p Holm < 0,05 în ambele rulări.",
+        ["Sarcina", "Varianta", "MSD", "p Holm", "Replicat"], rows)
+    write("stability.md", out)
+
+
 def crows():
     path = ROOT / "results" / "crows_pairs" / "Qwen2.5-1.5B-Instruct_summary.json"
     if not path.exists():
@@ -438,6 +473,7 @@ if __name__ == "__main__":
     if (CS / "e3_summary.json").exists():
         e3()
     compas_tables()
+    stability_tables()
     if (CS / "e3_summary.json").exists():
         expectations()
     git_log()

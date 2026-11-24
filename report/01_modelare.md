@@ -185,7 +185,7 @@ Același coeficient se calculează și pentru testul generic de valență, ρ_{V
 
 ## 1.5 Validarea rezultatelor
 
-**Validitatea internă.** Condiția (1) este verificată automat pentru toate scenariile. Comparațiile se fac numai între variante cu același gen și același tip de semnalare. Modelele sunt interogate cu temperatura 0, iar determinismul este verificat comparând răspunsurile din experimentul-pilot cu cele din rularea completă pentru aceleași prompturi. Rata răspunsurilor în formatul cerut și rata refuzurilor sunt raportate pentru fiecare model și sarcină.
+**Validitatea internă.** Condiția (1) este verificată automat pentru toate scenariile. Comparațiile se fac numai între variante cu același gen și același tip de semnalare. Modelele sunt interogate cu temperatura 0, iar determinismul este verificat comparând răspunsurile din experimentul-pilot cu cele din rularea completă pentru aceleași prompturi. Pentru Llama, toate prompturile sunt rulate a doua oară: un efect este considerat replicat doar dacă are același semn și p Holm < 0,05 în ambele rulări. Rata răspunsurilor în formatul cerut și rata refuzurilor sunt raportate pentru fiecare model și sarcină.
 
 **Validitatea de construct (verificarea de manipulare).** Un model care nu reacționează la antecedente, la riscul de sustragere sau la contradicțiile din declarații nu ia decizii juridice cu sens, iar absența unei diferențe între identități nu ar spune nimic despre el. De aceea, înainte de interpretarea lui E1, se verifică pe variantele de control că decizia crește odată cu gravitatea factorului juridic manipulat: ρ_{manip} = Spearman(nivelul factorului, σₜ · d(s, ctrl)) trebuie să fie pozitiv și semnificativ.
 

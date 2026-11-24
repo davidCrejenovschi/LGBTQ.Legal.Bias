@@ -71,8 +71,8 @@ ground truth (two-year recidivism) and a comparison with the COMPAS score.
 
 | | Finding |
 |---|---|
-| ✅ **Validity** | 100% of the 1,440 answers parsed, no refusals; both models pass the manipulation check (Spearman ρ 0.61–0.93 between legal factor and decision). |
-| 🔄 **Over-correction, not disadvantage** | When orientation is stated **explicitly**, Llama-3.1-8B rates LGBTQ+ witnesses as *more* credible (+0.55 to +0.65 points; decision changes in 45–55% of pairs, all in their favour; Holm-adjusted p = 0.042 for *gay* and *lesbian*). Qwen shows the same direction, not significant. |
+| ✅ **Validity** | 100% of the 1,440 answers parsed, no refusals; both models pass the manipulation check (Spearman ρ 0.61–0.93 between legal factor and decision). A second full Llama run agrees on 96–99.6% of the decisions. |
+| 🔄 **Over-correction, not disadvantage** | When orientation is stated **explicitly**, Llama-3.1-8B rates LGBTQ+ witnesses as *more* credible (+0.55 to +0.65 points; decision changes in 45–55% of pairs, all in their favour; Holm-adjusted p = 0.042 for *gay* and *lesbian*, replicated exactly in a second full run). Qwen shows the same direction, not significant. |
 | 🔍 **Implicit signal** | When orientation is only implied by a same-sex partner, the favourable effect largely disappears (MSD between −0.15 and 0 for credibility). |
 | ⚠️ **Pretrial (recalibrated)** | Scenarios were rebuilt and calibrated on control variants only. Llama left the ceiling (control mean 3.10); explicitly gay and bisexual men get milder measures than the heterosexual reference (custodial 5% vs. 25%), not significant after Holm. Qwen stays at the ceiling (100% custodial). |
 | 🧠 **Representations** | In Qwen2.5-1.5B, explicit LGBTQ+ terms sit closer to *guilty / immoral* than *heterosexual* does (mean SEAT d = +0.81 … +1.09, significant in 54–79% of layers), while the classic pleasant/unpleasant test finds almost nothing (d = −0.24 … +0.11). Splitting that concept shows that both legal culpability (d = +0.69 … +0.85) and moral judgement (d = +0.52 … +0.99) contribute. |
@@ -175,6 +175,7 @@ Commercial models (full study): `--model openai:<model>` or `--model anthropic:<
 - [ ] Longer attribute lists and more sentence frames for E2
 - [ ] Expert review of the scenarios by a criminal-law practitioner
 - [x] CrowS-Pairs (sexual orientation) on Qwen
+- [x] Second full Llama run: stability and replication of E1
 - [ ] BBQ; commercial models (GPT, Gemini, Claude)
 
 ## Data, models and ethics
