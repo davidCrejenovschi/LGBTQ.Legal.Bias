@@ -179,7 +179,7 @@ Același coeficient se calculează și pentru testul generic de valență, ρ_{V
 - **Testul McNemar exact** [25] se aplică pe deciziile binare de privare de libertate și folosește doar perechile discordante (n₁₀ cazuri în care doar varianta LGBTQ+ primește măsura privativă și n₀₁ cazuri inverse).
 - **Corecția Holm** [26] se aplică pentru fiecare model pe întreaga familie de teste principale: 6 variante × 3 sarcini (Wilcoxon) plus 6 teste McNemar, adică 24 de teste.
 - **Intervalele de încredere de 95%** sunt calculate prin bootstrap cu percentile [27], cu 10.000 de reeșantionări. Unitatea reeșantionată este scenariul, astfel încât perechile rămân împreună.
-- Pentru E2 se folosesc testul de permutare (12) și testul sign-flip, iar pentru E3, testul de permutare pentru ρ. Pragul de semnificație este α = 0,05.
+- Pentru E2 se folosesc testul de permutare (12) și testul sign-flip, iar pentru E3, testul de permutare pentru ρ. Pentru separarea conceptului vinovat–nevinovat în două jumătăți (secțiunea 2.6), diferența dintre jumătăți este comparată exact cu toate împărțirile posibile ale cuvintelor în jumătăți egale (70 × 70 = 4.900). Pragul de semnificație este α = 0,05.
 
 **Puterea statistică.** Cu aproximarea normală, cel mai mic efect standardizat pe perechi care poate fi detectat cu putere 0,8 este d_{z} = (z₀,₉₇₅ + z₀,₈) / √n. Pentru studiul de caz (n = 20 de scenarii pe sarcină) rezultă d_{z} ≈ 0,63 fără corecție și 0,88 la pragul cel mai strict al corecției Holm pentru 24 de teste (α/24). Pentru experimentul complet (n = 100) valorile scad la 0,28 și, respectiv, 0,39. Studiul de caz poate detecta deci doar efecte mari. Rolul lui este să ilustreze metodologia, iar estimările lui servesc la dimensionarea experimentului complet.
 

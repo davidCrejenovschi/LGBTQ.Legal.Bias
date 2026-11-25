@@ -222,18 +222,27 @@ def e2():
 
 def e2_split():
     d = pd.read_csv(CS / "e2_legal_moral_Qwen2.5-1.5B-Instruct.csv")
+    test_path = CS / "e2_legal_moral_test_Qwen2.5-1.5B-Instruct.csv"
+    test = pd.read_csv(test_path).set_index("vid") if test_path.exists() else None
     rows = []
     for vid in VID_ORDER:
         row = [VID[vid]]
         for part in ("legal", "moral"):
             s = d[(d.vid == vid) & (d.part == part)]
             row.append(f"{f(s.d.mean(), 2, True)} ({pct((s.p < 0.05).mean())})")
+        if test is not None:
+            row += [f(test.loc[vid, "delta_legal_minus_moral"], 2, True),
+                    f"{pv(test.loc[vid, 'p'])} / {pv(test.loc[vid, 'p_holm'])}"]
         rows.append(row)
+    header = ["Varianta", "culpabilitate juridică", "judecată morală"]
+    if test is not None:
+        header += ["Δ (juridic − moral)", "p / p Holm (permutare)"]
     write("e2_split.md", table(
         "Conceptul vinovat–nevinovat separat în culpabilitate juridică și judecată morală "
         "(Qwen2.5-1.5B-Instruct, vectori standardizați): d̄ pe cele 28 de straturi și, în paranteză, "
-        "proporția straturilor cu p < 0,05.",
-        ["Varianta", "culpabilitate juridică", "judecată morală"], rows))
+        "proporția straturilor cu p < 0,05. Δ este testat exact față de toate cele 4.900 de "
+        "împărțiri ale celor 8 + 8 cuvinte în jumătăți egale.",
+        header, rows))
 
 
 def e3():
