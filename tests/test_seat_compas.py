@@ -42,6 +42,50 @@ def test_standardize_gives_unit_variance():
     assert np.allclose(Z.std(axis=0), 1)
 
 
+def _split_fixture(seed=0, signal=True):
+    """8 negative + 8 positive words x 3 frames; X close to the first 4 negative words only."""
+    rng = np.random.default_rng(seed)
+    dim, frames = 24, 3
+    neg_dirs = rng.normal(size=(8, dim))
+    pos_dirs = rng.normal(size=(8, dim))
+    A = np.repeat(neg_dirs, frames, axis=0) + 0.05 * rng.normal(size=(24, dim))
+    B = np.repeat(pos_dirs, frames, axis=0) + 0.05 * rng.normal(size=(24, dim))
+    shift = 3 * (neg_dirs[:4].mean(axis=0) - pos_dirs[:4].mean(axis=0))
+    X = rng.normal(size=(10, dim)) + (shift if signal else 0)
+    Y = rng.normal(size=(10, dim))
+    return X, Y, A, B, np.repeat(np.arange(8), frames)
+
+
+def test_split_test_matches_seat_effect_size():
+    X, Y, A, B, word_of = _split_fixture()
+    T = np.vstack([X, Y])
+    cneg = seat.word_associations(T, A, word_of, 8)[None]
+    cpos = seat.word_associations(T, B, word_of, 8)[None]
+    r = seat.split_difference_test(cneg, cpos, len(X), [0, 1, 2, 3], [0, 1, 2, 3])
+    first_A, first_B = A[np.isin(word_of, [0, 1, 2, 3])], B[np.isin(word_of, [0, 1, 2, 3])]
+    rest_A, rest_B = A[np.isin(word_of, [4, 5, 6, 7])], B[np.isin(word_of, [4, 5, 6, 7])]
+    assert r["d_first"] == pytest.approx(seat.effect_size(X, Y, first_A, first_B))
+    assert r["d_second"] == pytest.approx(seat.effect_size(X, Y, rest_A, rest_B))
+    assert r["n_splits"] == 70 * 70
+
+
+def test_split_test_detects_a_half_specific_association():
+    X, Y, A, B, word_of = _split_fixture(signal=True)
+    T = np.vstack([X, Y])
+    cneg = seat.word_associations(T, A, word_of, 8)[None]
+    cpos = seat.word_associations(T, B, word_of, 8)[None]
+    r = seat.split_difference_test(cneg, cpos, len(X), [0, 1, 2, 3], [0, 1, 2, 3])
+    assert r["delta"] > 0 and r["p"] < 0.05
+
+
+def test_split_test_identical_words_give_no_difference():
+    rng = np.random.default_rng(4)
+    cneg = np.repeat(rng.normal(size=(1, 20, 1)), 8, axis=2)   # every word identical
+    cpos = np.repeat(rng.normal(size=(1, 20, 1)), 8, axis=2)
+    r = seat.split_difference_test(cneg, cpos, 10, [0, 1, 2, 3], [0, 1, 2, 3])
+    assert r["delta"] == pytest.approx(0) and r["p"] == 1.0
+
+
 def test_effect_size_null_is_small():
     rng = np.random.default_rng(1)
     X, Y, A, B = (rng.normal(size=(10, 32)) for _ in range(4))

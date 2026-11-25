@@ -95,3 +95,54 @@ def anisotropy(H: np.ndarray, n_pairs: int = 2000, seed: int = 0) -> float:
     keep = i != j
     U = _unit(H)
     return float(np.mean(np.sum(U[i[keep]] * U[j[keep]], axis=1)))
+
+
+def word_associations(T: np.ndarray, S: np.ndarray, word_of: np.ndarray, n_words: int) -> np.ndarray:
+    """Mean cosine between every row of T (target sentences) and the attribute
+    sentences S of each word; word_of[k] is the word index of S[k].
+    Returns an array (n_targets, n_words)."""
+    cos = _unit(T) @ _unit(S).T
+    return np.stack([cos[:, word_of == w].mean(axis=1) for w in range(n_words)], axis=1)
+
+
+def split_difference_test(cneg: np.ndarray, cpos: np.ndarray, nx: int,
+                          obs_neg, obs_pos) -> dict:
+    """Exact permutation test for the difference between two halves of an attribute list.
+
+    cneg, cpos: arrays (L, n_targets, n_words) with the mean cosine of every target
+    sentence (the nx sentences of X first, then Y) with every negative / positive word,
+    per layer. obs_neg, obs_pos: word indices of the first half (e.g. legal culpability);
+    the complements form the second half (e.g. moral judgement).
+
+    Statistic: delta = mean over layers of d_l(first half) - d_l(second half), with d_l the
+    SEAT effect size. Null distribution: every split of the negative words into two equal
+    halves combined with every split of the positive words (70 x 70 = 4,900 for 8 + 8 words).
+    Two-sided p = share of splits with |delta| >= |observed delta|."""
+    n_neg, n_pos = cneg.shape[2], cpos.shape[2]
+    neg_splits = list(itertools.combinations(range(n_neg), n_neg // 2))
+    pos_splits = list(itertools.combinations(range(n_pos), n_pos // 2))
+
+    def weights(splits, n):
+        W = np.zeros((len(splits), n))
+        for i, s in enumerate(splits):
+            W[i, list(s)] = 1.0
+        return W / (n // 2), (1 - W) / (n - n // 2)
+
+    Wn1, Wn2 = weights(neg_splits, n_neg)
+    Wp1, Wp2 = weights(pos_splits, n_pos)
+
+    def effect(sn, sp):
+        s = sn[..., :, None] - sp[..., None, :]                 # (L, T, Sn, Sp)
+        sd = s.std(axis=1, ddof=1)
+        d = (s[:, :nx].mean(axis=1) - s[:, nx:].mean(axis=1)) / np.where(sd == 0, np.inf, sd)
+        return d                                                 # (L, Sn, Sp)
+
+    d1 = effect(cneg @ Wn1.T, cpos @ Wp1.T)
+    d2 = effect(cneg @ Wn2.T, cpos @ Wp2.T)
+    delta = (d1 - d2).mean(axis=0)                               # (Sn, Sp)
+    i = neg_splits.index(tuple(sorted(obs_neg)))
+    j = pos_splits.index(tuple(sorted(obs_pos)))
+    obs = delta[i, j]
+    p = float(np.mean(np.abs(delta) >= abs(obs) - 1e-12))
+    return {"delta": float(obs), "p": p, "n_splits": int(delta.size),
+            "d_first": float(d1[:, i, j].mean()), "d_second": float(d2[:, i, j].mean())}
