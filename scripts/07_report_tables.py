@@ -338,6 +338,28 @@ def stability_tables():
     write("stability.md", out)
 
 
+def paraphrase_table():
+    path = CS / "paraphrase" / "robustness.csv"
+    if not path.exists():
+        return
+    r = pd.read_csv(path)
+    label = {0: "originală", 1: "„reliable” (relatare demnă de încredere)", 2: "„weight” (greutatea mărturiei)"}
+    rows = []
+    for k in sorted(r.wording.unique()):
+        for vid in VID_ORDER:
+            x = r[(r.wording == k) & (r.vid == vid)]
+            if x.empty:
+                continue
+            x = x.iloc[0]
+            rows.append([label.get(k, str(k)), VID[vid], pct(x.CFR),
+                         f"{f(x.MSD, 2, True)} {ci(x.MSD_lo, x.MSD_hi)}", pv(x.p_wilcoxon_holm)])
+    write("paraphrase.md", table(
+        "Robustețea efectelor de credibilitate la formularea instrucțiunii (Llama-3.1-8B, 20 de "
+        "perechi pe variantă). Corecția Holm este aplicată pe cele 6 teste CRED ale fiecărei "
+        "formulări; MSD < 0 înseamnă credibilitate mai mare pentru varianta LGBTQ+.",
+        ["Formularea", "Varianta", "CFR", "MSD [IÎ 95%]", "p Holm (6 teste)"], rows))
+
+
 def crows():
     path = ROOT / "results" / "crows_pairs" / "Qwen2.5-1.5B-Instruct_summary.json"
     if not path.exists():
@@ -483,6 +505,7 @@ if __name__ == "__main__":
         e3()
     compas_tables()
     stability_tables()
+    paraphrase_table()
     if (CS / "e3_summary.json").exists():
         expectations()
     git_log()

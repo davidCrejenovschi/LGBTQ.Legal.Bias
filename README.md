@@ -72,7 +72,7 @@ ground truth (two-year recidivism) and a comparison with the COMPAS score.
 | | Finding |
 |---|---|
 | ✅ **Validity** | 100% of the 1,440 answers parsed, no refusals; both models pass the manipulation check (Spearman ρ 0.61–0.93 between legal factor and decision). A second full Llama run agrees on 96–99.6% of the decisions. |
-| 🔄 **Over-correction, not disadvantage** | When orientation is stated **explicitly**, Llama-3.1-8B rates LGBTQ+ witnesses as *more* credible (+0.55 to +0.65 points; decision changes in 45–55% of pairs, all in their favour; Holm-adjusted p = 0.042 for *gay* and *lesbian*, replicated exactly in a second full run). Qwen shows the same direction, not significant. |
+| 🔄 **Over-correction, not disadvantage** | When orientation is stated **explicitly**, Llama-3.1-8B rates LGBTQ+ witnesses as *more* credible (+0.55 to +0.65 points; decision changes in 45–55% of pairs, all in their favour; Holm-adjusted p = 0.042 for *gay* and *lesbian*, replicated exactly in a second full run; under two rewordings of the instruction the direction holds but the effect is no longer significant). Qwen shows the same direction, not significant. |
 | 🔍 **Implicit signal** | When orientation is only implied by a same-sex partner, the favourable effect largely disappears (MSD between −0.15 and 0 for credibility). |
 | ⚠️ **Pretrial (recalibrated)** | Scenarios were rebuilt and calibrated on control variants only. Llama left the ceiling (control mean 3.10); explicitly gay and bisexual men get milder measures than the heterosexual reference (custodial 5% vs. 25%), not significant after Holm. Qwen stays at the ceiling (100% custodial). |
 | 🧠 **Representations** | In Qwen2.5-1.5B, explicit LGBTQ+ terms sit closer to *guilty / immoral* than *heterosexual* does (mean SEAT d = +0.81 … +1.09, significant in 54–79% of layers), while the classic pleasant/unpleasant test finds almost nothing (d = −0.24 … +0.11). Splitting that concept shows that both legal culpability (d = +0.69 … +0.85) and moral judgement (d = +0.52 … +0.99) contribute; an exact permutation test over all 4,900 word splits finds no significant difference between the two halves. |
@@ -114,7 +114,7 @@ similarity of ≈ 1.000 in layers 2–26, which makes cosine-based tests meaning
 | [`scripts/`](scripts) | the pipeline, numbered in running order |
 | [`results/`](results) | raw model answers (JSONL, one line per prompt) and analysis tables (CSV/JSON) |
 | [`report/`](report) | report chapters in Markdown, generated tables and figures, `build_report.py` |
-| [`tests/`](tests) | 52 unit tests (pytest), run by GitHub Actions on every push |
+| [`tests/`](tests) | 59 unit tests (pytest), run by GitHub Actions on every push |
 
 ## Reproduce
 
@@ -125,7 +125,7 @@ Requirements: Python 3.12+ (developed on 3.13), [Ollama](https://ollama.com) for
 pip install -r requirements.txt
 python scripts/download_assets.py      # Qwen2.5-1.5B-Instruct + COMPAS csv
 ollama pull llama3.1                   # Llama-3.1-8B-Instruct, 4-bit
-python -m pytest -q                    # 52 tests
+python -m pytest -q                    # 59 tests
 ```
 
 <details>
@@ -145,6 +145,7 @@ python scripts/02_run_e1.py --model hf:Qwen/Qwen2.5-1.5B-Instruct
 python scripts/03_run_e2.py
 python scripts/03b_massive_activations.py
 python scripts/03c_legal_moral_split.py
+python scripts/03d_legal_moral_permutation.py
 
 # real data: COMPAS records -> prompts -> both models
 python scripts/04_compas_prompts.py --n 60
@@ -154,6 +155,7 @@ python scripts/02_run_e1.py --model hf:Qwen/Qwen2.5-1.5B-Instruct --prompts data
 # 5, 9  analysis (E1, H1b, manipulation check, E3, COMPAS), figures, report
 python scripts/05_analyze.py
 python scripts/05b_stability.py        # needs a second run in results/case_study/stability/e1_raw
+python scripts/05c_paraphrase.py       # needs runs with --task CRED --paraphrase 1 and 2
 python scripts/download_assets.py --crows && python scripts/08_crows_pairs.py
 python scripts/06_figures.py
 python scripts/07_report_tables.py
@@ -176,6 +178,7 @@ Commercial models (full study): `--model openai:<model>` or `--model anthropic:<
 - [ ] Expert review of the scenarios by a criminal-law practitioner
 - [x] CrowS-Pairs (sexual orientation) on Qwen
 - [x] Second full Llama run: stability and replication of E1
+- [x] Robustness of the credibility effect to two rewordings of the instruction (Llama)
 - [ ] BBQ; commercial models (GPT, Gemini, Claude)
 
 ## Data, models and ethics
