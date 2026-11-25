@@ -29,9 +29,14 @@ ap.add_argument("--reps", type=int, default=1)
 ap.add_argument("--pilot", type=int, default=0,
                 help="only N scenarios (all 12 variants each), written to *_pilot.jsonl")
 ap.add_argument("--threads", type=int, default=0)
+ap.add_argument("--task", default=None, help="only prompts of this task (REC, PRE, CRED)")
+ap.add_argument("--paraphrase", type=int, default=0,
+                help="0 = original instruction, k = k-th alternative wording (prompts.PARAPHRASES)")
 a = ap.parse_args()
 
 prompts = load_jsonl(ROOT / a.prompts)
+if a.task:
+    prompts = [p for p in prompts if p["task"] == a.task]
 safe = re.sub(r"[^A-Za-z0-9._-]+", "_", a.model)
 suffix = ""
 if a.pilot:
@@ -45,7 +50,7 @@ out = ROOT / a.outdir / f"{safe}{suffix}.jsonl"
 
 kw = {"threads": a.threads} if a.model.startswith("hf:") and a.threads else {}
 client = make_client(a.model, **kw)
-run(client, prompts, out, repetitions=a.reps)
+run(client, prompts, out, repetitions=a.reps, paraphrase=a.paraphrase)
 
 recs = load_jsonl(out)
 print("status counts:", dict(collections.Counter(r["status"] for r in recs)))

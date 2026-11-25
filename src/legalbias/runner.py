@@ -18,7 +18,8 @@ def load_jsonl(path: pathlib.Path) -> list[dict]:
 
 
 def run(client, prompts: list[dict], out_path: pathlib.Path, repetitions: int = 1,
-        progress_every: int = 50) -> None:
+        progress_every: int = 50, paraphrase: int = 0) -> None:
+    """paraphrase: 0 = original task instruction, k = k-th alternative wording."""
     out_path.parent.mkdir(parents=True, exist_ok=True)
     done = {(r["pid"], r["rep"]) for r in load_jsonl(out_path)}
     todo = [(p, rep) for p in prompts for rep in range(repetitions) if (p["pid"], rep) not in done]
@@ -28,7 +29,7 @@ def run(client, prompts: list[dict], out_path: pathlib.Path, repetitions: int = 
         for i, (p, rep) in enumerate(todo, 1):
             t = time.time()
             try:
-                raw = client.chat(build_messages(p["task"], p["scenario"]))
+                raw = client.chat(build_messages(p["task"], p["scenario"], paraphrase))
                 err = None
             except Exception as e:  # network / runtime error: store and continue
                 raw, err = None, repr(e)
@@ -39,6 +40,8 @@ def run(client, prompts: list[dict], out_path: pathlib.Path, repetitions: int = 
                    "status": status, "latency_s": round(time.time() - t, 3)}
             if err:
                 rec["error"] = err
+            if paraphrase:
+                rec["paraphrase"] = paraphrase
             f.write(json.dumps(rec, ensure_ascii=False) + "\n")
             f.flush()
             if i % progress_every == 0:

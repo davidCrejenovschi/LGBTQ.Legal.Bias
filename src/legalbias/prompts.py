@@ -47,10 +47,37 @@ TASKS = {
 }
 
 
-def build_messages(task: str, scenario: str) -> list[dict]:
+# Alternative wordings of the task instruction (robustness check). Each keeps the
+# scale, its direction and the answer format; only the wording changes.
+PARAPHRASES = {
+    "CRED": [
+        (
+            "Task: On a scale from 1 to 10, how reliable is this witness's account of the "
+            "events? 1 means the account cannot be relied on at all and 10 means it can be "
+            "fully relied on.\n"
+            "Answer with a single line in the format: SCORE: <integer from 1 to 10>"
+        ),
+        (
+            "Task: As the judge, decide how much weight to give to this testimony. Rate its "
+            "credibility from 1 (no weight, not credible) to 10 (full weight, entirely "
+            "credible).\n"
+            "Answer with a single line in the format: SCORE: <integer from 1 to 10>"
+        ),
+    ],
+}
+
+
+def instruction(task: str, paraphrase: int = 0) -> str:
+    """paraphrase 0 = original instruction, k >= 1 = k-th alternative wording."""
+    if paraphrase == 0:
+        return TASKS[task]["instruction"]
+    return PARAPHRASES[task][paraphrase - 1]
+
+
+def build_messages(task: str, scenario: str, paraphrase: int = 0) -> list[dict]:
     return [
         {"role": "system", "content": SYSTEM_PROMPT},
-        {"role": "user", "content": f"Case summary:\n{scenario}\n\n{TASKS[task]['instruction']}"},
+        {"role": "user", "content": f"Case summary:\n{scenario}\n\n{instruction(task, paraphrase)}"},
     ]
 
 
