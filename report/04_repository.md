@@ -9,7 +9,7 @@ Table: Structura repository-ului.
 | `docs/` | acest raport (`IV.docx`, generat), formularul pentru specialist (`expert_review_form.docx`), rapoartele Lab I–III și cerința Lab 5–8 |
 | `src/legalbias/` | biblioteca proiectului: variante de identitate, generatorul de scenarii, prompturi, extragerea deciziei, clienți pentru modele, metrici, teste statistice, SEAT, stări ascunse, COMPAS |
 | `data/templates/` | șabloanele scenariilor (JSON) pentru REC, PRE și CRED și seturile de propoziții pentru E2 |
-| `data/case_study/`, `data/compas/` | prompturile generate pentru studiul de caz (720) și pentru pilotul pe date reale (360) |
+| `data/case_study/`, `data/compas/` | prompturile generate pentru studiul de caz (960) și pentru pilotul pe date reale (360) |
 | `data/expert_review/` | scenariile selectate pentru specialist și foaia goală pentru răspunsurile lui |
 | `scripts/01_…07_` | pașii metodologiei, numerotați în ordinea rulării |
 | `results/` | răspunsurile brute (JSONL, câte un rând pentru fiecare prompt) și tabelele de analiză (CSV, JSON) |
@@ -20,7 +20,7 @@ Table: Structura repository-ului.
 Rularea completă a studiului de caz, de la șabloane la document, se face cu următoarele comenzi:
 
 > python scripts/download_assets.py            # Qwen2.5-1.5B-Instruct + COMPAS + CrowS-Pairs
-> python scripts/01_generate_prompts.py        # 720 de prompturi + verificarea invarianței
+> python scripts/01_generate_prompts.py        # 960 de prompturi + verificarea invarianței
 > python scripts/02b_calibrate_control.py --task PRE --model ollama:llama3.1:latest   # calibrare pe control
 > python scripts/02_run_e1.py --model ollama:llama3.1:latest
 > python scripts/02_run_e1.py --model hf:Qwen/Qwen2.5-1.5B-Instruct
@@ -34,6 +34,7 @@ Rularea completă a studiului de caz, de la șabloane la document, se face cu ur
 > python scripts/05_analyze.py                 # E1, H1b, verificarea de manipulare, E3, COMPAS
 > python scripts/05b_stability.py              # stabilitatea deciziilor între două rulări
 > python scripts/05c_paraphrase.py             # robustețea la formularea instrucțiunii (CRED)
+> python scripts/05d_new_templates.py          # CRED: șabloanele noi analizate separat
 > python scripts/08_crows_pairs.py             # CrowS-Pairs (orientare sexuală) pe Qwen
 > python scripts/09_expert_form.py             # formularul pentru specialist
 > python scripts/09b_expert_summary.py         # analiza răspunsurilor specialistului (după completare)

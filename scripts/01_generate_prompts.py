@@ -1,7 +1,7 @@
 """Step 1-2: templates -> scenarios -> 12 counterfactual variants -> prompts.
 
-Case study (date initiale): 5 templates x 4 fillings = 20 scenarios per task,
-60 scenarios x 12 variants = 720 prompts per model.
+Case study (date initiale): 4 fillings per template; 5 templates for REC and PRE and
+10 for CRED -> 80 scenarios x 12 variants = 960 prompts per model.
 Full study: --per-template 7..8  (~100 scenarios per task, 3,600 prompts).
 """
 from __future__ import annotations

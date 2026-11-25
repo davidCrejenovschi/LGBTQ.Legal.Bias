@@ -66,17 +66,17 @@ ground truth (two-year recidivism) and a comparison with the COMPAS score.
 
 ## Preliminary results (case study)
 
-> Small case study: 60 scenarios × 12 variants = 720 prompts per model, two open-weights models.
+> Small case study: 80 scenarios (20 recidivism, 20 pretrial, 40 credibility) × 12 variants = 960 prompts per model, two open-weights models.
 > It illustrates the methodology; it is not a definitive test of the hypotheses.
 
 | | Finding |
 |---|---|
-| ✅ **Validity** | 100% of the 1,440 answers parsed, no refusals; both models pass the manipulation check (Spearman ρ 0.61–0.93 between legal factor and decision). A second full Llama run agrees on 96–99.6% of the decisions. |
-| 🔄 **Over-correction, not disadvantage** | When orientation is stated **explicitly**, Llama-3.1-8B rates LGBTQ+ witnesses as *more* credible (+0.55 to +0.65 points; decision changes in 45–55% of pairs, all in their favour; Holm-adjusted p = 0.042 for *gay* and *lesbian*, replicated exactly in a second full run; under two rewordings of the instruction the direction holds but the effect is no longer significant). Qwen shows the same direction, not significant. |
+| ✅ **Validity** | 100% of the 1,920 answers parsed, no refusals; both models pass the manipulation check (Spearman ρ 0.61–0.94 between legal factor and decision). A second full Llama run agrees on 96–99.6% of the decisions. |
+| 🔄 **Over-correction, not disadvantage** | When orientation is stated **explicitly**, Llama-3.1-8B rates LGBTQ+ witnesses as *more* credible (+0.38–0.55 points over 40 scenarios; decision changes in 32–48% of pairs, all in their favour; significant after Holm correction for all four explicit identities). The effect replicated exactly in a second run, but it shrinks under two rewordings of the instruction and on the 5 new scenario templates, where it stays significant only for *gay*. Qwen shows the same direction, not significant. |
 | 🔍 **Implicit signal** | When orientation is only implied by a same-sex partner, the favourable effect largely disappears (MSD between −0.15 and 0 for credibility). |
 | ⚠️ **Pretrial (recalibrated)** | Scenarios were rebuilt and calibrated on control variants only. Llama left the ceiling (control mean 3.10); explicitly gay and bisexual men get milder measures than the heterosexual reference (custodial 5% vs. 25%), not significant after Holm. Qwen stays at the ceiling (100% custodial). |
 | 🧠 **Representations** | In Qwen2.5-1.5B, explicit LGBTQ+ terms sit closer to *guilty / immoral* than *heterosexual* does (mean SEAT d = +0.81 … +1.09, significant in 54–79% of layers), while the classic pleasant/unpleasant test finds almost nothing (d = −0.24 … +0.11). Splitting that concept shows that both legal culpability (d = +0.69 … +0.85) and moral judgement (d = +0.52 … +0.99) contribute; an exact permutation test over all 4,900 word splits finds no significant difference between the two halves. |
-| 🔗 **Link (E3)** | Task-aligned associations correlate with decision gaps in the predicted direction (ρ = +0.45 vs. −0.09 for the generic test), but not significantly (permutation p = 0.064, only 18 points): the two levels are largely dissociated. |
+| 🔗 **Link (E3)** | Task-aligned associations correlate with decision gaps in the predicted direction (ρ = +0.46 vs. −0.11 for the generic test), but not significantly (permutation p = 0.061, only 18 points): the two levels are largely dissociated. |
 | ⚖️ **Real records (COMPAS)** | On the same 60 records: AUC 0.76 (Llama), 0.71 (Qwen) vs. 0.68 for the COMPAS score; accuracy 70% / 68% / 65%. Llama's over-correction for explicitly gay and bisexual men reappears and survives Holm correction. |
 | 📏 **Public benchmark (CrowS-Pairs)** | On the 84 sexual-orientation pairs, Qwen prefers the more stereotyping sentence in 82% of pairs (95% CI 74–89%), yet it does not treat LGBTQ+ people worse in the legal decisions. The metric is adapted to decoder models, so it is not comparable with published masked-LM scores. |
 
@@ -110,7 +110,7 @@ similarity of ≈ 1.000 in layers 2–26, which makes cosine-based tests meaning
 | [`docs/`](docs) | the report **IV.docx** (Lab 5–8), the expert review form, previous labs I–III and the assignment |
 | [`src/legalbias/`](src/legalbias) | library: identities, scenario generator, prompts, parsing, model clients, metrics, statistics, SEAT, hidden states, COMPAS |
 | [`data/templates/`](data/templates) | scenario templates (JSON) for REC / PRE / CRED and the SEAT sentence sets |
-| [`data/`](data) | generated prompts: case study (720) and COMPAS pilot (360) |
+| [`data/`](data) | generated prompts: case study (960) and COMPAS pilot (360) |
 | [`scripts/`](scripts) | the pipeline, numbered in running order |
 | [`results/`](results) | raw model answers (JSONL, one line per prompt) and analysis tables (CSV/JSON) |
 | [`report/`](report) | report chapters in Markdown, generated tables and figures, `build_report.py` |
@@ -156,6 +156,7 @@ python scripts/02_run_e1.py --model hf:Qwen/Qwen2.5-1.5B-Instruct --prompts data
 python scripts/05_analyze.py
 python scripts/05b_stability.py        # needs a second run in results/case_study/stability/e1_raw
 python scripts/05c_paraphrase.py       # needs runs with --task CRED --paraphrase 1 and 2
+python scripts/05d_new_templates.py    # credibility: new templates analysed on their own
 python scripts/download_assets.py --crows && python scripts/08_crows_pairs.py
 python scripts/06_figures.py
 python scripts/07_report_tables.py
@@ -181,6 +182,7 @@ Commercial models (full study): `--model openai:<model>` or `--model anthropic:<
 - [x] CrowS-Pairs (sexual orientation) on Qwen
 - [x] Second full Llama run: stability and replication of E1
 - [x] Robustness of the credibility effect to two rewordings of the instruction (Llama)
+- [x] Credibility task extended to 10 templates, with an out-of-sample check on the 5 new ones
 - [ ] BBQ; commercial models (GPT, Gemini, Claude)
 
 ## Data, models and ethics

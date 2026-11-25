@@ -2,14 +2,14 @@
 
 ## 2.1 Scopul și configurația
 
-Studiul de caz rulează întreaga metodologie din capitolul 1 pe un set mic de date, cu trei scopuri: să verifice că fiecare pas funcționează de la un capăt la altul, să ilustreze pe exemple concrete ce poate măsura abordarea propusă și să ofere estimări pentru dimensionarea experimentului complet. Nu are ca scop testarea definitivă a ipotezelor. Cu 20 de scenarii pe sarcină, doar efectele mari pot fi detectate (secțiunea 1.4).
+Studiul de caz rulează întreaga metodologie din capitolul 1 pe un set mic de date, cu trei scopuri: să verifice că fiecare pas funcționează de la un capăt la altul, să ilustreze pe exemple concrete ce poate măsura abordarea propusă și să ofere estimări pentru dimensionarea experimentului complet. Nu are ca scop testarea definitivă a ipotezelor. Cu 20 de scenarii pe sarcină (40 la CRED), doar efectele mari pot fi detectate (secțiunea 1.4).
 
 Table: Configurația studiului de caz.
 
 | Element | Valoare |
 |---|---|
-| Scenarii | 3 sarcini × 5 șabloane × 4 completări = 60 de scenarii |
-| Prompturi | 60 de scenarii × 12 variante de identitate = 720 pe model |
+| Scenarii | REC și PRE: 5 șabloane × 4 completări = 20 de scenarii fiecare; CRED: 10 șabloane × 4 completări = 40 de scenarii (80 în total) |
+| Prompturi | 80 de scenarii × 12 variante de identitate = 960 pe model |
 | Modele | Llama-3.1-8B-Instruct [32], cuantizat pe 4 biți (Q4, Ollama, GPU) – E1; Qwen2.5-1.5B-Instruct [31] (Hugging Face Transformers, CPU, float32) – E1, E2, E3 |
 | Decodare | temperatura 0 (greedy), cel mult 24 de tokeni generați, o singură rulare |
 | Date reale | 60 de dosare COMPAS (30 cu recidivă, 30 fără) × 6 variante = 360 de prompturi pe model |
@@ -42,9 +42,9 @@ Fiecare răspuns este salvat ca un rând JSON care conține scenariul, varianta,
 
 [[include:generated/status.md]]
 
-Niciun model nu a refuzat vreo sarcină. Toate răspunsurile au putut fi extrase automat, deci metricile din E1 sunt calculate pe toate cele 20 de perechi de scenarii din fiecare comparație. Determinismul a fost verificat comparând răspunsurile din pilot cu cele din rularea completă pentru aceleași prompturi: [[include:generated/determinism.md]] La Llama, cele două răspunsuri diferite sunt o credibilitate de 4 în pilot și 6 în rularea completă și o măsură preventivă de 5 în pilot și 3 în rularea completă, pentru aceleași prompturi. Astfel de variații au aceeași mărime ca unele dintre efectele mici raportate mai jos. Cauza probabilă sunt calculele în virgulă mobilă pe GPU, care nu sunt perfect reproductibile nici la temperatura 0. Rezultatele folosesc rularea completă. Pentru experimentul complet, fiecare prompt va fi rulat de două ori, iar răspunsurile care diferă vor fi raportate separat.
+Niciun model nu a refuzat vreo sarcină. Toate răspunsurile au putut fi extrase automat, deci metricile din E1 sunt calculate pe toate perechile de scenarii din fiecare comparație (20 la REC și PRE, 40 la CRED). Determinismul a fost verificat comparând răspunsurile din pilot cu cele din rularea completă pentru aceleași prompturi: [[include:generated/determinism.md]] La Llama, cele două răspunsuri diferite sunt o credibilitate de 4 în pilot și 6 în rularea completă și o măsură preventivă de 5 în pilot și 3 în rularea completă, pentru aceleași prompturi. Astfel de variații au aceeași mărime ca unele dintre efectele mici raportate mai jos. Cauza probabilă sunt calculele în virgulă mobilă pe GPU, care nu sunt perfect reproductibile nici la temperatura 0. Rezultatele folosesc rularea completă. Pentru experimentul complet, fiecare prompt va fi rulat de două ori, iar răspunsurile care diferă vor fi raportate separat.
 
-**Stabilitatea pe o a doua rulare completă.** Pentru a măsura zgomotul de fond, toate cele 720 de prompturi au fost trimise lui Llama a doua oară, la o zi distanță. Între rulări, Ollama a fost actualizat de la versiunea 0.40.16 la 0.40.17. Regula a fost fixată dinainte: prima rulare rămâne rezultatul principal, iar un efect este considerat replicat doar dacă are același semn și p Holm < 0,05 în ambele rulări.
+**Stabilitatea pe o a doua rulare completă.** Pentru a măsura zgomotul de fond, toate cele 720 de prompturi ale versiunii inițiale a studiului de caz (înainte de extinderea CRED) au fost trimise lui Llama a doua oară, la o zi distanță. Între rulări, Ollama a fost actualizat de la versiunea 0.40.16 la 0.40.17. Regula a fost fixată dinainte: prima rulare rămâne rezultatul principal, iar un efect este considerat replicat doar dacă are același semn și p Holm < 0,05 în ambele rulări.
 
 [[include:generated/stability.md]]
 
@@ -58,7 +58,7 @@ Deciziile sunt foarte stabile la REC și CRED (99,6% acord exact) și ceva mai p
 
 ![Decizia medie pe nivelurile factorului juridic manipulat, pe variantele de control (bare: interval de încredere de 95%).](figures/e1_manipulation_check.png)
 
-Ambele modele trec verificarea pentru toate sarcinile, cu corelații între 0,61 și 0,93. Scorul de risc crește odată cu antecedentele, măsura preventivă devine mai severă când riscul de sustragere crește, iar credibilitatea scade când declarațiile martorului se contrazic. Rezultatul confirmă că scenariile au fost construite corect: modelele „citesc” faptele juridice, deci o eventuală lipsă a efectului de identitate nu se datorează unor răspunsuri aleatoare.
+Ambele modele trec verificarea pentru toate sarcinile, cu corelații între 0,61 și 0,94. Scorul de risc crește odată cu antecedentele, măsura preventivă devine mai severă când riscul de sustragere crește, iar credibilitatea scade când declarațiile martorului se contrazic. Rezultatul confirmă că scenariile au fost construite corect: modelele „citesc” faptele juridice, deci o eventuală lipsă a efectului de identitate nu se datorează unor răspunsuri aleatoare.
 
 **Calibrarea sarcinii PRE.** În prima versiune a scenariilor, ambele modele alegeau arestarea preventivă (5) imediat ce apărea un factor de risc, deci deciziile atingeau plafonul scalei și E1 nu putea măsura nimic la această sarcină. Scenariile au fost refăcute cu fapte mai puțin grave și cu un risc procedural gradat, iar instrucțiunea amintește acum regula proporționalității din art. 202 alin. (3) C.proc.pen. Calibrarea s-a făcut pe variantele de control, în trei iterații, iar rezultatul este parțial. Llama a ieșit de la plafon: pe control, media este 3,10, 12,5% din decizii sunt privative de libertate, iar mediile pe nivelurile de risc sunt 2,7 / 3,0 / 4,0. Nu îndeplinește însă două criterii: proporția măsurilor privative este sub 20%, iar 72,5% din răspunsuri au aceeași valoare (3). Qwen rămâne la plafon: alege doar măsurile 4 și 5, deci privare de libertate în 100% din cazuri. Pentru acest model, sarcina PRE rămâne puțin informativă.
 

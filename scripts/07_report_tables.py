@@ -74,8 +74,9 @@ def status():
         same = int(round(r.identical * r.n))
         parts.append(f"{name} – {same} din {int(r.n)} răspunsuri identice ({f(100 * r.identical, 1)}%)")
     (OUT / "determinism.md").write_text("; ".join(parts) + ".", encoding="utf-8")
+    per_model = int(s.groupby("model")["n"].sum().max())
     write("status.md", table(
-        "Calitatea răspunsurilor în studiul de caz (720 de prompturi pe model).",
+        f"Calitatea răspunsurilor în studiul de caz ({per_model} de prompturi pe model).",
         ["Model", "Sarcina", "Prompturi", "Format corect", "Refuzuri", "Neinterpretabile",
          "Latența mediană"], rows))
     return det
@@ -89,9 +90,11 @@ def manip():
         rows.append([MODEL[r.model], r.task,
                      " / ".join(f(means[k], 2) for k in sorted(means)),
                      f(r.rho, 2, sign=True), pv(r.p)])
+    ns = m.groupby("task")["n"].max()
+    counts = ", ".join(f"{int(ns[t])} la {t}" for t in TASKS if t in ns)
     write("manip.md", table(
         "Verificarea de manipulare: decizia medie pe nivelurile factorului juridic (variantele de "
-        "control, 40 de răspunsuri pe sarcină și model) și corelația Spearman cu gravitatea factorului.",
+        f"control; răspunsuri pe model: {counts}) și corelația Spearman cu gravitatea factorului.",
         ["Model", "Sarcina", "Decizia medie pe niveluri (0 / 1 / 2)", "ρ_{manip}", "p"], rows))
 
 
@@ -117,10 +120,11 @@ def e1_main():
                              f"{pct(r.CFR_worse)}{NB}/{NB}{pct(r.CFR_better)}",
                              f"{f(r.MSD, 2, True)} {ci(r.MSD_lo, r.MSD_hi)}",
                              f(r.r_rb, 2, True), pv(r.p_wilcoxon), pv(r.p_wilcoxon_holm)])
-        n = int(e[e.model == model].n_pairs.min())
+        sub = e[e.model == model].groupby("task")["n_pairs"].max()
+        n = ", ".join(f"{int(sub[t])} ({t})" for t in TASKS if t in sub)
         out.append(table(
             f"Rezultatele E1 pentru {MODEL[model]}: fiecare variantă LGBTQ+ comparată cu referința "
-            f"heterosexuală (același gen, același tip de semnalare), n = {n} perechi de scenarii. "
+            f"heterosexuală (același gen, același tip de semnalare); perechi de scenarii: {n}. "
             "CFR⁺ / CFR⁻: proporția perechilor în care decizia se schimbă în defavoarea / în favoarea "
             "variantei LGBTQ+; MSD > 0 înseamnă tratament mai defavorabil.",
             ["Sarcina", "Varianta", "CFR", "CFR⁺ / CFR⁻", "MSD [IÎ 95%]", "r_{rb}", "p Wilcoxon",
@@ -308,10 +312,11 @@ def stability_tables():
     if not path.exists():
         return
     s = pd.read_csv(path)
-    e1 = pd.read_csv(CS / "e1_vs_reference.csv")
+    # CFR of the first run on exactly the prompts that were run twice
+    e1 = pd.read_csv(CS / "stability" / "replication.csv")
     rows = []
     for r in s.itertuples():
-        cfr = e1[(e1.model == r.model) & (e1.task == r.task)].CFR
+        cfr = e1[(e1.model == r.model) & (e1.task == r.task)].CFR_a
         rows.append([MODEL[r.model], r.task, str(int(r.n)), f(100 * r.agreement, 1) + "%", f(100 * r.noise_flip_rate, 1) + "%",
                      f(r.mean_abs_diff, 3), f(r.max_abs_diff, 0),
                      f"{pct(cfr.min())}–{pct(cfr.max())}"])
@@ -372,6 +377,30 @@ def expert_selection():
         "Cele 15 scenarii selectate pentru evaluarea de către specialist (variante de control, fără "
         "nicio mențiune a orientării). Nivelul factorului juridic: 0 = cel mai favorabil, 2 = cel mai grav.",
         ["Nr.", "Sarcina", "Șablonul", "Varianta", "Nivelul factorului"], rows))
+
+
+def new_templates_table():
+    path = CS / "new_templates" / "generalization.csv"
+    if not path.exists():
+        return
+    g = pd.read_csv(path)
+    rows = []
+    for model in MODEL:
+        for vid in VID_ORDER:
+            cells = [MODEL[model], VID[vid]]
+            for subset in ("original", "new"):
+                r = g[(g.templates == subset) & (g.model == model) & (g.vid == vid)]
+                if r.empty:
+                    cells += ["–", "–"]
+                    continue
+                r = r.iloc[0]
+                cells += [f"{f(r.MSD, 2, True)} {ci(r.MSD_lo, r.MSD_hi)}", pv(r.p_wilcoxon_holm)]
+            rows.append(cells)
+    write("new_templates.md", table(
+        "Credibilitatea pe șabloanele inițiale (CRED01–05) și pe cele noi (CRED06–10), câte 20 de "
+        "perechi de scenarii; corecția Holm pe cele 6 teste CRED ale fiecărui subset. MSD < 0 "
+        "înseamnă credibilitate mai mare pentru varianta LGBTQ+.",
+        ["Model", "Varianta", "Inițiale: MSD [IÎ 95%]", "p Holm", "Noi: MSD [IÎ 95%]", "p Holm"], rows))
 
 
 def crows():
@@ -521,6 +550,7 @@ if __name__ == "__main__":
     stability_tables()
     paraphrase_table()
     expert_selection()
+    new_templates_table()
     if (CS / "e3_summary.json").exists():
         expectations()
     git_log()
