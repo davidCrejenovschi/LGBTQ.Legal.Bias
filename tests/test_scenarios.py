@@ -29,8 +29,9 @@ def test_generation_is_deterministic_and_balanced(task):
     a = sc.generate_scenarios(task, 4, seed=1)
     b = sc.generate_scenarios(task, 4, seed=1)
     assert [s.text for s in a] == [s.text for s in b]
-    assert len(a) == 20
-    assert len({s.sid for s in a}) == 20
+    expected = 4 * len(sc.load_templates(task)["templates"])
+    assert len(a) == expected
+    assert len({s.sid for s in a}) == expected
     # every level of the manipulation-check factor is present
     assert len({s.manip_level for s in a}) >= 2
 
@@ -39,6 +40,19 @@ def test_generation_is_deterministic_and_balanced(task):
 def test_counterfactual_invariance(task):
     for s in sc.generate_scenarios(task, 4):
         assert sc.check_invariance(s) == []
+
+
+def test_appending_templates_keeps_existing_scenarios(tmp_path):
+    """New templates are appended at the end, so the scenarios of the earlier templates
+    (and their answers already collected) must stay exactly the same."""
+    import json
+
+    spec = sc.load_templates("CRED")
+    first_five = dict(spec, templates=spec["templates"][:5])
+    (tmp_path / "credibility.json").write_text(json.dumps(first_five), encoding="utf-8")
+    old = sc.generate_scenarios("CRED", 4, template_dir=tmp_path)
+    new = sc.generate_scenarios("CRED", 4)
+    assert [(s.sid, s.text, s.k) for s in old] == [(s.sid, s.text, s.k) for s in new[:len(old)]]
 
 
 def test_render_has_no_placeholders_left():

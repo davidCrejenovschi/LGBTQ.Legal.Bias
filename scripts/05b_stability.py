@@ -34,6 +34,9 @@ models = set(run_b["model"])
 run_a = pd.concat([pd.DataFrame(load_jsonl(p)) for p in sorted((CS / "e1_raw").glob("*.jsonl"))
                    if not p.stem.endswith("_pilot")], ignore_index=True)
 run_a = run_a[run_a["model"].isin(models)]
+# compare exactly the same prompts: the case study was later extended (CRED templates 6-10),
+# but the replication run covers only the prompts that existed at that time
+run_a = run_a[run_a["pid"].isin(set(run_b["pid"]))]
 
 stab = metrics.stability_table(run_a, run_b)
 e1_a = metrics.e1_table(run_a)

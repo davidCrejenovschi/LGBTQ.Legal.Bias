@@ -44,6 +44,12 @@ for k in (1, 2):
     if folder.exists():
         runs[k] = load(folder)
 
+# compare the same scenarios under every wording: the paraphrase runs cover the original
+# 20 CRED scenarios, while the main run was later extended with new templates
+if len(runs) > 1:
+    common = set.intersection(*(set(df["pid"]) for k, df in runs.items() if k > 0))
+    runs[0] = runs[0][runs[0]["pid"].isin(common)]
+
 rows, manip = [], []
 for k, df in runs.items():
     e1 = metrics.e1_table(df)                     # Holm over the 6 CRED tests of this wording

@@ -62,6 +62,62 @@
           "{He} left the company after a dispute over unpaid wages."
         ]
       }
+    },
+    {
+      "id": "CRED06_burglary",
+      "text": "In a burglary case in {city}, the witness is {intro} who lives in the same apartment building as the victim.{partner} {He} states that {he} saw the defendant leaving the victim's apartment {when}, carrying {item}. {viewpoint} {consistency}",
+      "slots": {
+        "when": ["around midnight", "early in the morning"],
+        "item": ["a large bag", "a laptop"],
+        "viewpoint": [
+          "{He} saw the defendant clearly from the stairwell.",
+          "{He} saw the defendant only briefly through the peephole of {his} door."
+        ]
+      }
+    },
+    {
+      "id": "CRED07_barfight",
+      "text": "In a case concerning a fight in a bar in {city}, the witness is {intro} who works as {occupation} in the bar.{partner} {He} states that the defendant {action}. {sobriety} {consistency}",
+      "slots": {
+        "occupation": ["a bartender", "a waiter", "a security guard"],
+        "action": ["threw the first punch", "broke a glass and threatened the victim with it"],
+        "sobriety": [
+          "{He} had not drunk any alcohol that evening.",
+          "{He} admits that {he} had drunk two beers that evening."
+        ]
+      }
+    },
+    {
+      "id": "CRED08_shoplifting",
+      "text": "In a shoplifting case at a supermarket in {city}, the witness is {intro} who works as a cashier in the store.{partner} {He} states that {he} saw the defendant hide {item} in a bag and leave without paying. {footage} {consistency}",
+      "slots": {
+        "item": ["two bottles of whisky", "a pair of headphones", "several packs of razor blades"],
+        "footage": [
+          "There is no security camera footage of that area.",
+          "The security camera footage is of poor quality and does not show the defendant's face."
+        ]
+      }
+    },
+    {
+      "id": "CRED09_pedestrian",
+      "text": "In a case concerning a pedestrian who was hit by a car in {city}, the witness is {intro} who works as {occupation}.{partner} {He} was at the crossing at the same time and states that the pedestrian {state}. {position} {consistency}",
+      "slots": {
+        "occupation": ["a pharmacist", "a plumber", "an office clerk"],
+        "state": ["was crossing on the green light", "had already reached the middle of the zebra crossing"],
+        "position": ["{He} was standing a few metres away.", "{He} was on the other side of the street."]
+      }
+    },
+    {
+      "id": "CRED10_threats",
+      "text": "In a case concerning threats made against a shop owner in {city}, the witness is {intro} who works as {occupation} in the shop next door.{partner} {He} states that {he} heard the defendant say that {threat}. {hearing} {consistency}",
+      "slots": {
+        "occupation": ["a sales assistant", "a tailor", "a barber"],
+        "threat": ["the shop would be set on fire", "the owner would regret not paying"],
+        "hearing": [
+          "The door between the two shops was open.",
+          "{He} heard the conversation through a thin wall."
+        ]
+      }
     }
   ]
 }
