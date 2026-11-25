@@ -6,14 +6,15 @@ Table: Structura repository-ului.
 
 | Director / fișier | Conținut |
 |---|---|
-| `docs/` | acest raport (`IV.docx`, generat), rapoartele Lab I–III și cerința Lab 5–8 |
+| `docs/` | acest raport (`IV.docx`, generat), formularul pentru specialist (`expert_review_form.docx`), rapoartele Lab I–III și cerința Lab 5–8 |
 | `src/legalbias/` | biblioteca proiectului: variante de identitate, generatorul de scenarii, prompturi, extragerea deciziei, clienți pentru modele, metrici, teste statistice, SEAT, stări ascunse, COMPAS |
 | `data/templates/` | șabloanele scenariilor (JSON) pentru REC, PRE și CRED și seturile de propoziții pentru E2 |
 | `data/case_study/`, `data/compas/` | prompturile generate pentru studiul de caz (720) și pentru pilotul pe date reale (360) |
+| `data/expert_review/` | scenariile selectate pentru specialist și foaia goală pentru răspunsurile lui |
 | `scripts/01_…07_` | pașii metodologiei, numerotați în ordinea rulării |
 | `results/` | răspunsurile brute (JSONL, câte un rând pentru fiecare prompt) și tabelele de analiză (CSV, JSON) |
 | `report/` | capitolele raportului (Markdown), tabelele și figurile generate, scriptul care produce .docx |
-| `tests/` | 59 de teste unitare (pytest) |
+| `tests/` | 67 de teste unitare (pytest) |
 | `.github/workflows/tests.yml` | integrare continuă: testele rulează automat pe GitHub la fiecare `push` |
 
 Rularea completă a studiului de caz, de la șabloane la document, se face cu următoarele comenzi:
@@ -34,12 +35,14 @@ Rularea completă a studiului de caz, de la șabloane la document, se face cu ur
 > python scripts/05b_stability.py              # stabilitatea deciziilor între două rulări
 > python scripts/05c_paraphrase.py             # robustețea la formularea instrucțiunii (CRED)
 > python scripts/08_crows_pairs.py             # CrowS-Pairs (orientare sexuală) pe Qwen
+> python scripts/09_expert_form.py             # formularul pentru specialist
+> python scripts/09b_expert_summary.py         # analiza răspunsurilor specialistului (după completare)
 > python scripts/06_figures.py
 > python scripts/07_report_tables.py
 > python report/build_report.py                # docs/IV.docx
 > python -m pytest -q
 
-**Testele automate** acoperă: generarea deterministă a scenariilor și invarianța contrafactuală (inclusiv un test care verifică faptul că o modificare în afara cuvintelor de identitate este detectată), extragerea deciziei și detectarea refuzurilor, metricile (direcția semnului pentru fiecare sarcină, ratele de privare de libertate, RD, DIR, eliminarea perechilor incomplete), testele statistice (corecția Holm, McNemar exact, rang-biserial și Wilcoxon pe valori calculate de mână, bootstrap, puterea minimă detectabilă, Spearman), testele SEAT (semnul efectului, testul de permutare, varianta pe perechi, centrarea și standardizarea) conversia dosarelor COMPAS în scenarii, compararea a două rulări (stabilitate și replicare) scorarea CrowS-Pairs, parafrazările instrucțiunii și testul exact pentru împărțirea cuvintelor în jumătăți.
+**Testele automate** acoperă: generarea deterministă a scenariilor și invarianța contrafactuală (inclusiv un test care verifică faptul că o modificare în afara cuvintelor de identitate este detectată), extragerea deciziei și detectarea refuzurilor, metricile (direcția semnului pentru fiecare sarcină, ratele de privare de libertate, RD, DIR, eliminarea perechilor incomplete), testele statistice (corecția Holm, McNemar exact, rang-biserial și Wilcoxon pe valori calculate de mână, bootstrap, puterea minimă detectabilă, Spearman), testele SEAT (semnul efectului, testul de permutare, varianta pe perechi, centrarea și standardizarea) conversia dosarelor COMPAS în scenarii, compararea a două rulări (stabilitate și replicare) scorarea CrowS-Pairs, parafrazările instrucțiunii, testul exact pentru împărțirea cuvintelor în jumătăți, precum și selecția scenariilor și analiza grilei pentru specialist.
 
 **Istoricul modificărilor.** Tabelul de mai jos este generat din `git log` la momentul producerii documentului.
 

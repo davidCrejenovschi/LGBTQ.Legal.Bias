@@ -360,6 +360,20 @@ def paraphrase_table():
         ["Formularea", "Varianta", "CFR", "MSD [IÎ 95%]", "p Holm (6 teste)"], rows))
 
 
+def expert_selection():
+    path = ROOT / "data" / "expert_review" / "selection.json"
+    if not path.exists():
+        return
+    items = json.loads(path.read_text(encoding="utf-8"))
+    who = {"M_ctrl": "bărbat (control)", "F_ctrl": "femeie (control)"}
+    rows = [[str(i["item"]), i["task"], i["template_id"], who[i["vid"]], str(i["manip_level"])]
+            for i in items]
+    write("expert_selection.md", table(
+        "Cele 15 scenarii selectate pentru evaluarea de către specialist (variante de control, fără "
+        "nicio mențiune a orientării). Nivelul factorului juridic: 0 = cel mai favorabil, 2 = cel mai grav.",
+        ["Nr.", "Sarcina", "Șablonul", "Varianta", "Nivelul factorului"], rows))
+
+
 def crows():
     path = ROOT / "results" / "crows_pairs" / "Qwen2.5-1.5B-Instruct_summary.json"
     if not path.exists():
@@ -506,6 +520,7 @@ if __name__ == "__main__":
     compas_tables()
     stability_tables()
     paraphrase_table()
+    expert_selection()
     if (CS / "e3_summary.json").exists():
         expectations()
     git_log()

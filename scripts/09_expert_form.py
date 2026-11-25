@@ -101,6 +101,14 @@ def table(doc: Document, rows: list[tuple[str, str]], widths=(5.5, 11.5), header
         for i, row in enumerate(t.rows):
             if not (header and i == 0):
                 row.height = Cm(answer_height)
+    # keep every table on one page: rows cannot split and each row stays with the next one
+    for i, row in enumerate(t.rows):
+        cant_split = OxmlElement("w:cantSplit")
+        row._tr.get_or_add_trPr().append(cant_split)
+        if i < len(t.rows) - 1:
+            for cell in row.cells:
+                for par in cell.paragraphs:
+                    par.paragraph_format.keep_with_next = True
     return t
 
 

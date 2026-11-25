@@ -107,14 +107,14 @@ similarity of ≈ 1.000 in layers 2–26, which makes cosine-based tests meaning
 
 | Path | Content |
 |---|---|
-| [`docs/`](docs) | the report **IV.docx** (Lab 5–8), previous labs I–III and the assignment |
+| [`docs/`](docs) | the report **IV.docx** (Lab 5–8), the expert review form, previous labs I–III and the assignment |
 | [`src/legalbias/`](src/legalbias) | library: identities, scenario generator, prompts, parsing, model clients, metrics, statistics, SEAT, hidden states, COMPAS |
 | [`data/templates/`](data/templates) | scenario templates (JSON) for REC / PRE / CRED and the SEAT sentence sets |
 | [`data/`](data) | generated prompts: case study (720) and COMPAS pilot (360) |
 | [`scripts/`](scripts) | the pipeline, numbered in running order |
 | [`results/`](results) | raw model answers (JSONL, one line per prompt) and analysis tables (CSV/JSON) |
 | [`report/`](report) | report chapters in Markdown, generated tables and figures, `build_report.py` |
-| [`tests/`](tests) | 59 unit tests (pytest), run by GitHub Actions on every push |
+| [`tests/`](tests) | 67 unit tests (pytest), run by GitHub Actions on every push |
 
 ## Reproduce
 
@@ -125,7 +125,7 @@ Requirements: Python 3.12+ (developed on 3.13), [Ollama](https://ollama.com) for
 pip install -r requirements.txt
 python scripts/download_assets.py      # Qwen2.5-1.5B-Instruct + COMPAS csv
 ollama pull llama3.1                   # Llama-3.1-8B-Instruct, 4-bit
-python -m pytest -q                    # 59 tests
+python -m pytest -q                    # 67 tests
 ```
 
 <details>
@@ -160,6 +160,7 @@ python scripts/download_assets.py --crows && python scripts/08_crows_pairs.py
 python scripts/06_figures.py
 python scripts/07_report_tables.py
 python report/build_report.py          # -> docs/IV.docx
+python scripts/09_expert_form.py       # expert review form -> docs/expert_review_form.docx
 ```
 
 Commercial models (full study): `--model openai:<model>` or `--model anthropic:<model>` with
@@ -175,7 +176,8 @@ Commercial models (full study): `--model openai:<model>` or `--model anthropic:<
 - [ ] More templates (≈ 100 scenarios per task) for the full study
 - [x] Separate legal and moral concepts in E2 (first split, on the existing words)
 - [ ] Longer attribute lists and more sentence frames for E2
-- [ ] Expert review of the scenarios by a criminal-law practitioner
+- [x] Expert review form ready (`docs/expert_review_form.docx`)
+- [ ] Expert review of the scenarios by a criminal-law practitioner (form to be filled in)
 - [x] CrowS-Pairs (sexual orientation) on Qwen
 - [x] Second full Llama run: stability and replication of E1
 - [x] Robustness of the credibility effect to two rewordings of the instruction (Llama)
